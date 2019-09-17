@@ -1,7 +1,13 @@
+// Import the default project's font
 @import url('https://fonts.googleapis.com/css?family=Roboto');
 
+// Import bootstrap
+@import url('../node_modules/bootstrap/dist/css/bootstrap.min.css');
+
+// Define constants
 $global-font: 'Roboto';
 
+// Global default style
 body {
   font-family: $global-font;
 }
