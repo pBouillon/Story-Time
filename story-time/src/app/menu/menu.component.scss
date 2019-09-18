@@ -1,0 +1,13 @@
+$color-primary: black;
+$color-secondary: lightslategray;
+
+.btn {
+    color: $color-primary;
+    border-color: $color-primary;
+
+    :hover {
+        color: $color-primary;
+        border-color: $color-primary;
+        background-color: $color-secondary;
+    }
+}
