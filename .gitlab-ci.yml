@@ -14,7 +14,6 @@ build:
     - npm -v
     - ls -la -F
     - npm ci
-    - npx ng test
     - npx ng build --prod
   cache:
     paths:
