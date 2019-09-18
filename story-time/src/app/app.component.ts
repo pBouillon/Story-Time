@@ -6,5 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'Story Time';
+  /**
+   * @summary application's title
+   */
+  readonly title: string = 'Story Time';
 }
