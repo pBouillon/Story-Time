@@ -1,9 +1,3 @@
 .btn {
-  color: #000;
-  border-color: #000;
-}
-.btn :hover {
-  color: #000;
-  border-color: #000;
-  background-color: #789;
+  transition: background-color 0.75s ease;
 }

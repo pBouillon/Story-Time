@@ -1,13 +1,5 @@
-$color-primary: black;
-$color-secondary: lightslategray;
-
+// Menu buttons style
 .btn {
-    color: $color-primary;
-    border-color: $color-primary;
-
-    :hover {
-        color: $color-primary;
-        border-color: $color-primary;
-        background-color: $color-secondary;
-    }
+    // Set a longer transition for color fading
+    transition: background-color 0.75s ease;
 }

@@ -6,23 +6,27 @@
     <!-- story selection -->
     <input 
       type="button" 
-      class="btn btn-outline-primary btn-lg p-2 my-2"
-      value="Choisir une histoire">
+      class="btn btn-outline-secondary btn-lg p-3 my-3"
+      value="Choisir une histoire"
+      [ngClass]="{ fadeOutLeft : isButtonFadingOut }"
+      (click)="onGame()">
     <!-- /story selection -->
 
     <!-- story writing -->
     <input 
       type="button" 
-      class="btn btn-outline-primary btn-lg p-2 my-2"
-      value="Rédiger une histoire">
+      class="btn btn-outline-secondary btn-lg p-3 my-3"
+      value="Rédiger une histoire"
+      (click)="onWrite()">
     <!-- /story writing -->
 
-    <!-- story writing -->
+    <!-- additional information -->
     <input 
       type="button" 
-      class="btn btn-outline-primary btn-lg p-2 my-2" 
-      value="Autres informations">
-    <!-- /story writing -->
+      class="btn btn-outline-secondary btn-lg p-3 my-3" 
+      value="Autres informations"
+      (click)="onAbout()">
+    <!-- /additional information -->
 
   </div>
   <!-- /menu buttons -->
