@@ -8,12 +8,12 @@ build:
   script:
     - apt update
     - apt-get install -y nodejs
+    - cd story-time/
     - npm install -y npm@6.11.0
     - nodejs -v
     - npm -v
     - ls -la -F
     - npm ci
-    - cd story-time/
     - npx ng test
     - npx ng build --prod
   cache:
