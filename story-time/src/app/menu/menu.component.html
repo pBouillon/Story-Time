@@ -4,26 +4,25 @@
   <div class="d-flex flex-column justify-content-center p-5 w-50">
 
     <!-- story selection -->
-    <input 
-      type="button" 
+    <input
+      type="button"
       class="btn btn-outline-secondary btn-lg p-3 my-3"
       value="Choisir une histoire"
-      [ngClass]="{ fadeOutLeft : isButtonFadingOut }"
       (click)="onGame()">
     <!-- /story selection -->
 
     <!-- story writing -->
-    <input 
-      type="button" 
+    <input
+      type="button"
       class="btn btn-outline-secondary btn-lg p-3 my-3"
       value="Rédiger une histoire"
       (click)="onWrite()">
     <!-- /story writing -->
 
     <!-- additional information -->
-    <input 
-      type="button" 
-      class="btn btn-outline-secondary btn-lg p-3 my-3" 
+    <input
+      type="button"
+      class="btn btn-outline-secondary btn-lg p-3 my-3"
       value="Autres informations"
       (click)="onAbout()">
     <!-- /additional information -->
