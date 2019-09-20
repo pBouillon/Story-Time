@@ -1,3 +1,68 @@
-<p>
-  infos works!
-</p>
+<div class="container justify-content-center d-flex">
+
+  <form [formGroup]="storyMetaForm" class="w-50">
+
+    <div class="form-group">
+      <input type="text"
+        class="form-control form-control-lg"
+        name="title"
+        placeholder="Titre de l'histoire"
+        formControlName="title"
+        required>
+    </div>
+
+    <div class="form-group">
+      <textarea id="overview"
+        class="form-control"
+        name="overview"
+        placeholder="Il était une fois ..."
+        formControlName="overview"
+        row="3"
+        [maxlength]="OVERVIEW_LENGTH"
+        required></textarea>
+      <small id="tagsHelp"
+        class="form-text text-muted">
+        Taille actuelle: {{ getOverviewCurrentSize() }} / {{ OVERVIEW_LENGTH }}
+      </small>
+    </div>
+
+    <div class="form-group row">
+      <label for="tags"
+        class="col-sm-2 col-form-label">Tags</label>
+      <div class="col-sm-10">
+        <input type="text"
+          id="tags"
+          class="form-control form-control-sm"
+          name="tags"
+          placeholder="vocabulary, school, ..."
+          formControlName="tags"
+          aria-describedby="tagsHelp">
+        <small id="tagsHelp"
+          class="form-text text-muted">Séparer les tags par des virgules.</small>
+      </div>
+    </div>
+
+    <div class="form-group row">
+      <label for="author"
+        class="col-sm-2 col-form-label">Auteur</label>
+      <div class="col-sm-10">
+        <input type="text"
+          id="author"
+          class="form-control form-control-sm"
+          name="author"
+          placeholder="John Doe"
+          formControlName="author"
+          required>
+      </div>
+    </div>
+
+    <button type="submit"
+      class="btn btn-primary"
+      (click)="onSubmit()">
+      Submit
+    </button>
+
+  </form>
+
+</div>
+
