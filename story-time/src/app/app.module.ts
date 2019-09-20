@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { ErrorPagesModule } from './error-pages/error-pages.module';
 import { FooterComponent } from './footer/footer.component';
 import { MenuModule } from './menu/menu.module';
+import { StoryModule } from './story/story.module';
 
 @NgModule({
   declarations: [
@@ -15,8 +16,9 @@ import { MenuModule } from './menu/menu.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MenuModule,
     ErrorPagesModule,
+    MenuModule,
+    StoryModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
