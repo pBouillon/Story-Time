@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-page-not-found',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PageNotFoundComponent implements OnInit {
 
-  constructor() { }
+  /**
+   * @summary Default constructor
+   * @param router Router to redirect the user to requested components
+   */
+  constructor(
+    private router: Router,
+  ) { }
 
-  ngOnInit() {
+  ngOnInit() { }
+
+  /**
+   * @summary Redirect the user back to the main page
+   */
+  public onMenu(): void {
+    this.router.navigate(['index']);
   }
 
 }
