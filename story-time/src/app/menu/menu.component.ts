@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { AppRoutes } from '../app-routing.module';
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -43,6 +45,6 @@ export class MenuComponent {
     // TODO: create associated component
     // TODO: add it to routing
     // TODO: redirect on this component
-    this.router.navigate(['#']);
+    this.router.navigate([AppRoutes.Writing]);
   }
 }

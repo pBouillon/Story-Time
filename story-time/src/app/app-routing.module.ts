@@ -7,7 +7,7 @@ import { InfosComponent } from './story/writing/infos/infos.component';
 /**
  * @summary Reference route constants
  */
-const enum AppRoutes {
+export const enum AppRoutes {
   // Main page
   Index = 'index',
   // Story writing
