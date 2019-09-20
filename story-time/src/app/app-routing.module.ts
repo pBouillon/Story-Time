@@ -20,14 +20,16 @@ const routes: Routes = [
     path: '',
     redirectTo: AppRoutes.Index,
     pathMatch: 'full',
-  }, {
-    path: '**',
-    component: PageNotFoundComponent,
   },
   // Routes
   {
     path: AppRoutes.Index,
     component: MenuComponent,
+  },
+  // Error pages
+  {
+    path: '**',
+    component: PageNotFoundComponent,
   },
 ];
 

@@ -10,7 +10,7 @@ import { MenuModule } from './menu/menu.module';
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent
+    FooterComponent,
   ],
   imports: [
     BrowserModule,
@@ -19,6 +19,6 @@ import { MenuModule } from './menu/menu.module';
     ErrorPagesModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
