@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
+import { PageNotFoundComponent } from './error-pages/page-not-found/page-not-found.component';
 
 /**
  * @summary Reference route constants
@@ -19,15 +20,16 @@ const routes: Routes = [
     path: '',
     redirectTo: AppRoutes.Index,
     pathMatch: 'full',
-  }, {
-    path: '**',
-    redirectTo: AppRoutes.Index,
-    pathMatch: 'full',
   },
   // Routes
   {
     path: AppRoutes.Index,
     component: MenuComponent,
+  },
+  // Error pages
+  {
+    path: '**',
+    component: PageNotFoundComponent,
   },
 ];
 
