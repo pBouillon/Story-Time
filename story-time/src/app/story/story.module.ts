@@ -1,12 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WritingComponent } from './writing/writing.component';
 import { SelectionComponent } from './selection/selection.component';
+import { WritingModule } from './writing/writing.module';
+import { EditorService } from './writing/editor.service';
 
 @NgModule({
-  declarations: [WritingComponent, SelectionComponent],
+  declarations: [SelectionComponent],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    WritingModule,
+  ],
+  providers: [
+    EditorService,
+  ],
 })
 export class StoryModule { }
