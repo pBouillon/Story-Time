@@ -5,6 +5,22 @@ import { EditorService } from '../editor.service';
 import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
 
+/**
+ * @summary Lenght specifications for a field
+ */
+class LenghtSpec {
+
+  /**
+   * @summary Default constructor
+   * @param min Minimal size of the field
+   * @param max Maximum size of the field
+   */
+  constructor(
+    public min: number,
+    public max: number,
+  ) { }
+}
+
 @Component({
   selector: 'app-infos',
   templateUrl: './infos.component.html',
@@ -12,7 +28,25 @@ import { AppRoutes } from 'src/app/app-routing.module';
 })
 export class InfosComponent implements OnInit {
 
-  public readonly OVERVIEW_LENGTH = 140;
+  /**
+   * @summary Author authorized lengths
+   */
+  public readonly AUTHOR_LENGTH = new LenghtSpec(3, 60);
+
+  /**
+   * @summary Overview authorized lengths
+   */
+  public readonly OVERVIEW_LENGTH = new LenghtSpec(5, 140);
+
+  /**
+   * @summary Tags authorized lengths
+   */
+  public readonly TAGS_LENGTH = new LenghtSpec(0, 40);
+
+  /**
+   * @summary Title authorized lengths
+   */
+  public readonly TITLE_LENGTH = new LenghtSpec(2, 60);
 
   /**
    * @summary Form containing story's data
@@ -31,6 +65,9 @@ export class InfosComponent implements OnInit {
     private router: Router,
   ) { }
 
+  /**
+   * @summary Initialize the component
+   */
   ngOnInit() {
     this.setupForm();
   }
@@ -107,10 +144,25 @@ export class InfosComponent implements OnInit {
    */
   private setupForm(): void {
     this.storyMetaForm = this.formBuilder.group({
-      author: ['', Validators.required],
-      overview: ['', Validators.required],
-      tags: [''],
-      title: ['', Validators.required],
+      author: ['', [
+        Validators.required,
+        Validators.minLength(this.AUTHOR_LENGTH.min),
+        Validators.maxLength(this.AUTHOR_LENGTH.max)
+      ]],
+      overview: ['', [
+        Validators.required,
+        Validators.minLength(this.OVERVIEW_LENGTH.min),
+        Validators.maxLength(this.OVERVIEW_LENGTH.max)
+      ]],
+      tags: ['', [
+        Validators.minLength(this.TAGS_LENGTH.min),
+        Validators.maxLength(this.TAGS_LENGTH.max)
+      ]],
+      title: ['', [
+        Validators.required,
+        Validators.minLength(this.TITLE_LENGTH.min),
+        Validators.maxLength(this.TITLE_LENGTH.max)
+      ]],
     });
   }
 

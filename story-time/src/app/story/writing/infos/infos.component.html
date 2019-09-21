@@ -7,8 +7,7 @@
         class="form-control form-control-lg"
         name="title"
         placeholder="Titre de l'histoire"
-        formControlName="title"
-        required>
+        formControlName="title">
     </div>
 
     <div class="form-group">
@@ -17,18 +16,16 @@
         name="overview"
         placeholder="Il était une fois ..."
         formControlName="overview"
-        row="3"
-        [maxlength]="OVERVIEW_LENGTH"
-        required></textarea>
+        row="3"></textarea>
       <small id="tagsHelp"
         class="form-text text-muted">
-        Taille actuelle: {{ getOverviewCurrentSize() }} / {{ OVERVIEW_LENGTH }}
+        Taille actuelle: {{ getOverviewCurrentSize() }} / {{ OVERVIEW_LENGTH.max }}
       </small>
     </div>
 
     <div class="form-group row">
       <label for="tags"
-        class="col-sm-2 col-form-label">Tags</label>
+        class="col-sm-2 col-form-label">Tags <small>(Optionnels)</small></label>
       <div class="col-sm-10">
         <input type="text"
           id="tags"
@@ -51,14 +48,14 @@
           class="form-control form-control-sm"
           name="author"
           placeholder="John Doe"
-          formControlName="author"
-          required>
+          formControlName="author">
       </div>
     </div>
 
     <div class="container d-flex flex-row-reverse p-0">
       <button type="submit"
-        class="btn btn-outline-primary w-25"
+        class="btn btn-primary w-25"
+        [disabled]="storyMetaForm.invalid"
         (click)="onSubmit()">
         Submit
       </button>
