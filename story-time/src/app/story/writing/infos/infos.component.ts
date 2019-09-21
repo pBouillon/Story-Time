@@ -31,7 +31,7 @@ export class InfosComponent implements OnInit {
   /**
    * @summary Author authorized lengths
    */
-  public readonly AUTHOR_LENGTH = new LenghtSpec(3, 60);
+  public readonly AUTHOR_LENGTH = new LenghtSpec(3, 25);
 
   /**
    * @summary Overview authorized lengths

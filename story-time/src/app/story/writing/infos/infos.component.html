@@ -1,4 +1,8 @@
 <div class="container justify-content-center d-flex">
+  <h2>Rédiger une nouvelle histoire</h2>
+</div>
+
+<div class="container justify-content-center d-flex mt-4">
 
   <!-- story meta data form -->
   <form [formGroup]="storyMetaForm" class="w-50">
@@ -142,12 +146,12 @@
         <!-- /required -->
         <!-- min size -->
         <div *ngIf="author.errors.minlength">
-          Le nom de l'auteur doit être composé d'au moins {{ TITLE_LENGTH.min }} caractère(s).
+          Le nom de l'auteur doit être composé d'au moins {{ AUTHOR_LENGTH.min }} caractère(s).
         </div>
         <!-- /min size -->
         <!-- max size -->
         <div *ngIf="author.errors.maxlength">
-          Le nom de l'auteur ne peut excéder {{ TITLE_LENGTH.max }} caractères (actuels: {{ title.value.length }}).
+          Le nom de l'auteur ne peut excéder {{ AUTHOR_LENGTH.max }} caractères (actuels: {{ author.value.length }}).
         </div>
         <!-- /max size -->
       </div>
