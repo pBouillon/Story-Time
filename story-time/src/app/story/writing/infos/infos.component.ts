@@ -105,6 +105,38 @@ export class InfosComponent implements OnInit {
   }
 
   /**
+   * @summary Fetch a property from the `storyMetaForm`
+   * @param property Property to fetch
+   * @returns An AbstractControl of the associated property
+   */
+  private fetchFormProperty(property: string): AbstractControl {
+    return this.storyMetaForm.get(property);
+  }
+
+  /**
+   * @summary Get the current length of the story's summary
+   * @returns The current length of the story's summary
+   */
+  public getOverviewCurrentSize(): number {
+    return this.overview.value.length;
+  }
+
+  /**
+   * @summary Check if a field has to be considered as invalid for the form
+   *
+   * A field is invalid if it is marked as invalid by the form and the user
+   * had already interract with it
+   *
+   * @param field field's name to check
+   * @returns true if the field is invalid; false otherwise
+   */
+  public isFieldInvalid(field: AbstractControl): boolean {
+    return field.invalid
+      && (field.dirty
+        || field.touched);
+  }
+
+  /**
    * @summary Redirect the user back to the main menu
    */
   public onBack(): void {
@@ -132,23 +164,6 @@ export class InfosComponent implements OnInit {
 
     // Redirect the user to the next page
     this.router.navigate(['#']); // TODO
-  }
-
-  /**
-   * @summary Fetch a property from the `storyMetaForm`
-   * @param property Property to fetch
-   * @returns An AbstractControl of the associated property
-   */
-  private fetchFormProperty(property: string): AbstractControl {
-    return this.storyMetaForm.get(property);
-  }
-
-  /**
-   * @summary Get the current length of the story's summary
-   * @returns The current length of the story's summary
-   */
-  public getOverviewCurrentSize(): number {
-    return this.overview.value.length;
   }
 
   /**

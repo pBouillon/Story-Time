@@ -13,7 +13,7 @@
       <!-- title -->
       <input type="text"
         class="form-control form-control-lg"
-        [ngClass]="{'border-danger': title.invalid && (title.dirty || title.touched)}"
+        [ngClass]="{'border-danger': isFieldInvalid(title)}"
         name="title"
         placeholder="Titre de l'histoire *"
         formControlName="title"
@@ -21,7 +21,7 @@
       <!-- /title -->
 
       <!-- error messages -->
-      <div *ngIf="title.invalid && (title.dirty || title.touched)"
+      <div *ngIf="isFieldInvalid(title)"
         class="text-danger small">
         <!-- required -->
         <div *ngIf="title.errors.required">
@@ -50,7 +50,7 @@
       <!-- overview -->
       <textarea id="overview"
         class="form-control"
-        [ngClass]="{'border-danger': overview.invalid && (overview.dirty || overview.touched)}"
+        [ngClass]="{'border-danger': isFieldInvalid(overview)}"
         name="overview"
         placeholder="Il était une fois ... *"
         formControlName="overview"
@@ -63,7 +63,7 @@
       <!-- /overview -->
 
       <!-- error messages -->
-      <div *ngIf="overview.invalid && (overview.dirty || overview.touched)"
+      <div *ngIf="isFieldInvalid(overview)"
         class="text-danger small">
         <!-- required -->
         <div *ngIf="overview.errors.required">
@@ -97,7 +97,7 @@
         <input type="text"
           id="tags"
           class="form-control form-control-sm"
-          [ngClass]="{'border-danger': tags.invalid && (tags.dirty || tags.touched)}"
+          [ngClass]="{'border-danger': isFieldInvalid(tags)}"
           name="tags"
           placeholder="vocabulary, school, ..."
           formControlName="tags"
@@ -107,7 +107,7 @@
           class="form-text text-muted">Séparer les tags par des virgules.</small>
 
         <!-- error messages -->
-        <div *ngIf="tags.invalid && (tags.dirty || tags.touched)"
+        <div *ngIf="isFieldInvalid(tags)"
           class="text-danger small">
           <!-- min size -->
           <div *ngIf="tags.errors.minlength">
@@ -138,14 +138,14 @@
         <input type="text"
           id="author"
           class="form-control form-control-sm"
-          [ngClass]="{'border-danger': author.invalid && (author.dirty || author.touched)}"
+          [ngClass]="{'border-danger': isFieldInvalid(author)}"
           name="author"
           placeholder="John Doe"
           formControlName="author"
           autocomplete="off">
 
         <!-- error messages -->
-        <div *ngIf="author.invalid && (author.dirty || author.touched)"
+        <div *ngIf="isFieldInvalid(overview)"
           class="text-danger small">
           <!-- required -->
           <div *ngIf="author.errors.required">
