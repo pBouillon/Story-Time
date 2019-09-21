@@ -16,7 +16,8 @@
         [ngClass]="{'border-danger': title.invalid && (title.dirty || title.touched)}"
         name="title"
         placeholder="Titre de l'histoire *"
-        formControlName="title">
+        formControlName="title"
+        autocomplete="off">
       <!-- /title -->
 
       <!-- error messages -->
@@ -53,7 +54,8 @@
         name="overview"
         placeholder="Il était une fois ... *"
         formControlName="overview"
-        row="3"></textarea>
+        row="3"
+        autocomplete="off"></textarea>
       <small id="tagsHelp"
         class="form-text text-muted">
         Taille actuelle: {{ getOverviewCurrentSize() }} / {{ OVERVIEW_LENGTH.max }}
@@ -89,36 +91,39 @@
 
       <!-- tags -->
       <label for="tags"
-          class="col-sm-2 col-form-label">Tags <small>(Optionnels)</small></label>
-        <div class="col-sm-10">
-          <input type="text"
+          class="col-sm-2 col-form-label">Tags <small>(Optionnels)</small>
+      </label>
+      <div class="col-sm-10">
+        <input type="text"
           id="tags"
           class="form-control form-control-sm"
           [ngClass]="{'border-danger': tags.invalid && (tags.dirty || tags.touched)}"
           name="tags"
           placeholder="vocabulary, school, ..."
           formControlName="tags"
-          aria-describedby="tagsHelp">
+          aria-describedby="tagsHelp"
+          autocomplete="off">
         <small id="tagsHelp"
           class="form-text text-muted">Séparer les tags par des virgules.</small>
+
+        <!-- error messages -->
+        <div *ngIf="tags.invalid && (tags.dirty || tags.touched)"
+          class="text-danger small">
+          <!-- min size -->
+          <div *ngIf="tags.errors.minlength">
+            Le champ <code>tags</code> doit comporter au minimum {{ TAGS_LENGTH.min }} caractère(s).
+          </div>
+          <!-- /min size -->
+          <!-- max size -->
+          <div *ngIf="tags.errors.maxlength">
+            Le champ <code>tags</code> doit comporter au maximum {{ TAGS_LENGTH.max }} caractères (actuels: {{ tags.value.length }}).
+          </div>
+          <!-- /max size -->
+        </div>
+        <!-- /error messages -->
+
       </div>
       <!-- /tags -->
-
-      <!-- error messages -->
-      <div *ngIf="tags.invalid && (tags.dirty || tags.touched)"
-        class="text-danger small">
-        <!-- min size -->
-        <div *ngIf="tags.errors.minlength">
-          Le champ <code>tags</code> doit comporter au minimum {{ TAGS_LENGTH.min }} caractère(s).
-        </div>
-        <!-- /min size -->
-        <!-- max size -->
-        <div *ngIf="tags.errors.maxlength">
-          Le champ <code>tags</code> doit comporter au maximum {{ TAGS_LENGTH.max }} caractères (actuels: {{ tags.value.length }}).
-        </div>
-        <!-- /max size -->
-      </div>
-      <!-- /error messages -->
 
     </div>
     <!-- /story's tags -->
@@ -136,30 +141,32 @@
           [ngClass]="{'border-danger': author.invalid && (author.dirty || author.touched)}"
           name="author"
           placeholder="John Doe"
-          formControlName="author">
+          formControlName="author"
+          autocomplete="off">
+
+        <!-- error messages -->
+        <div *ngIf="author.invalid && (author.dirty || author.touched)"
+          class="text-danger small">
+          <!-- required -->
+          <div *ngIf="author.errors.required">
+            Veuillez saisir un(e) auteur.
+          </div>
+          <!-- /required -->
+          <!-- min size -->
+          <div *ngIf="author.errors.minlength">
+            Le nom de l'auteur doit être composé d'au moins {{ AUTHOR_LENGTH.min }} caractère(s).
+          </div>
+          <!-- /min size -->
+          <!-- max size -->
+          <div *ngIf="author.errors.maxlength">
+            Le nom de l'auteur ne peut excéder {{ AUTHOR_LENGTH.max }} caractères (actuels: {{ author.value.length }}).
+          </div>
+          <!-- /max size -->
+        </div>
+        <!-- /error messages -->
+
       </div>
       <!-- /author -->
-
-      <!-- error messages -->
-      <div *ngIf="author.invalid && (author.dirty || author.touched)"
-        class="text-danger small">
-        <!-- required -->
-        <div *ngIf="author.errors.required">
-          Veuillez saisir un(e) auteur.
-        </div>
-        <!-- /required -->
-        <!-- min size -->
-        <div *ngIf="author.errors.minlength">
-          Le nom de l'auteur doit être composé d'au moins {{ AUTHOR_LENGTH.min }} caractère(s).
-        </div>
-        <!-- /min size -->
-        <!-- max size -->
-        <div *ngIf="author.errors.maxlength">
-          Le nom de l'auteur ne peut excéder {{ AUTHOR_LENGTH.max }} caractères (actuels: {{ author.value.length }}).
-        </div>
-        <!-- /max size -->
-      </div>
-      <!-- /error messages -->
 
     </div>
     <!-- /story's author -->
