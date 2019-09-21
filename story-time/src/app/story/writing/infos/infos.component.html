@@ -13,6 +13,7 @@
       <!-- title -->
       <input type="text"
         class="form-control form-control-lg"
+        [ngClass]="{'border-danger': title.invalid && (title.dirty || title.touched)}"
         name="title"
         placeholder="Titre de l'histoire *"
         formControlName="title">
@@ -48,6 +49,7 @@
       <!-- overview -->
       <textarea id="overview"
         class="form-control"
+        [ngClass]="{'border-danger': overview.invalid && (overview.dirty || overview.touched)}"
         name="overview"
         placeholder="Il était une fois ... *"
         formControlName="overview"
@@ -92,6 +94,7 @@
           <input type="text"
           id="tags"
           class="form-control form-control-sm"
+          [ngClass]="{'border-danger': tags.invalid && (tags.dirty || tags.touched)}"
           name="tags"
           placeholder="vocabulary, school, ..."
           formControlName="tags"
@@ -130,6 +133,7 @@
         <input type="text"
           id="author"
           class="form-control form-control-sm"
+          [ngClass]="{'border-danger': author.invalid && (author.dirty || author.touched)}"
           name="author"
           placeholder="John Doe"
           formControlName="author">
