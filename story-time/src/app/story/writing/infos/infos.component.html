@@ -1,72 +1,93 @@
 <div class="container justify-content-center d-flex">
 
+  <!-- story meta data form -->
   <form [formGroup]="storyMetaForm" class="w-50">
 
+    <!-- story's title -->
     <div class="form-group">
       <input type="text"
-        class="form-control form-control-lg"
-        name="title"
-        placeholder="Titre de l'histoire"
-        formControlName="title">
+      class="form-control form-control-lg"
+      name="title"
+      placeholder="Titre de l'histoire"
+      formControlName="title">
+      <!-- TODO: err msg -->
     </div>
+    <!-- /story's title -->
 
+    <!-- story's overview -->
     <div class="form-group">
       <textarea id="overview"
-        class="form-control"
-        name="overview"
-        placeholder="Il était une fois ..."
-        formControlName="overview"
-        row="3"></textarea>
+      class="form-control"
+      name="overview"
+      placeholder="Il était une fois ..."
+      formControlName="overview"
+      row="3"></textarea>
       <small id="tagsHelp"
         class="form-text text-muted">
         Taille actuelle: {{ getOverviewCurrentSize() }} / {{ OVERVIEW_LENGTH.max }}
       </small>
+      <!-- TODO: err msg -->
     </div>
+    <!-- /story's overview -->
 
+    <!-- story's tags -->
     <div class="form-group row">
       <label for="tags"
-        class="col-sm-2 col-form-label">Tags <small>(Optionnels)</small></label>
+      class="col-sm-2 col-form-label">Tags <small>(Optionnels)</small></label>
       <div class="col-sm-10">
         <input type="text"
-          id="tags"
-          class="form-control form-control-sm"
-          name="tags"
-          placeholder="vocabulary, school, ..."
-          formControlName="tags"
-          aria-describedby="tagsHelp">
+        id="tags"
+        class="form-control form-control-sm"
+        name="tags"
+        placeholder="vocabulary, school, ..."
+        formControlName="tags"
+        aria-describedby="tagsHelp">
         <small id="tagsHelp"
-          class="form-text text-muted">Séparer les tags par des virgules.</small>
+        class="form-text text-muted">Séparer les tags par des virgules.</small>
       </div>
+      <!-- TODO: err msg -->
     </div>
+    <!-- /story's tags -->
 
+    <!-- story's authors -->
     <div class="form-group row">
       <label for="author"
-        class="col-sm-2 col-form-label">Auteur</label>
+      class="col-sm-2 col-form-label">Auteur</label>
       <div class="col-sm-10">
         <input type="text"
-          id="author"
-          class="form-control form-control-sm"
-          name="author"
-          placeholder="John Doe"
-          formControlName="author">
+        id="author"
+        class="form-control form-control-sm"
+        name="author"
+        placeholder="John Doe"
+        formControlName="author">
       </div>
+      <!-- TODO: err msg -->
     </div>
+    <!-- /story's authors -->
 
+    <!-- form buttons -->
     <div class="container d-flex flex-row-reverse p-0">
+
+      <!-- form submission -->
       <button type="submit"
         class="btn btn-primary w-25"
         [disabled]="storyMetaForm.invalid"
         (click)="onSubmit()">
         Submit
       </button>
+      <!-- /form submission -->
 
+      <!-- back to menu -->
       <input type="button"
         value="Retour"
         class="btn btn-outline-secondary mx-2 w-25"
         (click)="onBack()">
+      <!-- /back to menu -->
+
     </div>
+    <!-- /form buttons -->
 
   </form>
+  <!-- /story meta data form -->
 
 </div>
-

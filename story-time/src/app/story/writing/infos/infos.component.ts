@@ -92,7 +92,7 @@ export class InfosComponent implements OnInit {
    * @summary Getter for the `tags` field of the form
    * @returns An array of tags that may be empty
    */
-  get tags(): string {
+  get tags(): Array<string> {
     return this.fetchFormProperty('tags').value
       .split(',')
       .map(tag => tag.trim());
@@ -117,9 +117,21 @@ export class InfosComponent implements OnInit {
    * @summary Actions to perform on form submission
    */
   public onSubmit(): void {
-    if (this.storyMetaForm.valid) {
-      // TODO: action on form valid
+    // Does not perform any action if the form is invalid
+    if (this.storyMetaForm.invalid) {
+      return;
     }
+
+    // Store the data in the local storage
+    this.editorService.storeStoryMeta({
+      author: this.author,
+      overview: this.overview,
+      tags: this.tags,
+      title: this.title,
+    });
+
+    // Redirect the user to the next page
+    this.router.navigate(['#']); // TODO
   }
 
   /**
