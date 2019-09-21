@@ -1,12 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 import { EditorService } from '../editor.service';
+import { Router } from '@angular/router';
+import { AppRoutes } from 'src/app/app-routing.module';
 
 @Component({
   selector: 'app-infos',
   templateUrl: './infos.component.html',
-  styleUrls: ['./infos.component.sass']
+  styleUrls: ['./infos.component.scss']
 })
 export class InfosComponent implements OnInit {
 
@@ -19,12 +21,14 @@ export class InfosComponent implements OnInit {
 
   /**
    * Default constructor
-   * @param formBuilder FormBuilder object to gather story's details
    * @param editorService Editor toolbox
+   * @param formBuilder FormBuilder object to gather story's details
+   * @param router Router to redirect the user to the requested pages
    */
   constructor(
-    private formBuilder: FormBuilder,
     private editorService: EditorService,
+    private formBuilder: FormBuilder,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -66,6 +70,13 @@ export class InfosComponent implements OnInit {
   }
 
   /**
+   * @summary Redirect the user back to the main menu
+   */
+  public onBack(): void {
+    this.router.navigate([AppRoutes.Index]);
+  }
+
+  /**
    * @summary Actions to perform on form submission
    */
   public onSubmit(): void {
@@ -74,7 +85,12 @@ export class InfosComponent implements OnInit {
     }
   }
 
-  private fetchFormProperty(property: string): any {
+  /**
+   * @summary Fetch a property from the `storyMetaForm`
+   * @param property Property to fetch
+   * @returns An AbstractControl of the associated property
+   */
+  private fetchFormProperty(property: string): AbstractControl {
     return this.storyMetaForm.get(property);
   }
 

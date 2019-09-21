@@ -56,11 +56,18 @@
       </div>
     </div>
 
-    <button type="submit"
-      class="btn btn-primary"
-      (click)="onSubmit()">
-      Submit
-    </button>
+    <div class="container d-flex flex-row-reverse p-0">
+      <button type="submit"
+        class="btn btn-outline-primary w-25"
+        (click)="onSubmit()">
+        Submit
+      </button>
+
+      <input type="button"
+        value="Retour"
+        class="btn btn-outline-secondary mx-2 w-25"
+        (click)="onBack()">
+    </div>
 
   </form>
 
