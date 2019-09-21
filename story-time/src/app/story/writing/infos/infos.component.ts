@@ -76,34 +76,32 @@ export class InfosComponent implements OnInit {
    * @summary Getter for the `author` field of the form
    * @returns The author as string
    */
-  get author(): string {
-    return this.fetchFormProperty('author').value;
+  get author(): AbstractControl {
+    return this.fetchFormProperty('author');
   }
 
   /**
    * @summary Getter for the `overview` field of the form
    * @returns The overview as a string
    */
-  get overview(): string {
-    return this.fetchFormProperty('overview').value;
+  get overview(): AbstractControl {
+    return this.fetchFormProperty('overview');
   }
 
   /**
    * @summary Getter for the `tags` field of the form
    * @returns An array of tags that may be empty
    */
-  get tags(): Array<string> {
-    return this.fetchFormProperty('tags').value
-      .split(',')
-      .map(tag => tag.trim());
+  get tags(): AbstractControl {
+    return this.fetchFormProperty('tags');
   }
 
   /**
    * @summary Getter for the `title` field of the form
    * @returns The title as string
    */
-  get title(): string {
-    return this.fetchFormProperty('title').value;
+  get title(): AbstractControl {
+    return this.fetchFormProperty('title');
   }
 
   /**
@@ -124,10 +122,12 @@ export class InfosComponent implements OnInit {
 
     // Store the data in the local storage
     this.editorService.storeStoryMeta({
-      author: this.author,
-      overview: this.overview,
-      tags: this.tags,
-      title: this.title,
+      author: this.author.value,
+      overview: this.overview.value,
+      tags: this.tags.value
+        .split(',')
+        .map(tag => tag.trim()),
+      title: this.title.value,
     });
 
     // Redirect the user to the next page
@@ -148,7 +148,7 @@ export class InfosComponent implements OnInit {
    * @returns The current length of the story's summary
    */
   public getOverviewCurrentSize(): number {
-    return this.overview.length;
+    return this.overview.value.length;
   }
 
   /**

@@ -5,65 +5,156 @@
 
     <!-- story's title -->
     <div class="form-group">
+
+      <!-- title -->
       <input type="text"
-      class="form-control form-control-lg"
-      name="title"
-      placeholder="Titre de l'histoire"
-      formControlName="title">
-      <!-- TODO: err msg -->
+        class="form-control form-control-lg"
+        name="title"
+        placeholder="Titre de l'histoire *"
+        formControlName="title">
+      <!-- /title -->
+
+      <!-- error messages -->
+      <div *ngIf="title.invalid && (title.dirty || title.touched)"
+        class="text-danger small">
+        <!-- required -->
+        <div *ngIf="title.errors.required">
+          Veuillez saisir un titre.
+        </div>
+        <!-- /required -->
+        <!-- min size -->
+        <div *ngIf="title.errors.minlength">
+          Le titre doit comporter au minimum {{ TITLE_LENGTH.min }} caractère(s).
+        </div>
+        <!-- /min size -->
+        <!-- max size -->
+        <div *ngIf="title.errors.maxlength">
+          Le titre doit comporter au maximum {{ TITLE_LENGTH.max }} caractères (actuels: {{ title.value.length }}).
+        </div>
+        <!-- /max size -->
+      </div>
+      <!-- /error messages -->
+
     </div>
     <!-- /story's title -->
 
     <!-- story's overview -->
     <div class="form-group">
+
+      <!-- overview -->
       <textarea id="overview"
-      class="form-control"
-      name="overview"
-      placeholder="Il était une fois ..."
-      formControlName="overview"
-      row="3"></textarea>
+        class="form-control"
+        name="overview"
+        placeholder="Il était une fois ... *"
+        formControlName="overview"
+        row="3"></textarea>
       <small id="tagsHelp"
         class="form-text text-muted">
         Taille actuelle: {{ getOverviewCurrentSize() }} / {{ OVERVIEW_LENGTH.max }}
       </small>
-      <!-- TODO: err msg -->
+      <!-- /overview -->
+
+      <!-- error messages -->
+      <div *ngIf="overview.invalid && (overview.dirty || overview.touched)"
+        class="text-danger small">
+        <!-- required -->
+        <div *ngIf="overview.errors.required">
+          Veuillez saisir un résumé.
+        </div>
+        <!-- /required -->
+        <!-- min size -->
+        <div *ngIf="overview.errors.minlength">
+          Le résumé doit comporter au minimum {{ OVERVIEW_LENGTH.min }} caractère(s).
+        </div>
+        <!-- /min size -->
+        <!-- max size -->
+        <div *ngIf="overview.errors.maxlength">
+          Le résumé doit comporter au maximum {{ OVERVIEW_LENGTH.max }} caractères (actuels: {{ overview.value.length }}).
+        </div>
+        <!-- /max size -->
+      </div>
+      <!-- /error messages -->
+
     </div>
     <!-- /story's overview -->
 
     <!-- story's tags -->
     <div class="form-group row">
+
+      <!-- tags -->
       <label for="tags"
-      class="col-sm-2 col-form-label">Tags <small>(Optionnels)</small></label>
-      <div class="col-sm-10">
-        <input type="text"
-        id="tags"
-        class="form-control form-control-sm"
-        name="tags"
-        placeholder="vocabulary, school, ..."
-        formControlName="tags"
-        aria-describedby="tagsHelp">
+          class="col-sm-2 col-form-label">Tags <small>(Optionnels)</small></label>
+        <div class="col-sm-10">
+          <input type="text"
+          id="tags"
+          class="form-control form-control-sm"
+          name="tags"
+          placeholder="vocabulary, school, ..."
+          formControlName="tags"
+          aria-describedby="tagsHelp">
         <small id="tagsHelp"
-        class="form-text text-muted">Séparer les tags par des virgules.</small>
+          class="form-text text-muted">Séparer les tags par des virgules.</small>
       </div>
-      <!-- TODO: err msg -->
+      <!-- /tags -->
+
+      <!-- error messages -->
+      <div *ngIf="tags.invalid && (tags.dirty || tags.touched)"
+        class="text-danger small">
+        <!-- min size -->
+        <div *ngIf="tags.errors.minlength">
+          Le champ <code>tags</code> doit comporter au minimum {{ TAGS_LENGTH.min }} caractère(s).
+        </div>
+        <!-- /min size -->
+        <!-- max size -->
+        <div *ngIf="tags.errors.maxlength">
+          Le champ <code>tags</code> doit comporter au maximum {{ TAGS_LENGTH.max }} caractères (actuels: {{ tags.value.length }}).
+        </div>
+        <!-- /max size -->
+      </div>
+      <!-- /error messages -->
+
     </div>
     <!-- /story's tags -->
 
-    <!-- story's authors -->
+    <!-- story's author -->
     <div class="form-group row">
+
+      <!-- author -->
       <label for="author"
-      class="col-sm-2 col-form-label">Auteur</label>
+        class="col-sm-2 col-form-label">Auteur&nbsp;*</label>
       <div class="col-sm-10">
         <input type="text"
-        id="author"
-        class="form-control form-control-sm"
-        name="author"
-        placeholder="John Doe"
-        formControlName="author">
+          id="author"
+          class="form-control form-control-sm"
+          name="author"
+          placeholder="John Doe"
+          formControlName="author">
       </div>
-      <!-- TODO: err msg -->
+      <!-- /author -->
+
+      <!-- error messages -->
+      <div *ngIf="author.invalid && (author.dirty || author.touched)"
+        class="text-danger small">
+        <!-- required -->
+        <div *ngIf="author.errors.required">
+          Veuillez saisir un(e) auteur.
+        </div>
+        <!-- /required -->
+        <!-- min size -->
+        <div *ngIf="author.errors.minlength">
+          Le nom de l'auteur doit être composé d'au moins {{ TITLE_LENGTH.min }} caractère(s).
+        </div>
+        <!-- /min size -->
+        <!-- max size -->
+        <div *ngIf="author.errors.maxlength">
+          Le nom de l'auteur ne peut excéder {{ TITLE_LENGTH.max }} caractères (actuels: {{ title.value.length }}).
+        </div>
+        <!-- /max size -->
+      </div>
+      <!-- /error messages -->
+
     </div>
-    <!-- /story's authors -->
+    <!-- /story's author -->
 
     <!-- form buttons -->
     <div class="container d-flex flex-row-reverse p-0">
