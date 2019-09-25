@@ -4,6 +4,7 @@ import { MenuComponent } from './menu/menu.component';
 import { PageNotFoundComponent } from './error-pages/page-not-found/page-not-found.component';
 import { InfosComponent } from './story/writing/infos/infos.component';
 import { ContentComponent } from './story/writing/content/content.component';
+import { ContentWritingGuard } from './guards/content-writing.guard';
 
 /**
  * @summary Reference route constants
@@ -43,6 +44,9 @@ const routes: Routes = [
     }, {
       path: AppRoutes.Content,
       component: ContentComponent,
+      canActivate: [
+        ContentWritingGuard,
+      ],
     }]
   },
   // Error pages

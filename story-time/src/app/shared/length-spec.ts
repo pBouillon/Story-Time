@@ -12,4 +12,5 @@ export class LenghtSpec {
     public min: number,
     public max: number,
   ) { }
+
 }
