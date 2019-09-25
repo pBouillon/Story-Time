@@ -21,6 +21,7 @@ class LenghtSpec {
   ) { }
 }
 
+
 @Component({
   selector: 'app-infos',
   templateUrl: './infos.component.html',
@@ -42,6 +43,11 @@ export class InfosComponent implements OnInit {
    * @summary Tags authorized lengths
    */
   public readonly TAGS_LENGTH = new LenghtSpec(0, 40);
+
+  /**
+   * @todo doc
+   */
+  public readonly TAG_SEPARATOR = ',';
 
   /**
    * @summary Title authorized lengths
@@ -157,7 +163,7 @@ export class InfosComponent implements OnInit {
       author: this.author.value,
       overview: this.overview.value,
       tags: this.tags.value
-        .split(',')
+        .split(this.TAG_SEPARATOR)
         .map(tag => tag.trim()),
       title: this.title.value,
     });
@@ -204,7 +210,7 @@ export class InfosComponent implements OnInit {
     this.storyMetaForm.patchValue({
       author: currentStoryMeta.author || '',
       overview: currentStoryMeta.overview || '',
-      tags: currentStoryMeta.tags.join(', ') || '', // TODO: to const
+      tags: currentStoryMeta.tags.join(`${this.TAG_SEPARATOR} `) || '',
       title: currentStoryMeta.title || '',
     });
   }
