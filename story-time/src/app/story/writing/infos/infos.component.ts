@@ -203,7 +203,7 @@ export class InfosComponent implements OnInit {
 
     this.storyMetaForm.patchValue({
       author: currentStoryMeta.author || '',
-      overview: currentStoryMeta || '',
+      overview: currentStoryMeta.overview || '',
       tags: currentStoryMeta.tags.join(', ') || '', // TODO: to const
       title: currentStoryMeta.title || '',
     });
