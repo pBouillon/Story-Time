@@ -169,7 +169,7 @@ export class InfosComponent implements OnInit {
     });
 
     // Redirect the user to the next page
-    this.router.navigate(['#']);
+    this.router.navigate([`${AppRoutes.Writing}/${AppRoutes.Content}`]);
   }
 
   /**
