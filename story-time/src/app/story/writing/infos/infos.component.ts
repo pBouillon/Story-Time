@@ -21,6 +21,7 @@ class LenghtSpec {
   ) { }
 }
 
+
 @Component({
   selector: 'app-infos',
   templateUrl: './infos.component.html',
@@ -42,6 +43,11 @@ export class InfosComponent implements OnInit {
    * @summary Tags authorized lengths
    */
   public readonly TAGS_LENGTH = new LenghtSpec(0, 40);
+
+  /**
+   * @todo doc
+   */
+  public readonly TAG_SEPARATOR = ',';
 
   /**
    * @summary Title authorized lengths
@@ -157,19 +163,20 @@ export class InfosComponent implements OnInit {
       author: this.author.value,
       overview: this.overview.value,
       tags: this.tags.value
-        .split(',')
+        .split(this.TAG_SEPARATOR)
         .map(tag => tag.trim()),
       title: this.title.value,
     });
 
     // Redirect the user to the next page
-    this.router.navigate(['#']); // TODO
+    this.router.navigate(['#']);
   }
 
   /**
    * @summary Build the story's meta form
    */
   private setupForm(): void {
+    // Creates the form
     this.storyMetaForm = this.formBuilder.group({
       author: ['', [
         Validators.required,
@@ -190,6 +197,21 @@ export class InfosComponent implements OnInit {
         Validators.minLength(this.TITLE_LENGTH.min),
         Validators.maxLength(this.TITLE_LENGTH.max)
       ]],
+    });
+
+    // Fetch already existing values
+    const currentStoryMeta = this.editorService.getCurrentStoryMeta();
+
+    // Early exit if no values found
+    if (currentStoryMeta === null) {
+      return;
+    }
+
+    this.storyMetaForm.patchValue({
+      author: currentStoryMeta.author || '',
+      overview: currentStoryMeta.overview || '',
+      tags: currentStoryMeta.tags.join(`${this.TAG_SEPARATOR} `) || '',
+      title: currentStoryMeta.title || '',
     });
   }
 

@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
+import { StoryModule } from '../story.module';
 
+export interface IStoryMeta {
+  author: string;
+  overview: string;
+  tags: Array<string>;
+  title: string;
+}
 
 /**
  * @summary Wrapper for the story "meta" data
  */
-export class StoryMeta {
+export class StoryMeta implements IStoryMeta {
 
   /**
    * @summary Default constructor
@@ -15,10 +22,10 @@ export class StoryMeta {
    * @param title The story's title
    */
   constructor(
-    author: string,
-    overview: string,
-    tags: Array<string>,
-    title: string,
+    public author: string,
+    public overview: string,
+    public tags: Array<string>,
+    public title: string,
   ) { }
 
 }
@@ -44,6 +51,17 @@ export class EditorService {
   constructor(
     private storageService: StorageService,
   ) { }
+
+  /**
+   * @todo doc
+   */
+  public getCurrentStoryMeta(): StoryMeta {
+    const currentStoryMeta = this.storageService.get(this.STORY_META_KEY) || null;
+
+    return currentStoryMeta === null
+      ? null
+      : JSON.parse(currentStoryMeta) as IStoryMeta;
+  }
 
   /**
    * @summary Store the "meta" part of the story
