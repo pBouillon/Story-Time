@@ -163,13 +163,14 @@ export class InfosComponent implements OnInit {
     });
 
     // Redirect the user to the next page
-    this.router.navigate(['#']); // TODO
+    this.router.navigate(['#']);
   }
 
   /**
    * @summary Build the story's meta form
    */
   private setupForm(): void {
+    // Creates the form
     this.storyMetaForm = this.formBuilder.group({
       author: ['', [
         Validators.required,
@@ -190,6 +191,21 @@ export class InfosComponent implements OnInit {
         Validators.minLength(this.TITLE_LENGTH.min),
         Validators.maxLength(this.TITLE_LENGTH.max)
       ]],
+    });
+
+    // Fetch already existing values
+    const currentStoryMeta = this.editorService.getCurrentStoryMeta();
+
+    // Early exit if no values found
+    if (currentStoryMeta === null) {
+      return;
+    }
+
+    this.storyMetaForm.patchValue({
+      author: currentStoryMeta.author || '',
+      overview: currentStoryMeta || '',
+      tags: currentStoryMeta.tags.join(', ') || '', // TODO: to const
+      title: currentStoryMeta.title || '',
     });
   }
 
