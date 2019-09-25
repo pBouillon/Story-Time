@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { PageNotFoundComponent } from './error-pages/page-not-found/page-not-found.component';
 import { InfosComponent } from './story/writing/infos/infos.component';
+import { ContentComponent } from './story/writing/content/content.component';
 
 /**
  * @summary Reference route constants
@@ -11,8 +12,9 @@ export const enum AppRoutes {
   // Main page
   Index = 'index',
   // Story writing
-  Writing = 'writing',
+  Content = 'content',
   Infos = 'infos',
+  Writing = 'writing',
 }
 
 /**
@@ -38,6 +40,9 @@ const routes: Routes = [
     }, {
       path: AppRoutes.Infos,
       component: InfosComponent
+    }, {
+      path: AppRoutes.Content,
+      component: ContentComponent,
     }]
   },
   // Error pages

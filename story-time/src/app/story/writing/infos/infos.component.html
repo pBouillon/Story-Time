@@ -104,7 +104,7 @@
           aria-describedby="tagsHelp"
           autocomplete="off">
         <small id="tagsHelp"
-          class="form-text text-muted">Séparer les tags par des virgules.</small>
+          class="form-text text-muted">Séparer les tags par des <kbd>{{ TAG_SEPARATOR }}</kbd></small>
 
         <!-- error messages -->
         <div *ngIf="isFieldInvalid(tags)"

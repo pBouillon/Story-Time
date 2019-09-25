@@ -45,7 +45,7 @@ export class InfosComponent implements OnInit {
   public readonly TAGS_LENGTH = new LenghtSpec(0, 40);
 
   /**
-   * @todo doc
+   * @summary used separator for tags listing
    */
   public readonly TAG_SEPARATOR = ',';
 
