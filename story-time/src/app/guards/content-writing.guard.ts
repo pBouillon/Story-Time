@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate } from '@angular/router';
-import { Observable } from 'rxjs';
+import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, Router } from '@angular/router';
 import { EditorService } from '../story/writing/editor.service';
-import { IStoryMeta } from '../shared/story-meta';
+import { IStoryMeta, StoryMeta } from '../shared/story-meta';
+import { AppRoutes } from '../app-routing.module';
 
 @Injectable({
   providedIn: 'root'
@@ -10,33 +10,27 @@ import { IStoryMeta } from '../shared/story-meta';
 export class ContentWritingGuard implements CanActivate {
 
   constructor(
-    private editorService: EditorService
+    private editorService: EditorService,
+    private router: Router,
   ) { }
 
   public canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
-      const storedStoryMeta = this.editorService
-        .getCurrentStoryMeta();
+    state: RouterStateSnapshot
+  ): boolean {
+    const storedStoryMeta = this.editorService
+      .getCurrentStoryMeta();
 
-      return this.areRequiredPropertiesFilled(storedStoryMeta);
-  }
+    const isContentAccessGranted = storedStoryMeta !== null
+      && storedStoryMeta.author !== ''
+      && storedStoryMeta.overview !== ''
+      && storedStoryMeta.title !== '';
 
-  /**
-   * @todo doc
-   */
-  private areRequiredPropertiesFilled(storyMeta: IStoryMeta): boolean {
-    /**
-     * @todo doc
-     * @param str
-     */
-    function isBlankOrEmpty(str: string) {
-      return (!str || /^\s*$/.test(str));
+    if (!isContentAccessGranted) {
+      this.router.navigate([`${AppRoutes.Writing}/${AppRoutes.Infos}`]);
     }
 
-    return !isBlankOrEmpty(storyMeta.author)
-      && !isBlankOrEmpty(storyMeta.overview)
-      && !isBlankOrEmpty(storyMeta.title);
+    return isContentAccessGranted;
   }
 
 }
