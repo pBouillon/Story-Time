@@ -1,7 +1,7 @@
 /**
  * @summary Lenght specifications for a field
  */
-export class LenghtSpec {
+export class LengthSpec {
 
   /**
    * @summary Default constructor

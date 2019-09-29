@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { EditorService } from '../editor.service';
 import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
-import { LenghtSpec } from '../../../shared/length-spec';
+import { LengthSpec } from '../../../shared/length-spec';
 
 @Component({
   selector: 'app-infos',
@@ -16,17 +16,17 @@ export class InfosComponent implements OnInit {
   /**
    * @summary Author authorized lengths
    */
-  public readonly AUTHOR_LENGTH = new LenghtSpec(3, 25);
+  public readonly AUTHOR_LENGTH = new LengthSpec(3, 25);
 
   /**
    * @summary Overview authorized lengths
    */
-  public readonly OVERVIEW_LENGTH = new LenghtSpec(5, 140);
+  public readonly OVERVIEW_LENGTH = new LengthSpec(5, 140);
 
   /**
    * @summary Tags authorized lengths
    */
-  public readonly TAGS_LENGTH = new LenghtSpec(0, 40);
+  public readonly TAGS_LENGTH = new LengthSpec(0, 40);
 
   /**
    * @summary used separator for tags listing
@@ -36,7 +36,7 @@ export class InfosComponent implements OnInit {
   /**
    * @summary Title authorized lengths
    */
-  public readonly TITLE_LENGTH = new LenghtSpec(2, 60);
+  public readonly TITLE_LENGTH = new LengthSpec(2, 60);
 
   /**
    * @summary Form containing story's data
@@ -115,7 +115,7 @@ export class InfosComponent implements OnInit {
    * @summary Check if a field has to be considered as invalid for the form
    *
    * A field is invalid if it is marked as invalid by the form and the user
-   * had already interract with it
+   * had already interact with it
    *
    * @param field field's name to check
    * @returns true if the field is invalid; false otherwise
