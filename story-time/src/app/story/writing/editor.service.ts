@@ -29,12 +29,8 @@ export class EditorService {
   public clearCurrentStoryMeta(): void {
     const currentStoryMeta = this.storageService.get(this.STORY_META_KEY) || null;
 
-    console.log('got');
-    
     if (currentStoryMeta !== null) {
       localStorage.removeItem(this.STORY_META_KEY);
-      console.log('clear');
-      
     }
   }
 

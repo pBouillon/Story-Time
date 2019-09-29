@@ -185,7 +185,7 @@ export class InfosComponent implements OnInit {
      */
     const getValidatorsFromSpec = (specification: LengthSpec) => {
       return Validators.minLength(specification.min),
-        Validators.minLength(specification.max);
+        Validators.maxLength(specification.max);
     };
 
     // Creates the form
