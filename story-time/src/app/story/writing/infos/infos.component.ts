@@ -172,26 +172,34 @@ export class InfosComponent implements OnInit {
    * @summary Build the story's meta form
    */
   private setupForm(): void {
+
+    /**
+     * @summary Inner-function to generate validators for lengths
+     * @param specification Defined specification precising the lengths
+     * @returns The `minLength` and `maxLength` validators associated with the
+     *          given `specification`
+     */
+    const getValidatorsFromSpec = (specification: LengthSpec) => {
+      return Validators.minLength(specification.min),
+        Validators.minLength(specification.max);
+    };
+
     // Creates the form
     this.storyMetaForm = this.formBuilder.group({
       author: ['', [
         Validators.required,
-        Validators.minLength(this.AUTHOR_LENGTH.min),
-        Validators.maxLength(this.AUTHOR_LENGTH.max)
+        getValidatorsFromSpec(this.AUTHOR_LENGTH),
       ]],
       overview: ['', [
         Validators.required,
-        Validators.minLength(this.OVERVIEW_LENGTH.min),
-        Validators.maxLength(this.OVERVIEW_LENGTH.max)
+        getValidatorsFromSpec(this.OVERVIEW_LENGTH),
       ]],
       tags: ['', [
-        Validators.minLength(this.TAGS_LENGTH.min),
-        Validators.maxLength(this.TAGS_LENGTH.max)
+        getValidatorsFromSpec(this.TAGS_LENGTH),
       ]],
       title: ['', [
         Validators.required,
-        Validators.minLength(this.TITLE_LENGTH.min),
-        Validators.maxLength(this.TITLE_LENGTH.max)
+        getValidatorsFromSpec(this.TITLE_LENGTH),
       ]],
     });
 
