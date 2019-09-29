@@ -137,6 +137,10 @@ export class InfosComponent implements OnInit {
    * @summary Clear form's content
    */
   public onClear(): void {
+    // Reset cached values
+    this.editorService.clearCurrentStoryMeta();
+
+    // Reset form values
     this.storyMetaForm.setValue({
       author: '',
       overview: '',
