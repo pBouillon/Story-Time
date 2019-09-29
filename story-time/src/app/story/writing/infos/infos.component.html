@@ -179,9 +179,16 @@
         class="btn btn-primary w-25"
         [disabled]="storyMetaForm.invalid"
         (click)="onSubmit()">
-        Submit
+        Valider
       </button>
       <!-- /form submission -->
+
+      <!-- clear form -->
+      <input type="button" 
+        value="Effacer" 
+        class="btn btn-outline-primary mx-2 w-25" 
+        (click)="onClear()">
+      <!-- /clear form -->
 
       <!-- back to menu -->
       <input type="button"

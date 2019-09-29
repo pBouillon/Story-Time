@@ -134,6 +134,18 @@ export class InfosComponent implements OnInit {
   }
 
   /**
+   * @summary Clear form's content
+   */
+  public onClear(): void {
+    this.storyMetaForm.setValue({
+      author: '',
+      overview: '',
+      title: '',
+      tags: ''
+    });
+  }
+
+  /**
    * @summary Actions to perform on form submission
    */
   public onSubmit(): void {
