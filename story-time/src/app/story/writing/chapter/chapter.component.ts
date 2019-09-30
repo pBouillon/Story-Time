@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Chapter } from 'src/app/shared/chapter';
 
 /**
@@ -12,10 +12,31 @@ import { Chapter } from 'src/app/shared/chapter';
 export class ChapterComponent implements OnInit {
 
   /**
+   * @summary Constant code to ask for another chapter after this one
+   */
+  public readonly AFTER = 1;
+
+  /**
+   * @summary Constant code to ask for another chapter before this one
+   */
+  public readonly BEFORE = -1;
+
+  /**
+   * @summary Constant code to ask for the item to be removed
+   */
+  public readonly REMOVE = 0;
+
+  /**
    * @summary Chapter's initial data
    */
   @Input()
   public chapterData: Chapter;
+
+  /**
+   * @summary Emitter for the chapters order
+   */
+  @Output()
+  public requestedAction: EventEmitter<number>;
 
   /**
    * @summary Getter and setter for the chapter's content
@@ -37,6 +58,29 @@ export class ChapterComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.requestedAction = new EventEmitter<number>();
+  }
+
+  /**
+   * @todo doc
+   */
+  public askAfter(): void {
+    return this.requestedAction.emit(this.BEFORE);
+  }
+
+  /**
+   * @todo doc
+   */
+  public askBefore(): void {
+    return this.requestedAction.emit(this.BEFORE);
+  }
+
+  /**
+   * @todo doc
+   */
+  public askRemove(): void {
+    return this.requestedAction.emit(this.REMOVE);
+  }
 
 }

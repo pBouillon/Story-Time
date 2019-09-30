@@ -9,7 +9,8 @@
 
     <!-- chapters display -->
     <div *ngFor="let chapter of chapters">
-      <app-chapter [chapterData]="chapter"></app-chapter>
+      <app-chapter [chapterData]="chapter"
+        (requestedAction)="handleRequestedAction($event);"></app-chapter>
     </div>
     <!-- /chapters display -->
 

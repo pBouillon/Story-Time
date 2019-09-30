@@ -39,6 +39,13 @@ export class ContentComponent implements OnInit {
   }
 
   /**
+   * @todo doc
+   */
+  public handleRequestedAction(event: number): void {
+    this.chapters.push(new Chapter('I\'m', 'testing', 'stuff'));
+  }
+
+  /**
    * @summary Redirect the user back to the main menu
    */
   public onBack(): void {

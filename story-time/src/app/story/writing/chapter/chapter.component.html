@@ -1,15 +1,43 @@
-<div class="container shadow p-3 mb-5 bg-white rounded">
+<div class="d-flex flex-row">
 
-  <p class="border border-secondary rounded p-2">
-    {{ chapterData.content }}
-  </p>
+  <!-- chapter content -->
+  <div class="container shadow p-3 mb-5 bg-white rounded">
 
-  <p class="border border-success rounded p-2">
-    {{ chapterData.expectedWord }}
-  </p>
+    <p class="border border-secondary rounded p-2">
+      {{ chapterData.content }}
+    </p>
 
-  <p class="border border-danger rounded p-2">
-    {{ chapterData.messageFailure }}
-  </p>
+    <p class="border border-success rounded p-2">
+      {{ chapterData.expectedWord }}
+    </p>
+
+    <p class="border border-danger rounded p-2">
+      {{ chapterData.messageFailure }}
+    </p>
+
+  </div>
+  <!-- /chapter content -->
+
+  <!-- chapter controls -->
+  <div class="d-flex flex-column mx-2">
+
+    <input type="button"
+      class="btn btn-outline-primary mb-2"
+      value="⬆"
+      (click)="askBefore()">
+
+    <input type="button"
+      class="btn btn-outline-danger mb-2"
+      value="❌"
+      (click)="askRemove()">
+
+    <input type="button"
+      class="btn btn-outline-primary mb-2"
+      value="⬇"
+      (click)="askAfter()">
+
+  </div>
+  <!-- /chapter controls -->
 
 </div>
+
