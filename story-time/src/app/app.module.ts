@@ -8,11 +8,13 @@ import { ErrorPagesModule } from './error-pages/error-pages.module';
 import { FooterComponent } from './footer/footer.component';
 import { MenuModule } from './menu/menu.module';
 import { StoryModule } from './story/story.module';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
+    AboutComponent,
   ],
   imports: [
     BrowserModule,

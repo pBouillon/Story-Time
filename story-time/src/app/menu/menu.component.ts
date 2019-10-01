@@ -25,7 +25,7 @@ export class MenuComponent {
     // TODO: create associated component
     // TODO: add it to routing
     // TODO: redirect on this component
-    this.router.navigate(['#']);
+    this.router.navigate([AppRoutes.About]);
   }
 
   /**

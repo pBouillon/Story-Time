@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { PageNotFoundComponent } from './error-pages/page-not-found/page-not-found.component';
 import { InfosComponent } from './story/writing/infos/infos.component';
+import { AboutComponent } from './about/about.component';
 
 /**
  * @summary Reference route constants
@@ -13,6 +14,8 @@ export const enum AppRoutes {
   // Story writing
   Writing = 'writing',
   Infos = 'infos',
+  // About page
+  About = 'about'
 }
 
 /**
@@ -39,6 +42,9 @@ const routes: Routes = [
       path: AppRoutes.Infos,
       component: InfosComponent
     }]
+  }, {
+    path: AppRoutes.About,
+    component: AboutComponent,
   },
   // Error pages
   {
