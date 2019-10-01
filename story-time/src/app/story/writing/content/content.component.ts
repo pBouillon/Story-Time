@@ -4,6 +4,7 @@ import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
 import { IChapter, Chapter, ChapterAction } from 'src/app/shared/chapter';
+import { LengthSpec } from 'src/app/shared/length-spec';
 
 @Component({
   selector: 'app-content',
@@ -12,7 +13,10 @@ import { IChapter, Chapter, ChapterAction } from 'src/app/shared/chapter';
 })
 export class ContentComponent implements OnInit {
 
-  // TODO bloquer l'accès si la page précédente n'est pas validée
+  /**
+   * @summary Bounds for the number of chapters contained in a story
+   */
+  private readonly chaptersBounds = new LengthSpec(1, 15);
 
   /**
    * @summary Ordered list of all chapters
@@ -40,7 +44,14 @@ export class ContentComponent implements OnInit {
    * @summary Add a new chapter in the chapters list
    * @param position position in which the new chapter will be created
    */
-  private addChapter(position: number = this.chapters.length): any {
+  private addChapter(position: number = this.chapters.length): IChapter {
+    // If the maximum number of chapters allowed is reached, does nothing
+    if (this.chapters.length === this.chaptersBounds.max) {
+      // TODO: error notification
+      return;
+    }
+
+    // Add a new chapter at the given position
     this.chapters.splice(position, 0, new Chapter(this.chapters.length));
   }
 
@@ -83,10 +94,43 @@ export class ContentComponent implements OnInit {
   }
 
   /**
+   * @summary Reset the chapters writing view
+   */
+  public onReset(): void {
+    // Clear all values
+    this.chapters = new Array<IChapter>();
+
+    // Add a new empty chapter
+    this.addChapter();
+  }
+
+  /**
+   * @summary Validate all values provided by the user and save them
+   */
+  public onSubmit(): void {
+    // Validate content
+    // TODO
+
+    // Save chapters
+    // TODO
+
+    // Redirect the user to the export page
+    // TODO
+    this.router.navigate([`#`]);
+  }
+
+  /**
    * @summary Remove an item at a given position
    * @param position Position of the item to delete
    */
   private removeItem(position: number): void {
+    // If the minimum number of chapters allowed is reached, does nothing
+    if (this.chapters.length === this.chaptersBounds.min) {
+      // TODO: error notification
+      return;
+    }
+
+    // Remove the chapter at the given position
     this.chapters.splice(position, 1);
   }
 
