@@ -34,6 +34,7 @@
       <!-- back to menu -->
       <input type="button"
         value="Retour"
+        [disabled]="!isContentValid()"
         class="btn btn-outline-secondary mx-2 w-25"
         (click)="onBack()">
       <!-- /back to menu -->

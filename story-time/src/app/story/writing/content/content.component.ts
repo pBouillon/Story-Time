@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
 import { IChapter, Chapter, ChapterAction } from 'src/app/shared/chapter';
 import { LengthSpec } from 'src/app/shared/length-spec';
+import { all } from 'q';
 
 @Component({
   selector: 'app-content',
@@ -87,6 +88,23 @@ export class ContentComponent implements OnInit {
   }
 
   /**
+   * @summary Assert that all chapters are valid
+   * @returns `true` if all chapters are filled; `false` otherwise
+   */
+  public isContentValid(): boolean {
+    this.chapters.forEach(chapter => {
+      if (chapter.content === ''
+        || chapter.expectedWord === ''
+        || chapter.messageFailure === ''
+        || chapter.question === '') {
+        return false;
+      }
+    });
+
+    return true;
+  }
+
+  /**
    * @summary Redirect the user back to the main menu
    */
   public onBack(): void {
@@ -108,8 +126,11 @@ export class ContentComponent implements OnInit {
    * @summary Validate all values provided by the user and save them
    */
   public onSubmit(): void {
-    // Validate content
-    // TODO
+    // Validate all chapters
+    if (!this.isContentValid()) {
+      // TODO: error message
+      return;
+    }
 
     // Save chapters
     // TODO
