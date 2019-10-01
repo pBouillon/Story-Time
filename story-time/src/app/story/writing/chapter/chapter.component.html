@@ -11,17 +11,25 @@
 
     <!-- chapter fields -->
     <div class="d-flex flex-column w-100">
-      <p class="border border-secondary rounded p-2">
-        {{ chapterData.content }}
-      </p>
 
-      <p class="border border-success rounded p-2">
-        {{ chapterData.expectedWord }}
-      </p>
+      <input type="text"
+        #content
+        class="border border-secondary rounded m-1 p-2"
+        [value]="chapterData.content"
+        (input)="chapterData.content = content.value">
 
-      <p class="border border-danger rounded p-2">
-        {{ chapterData.messageFailure }}
-      </p>
+      <input type="text"
+        #expectedWord
+        class="border border-success rounded m-1 p-2"
+        [value]="chapterData.expectedWord"
+        (input)="chapterData.expectedWord = expectedWord.value">
+
+      <input type="text"
+        #messageFailure
+        class="border border-danger rounded m-1 p-2"
+        [value]="chapterData.messageFailure"
+        (input)="chapterData.messageFailure = messageFailure.value">
+
     </div>
     <!-- /chapter fields -->
 
