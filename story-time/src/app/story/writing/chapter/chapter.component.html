@@ -14,18 +14,21 @@
 
       <input type="text"
         #content
+        placeholder="Contenu du chapitre"
         class="border border-secondary rounded m-1 p-2"
         [value]="chapterData.content"
         (input)="chapterData.content = content.value">
 
       <input type="text"
         #expectedWord
+        placeholder="Mot attendu"
         class="border border-success rounded m-1 p-2"
         [value]="chapterData.expectedWord"
         (input)="chapterData.expectedWord = expectedWord.value">
 
       <input type="text"
         #messageFailure
+        placeholder="Message en cas d'échec"
         class="border border-danger rounded m-1 p-2"
         [value]="chapterData.messageFailure"
         (input)="chapterData.messageFailure = messageFailure.value">
