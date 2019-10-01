@@ -17,26 +17,26 @@
     <!-- form buttons -->
     <div class="container d-flex flex-row-reverse p-0 justify-content-center">
 
-      <!-- back to menu -->
+      <!-- form submission -->
       <input type="button"
-        value="Retour"
-        class="btn btn-outline-primary mx-2 w-25"
-        (click)="onBack()">
-      <!-- /back to menu -->
+        value="Valider"
+        class="btn btn-primary mx-2 w-25"
+        (click)="onSubmit()">
+      <!-- /form submission -->
 
       <!-- form clear -->
       <input type="button"
         value="Effacer"
-        class="btn btn-outline-secondary mx-2 w-25"
+        class="btn btn-outline-primary mx-2 w-25"
         (click)="onReset()">
       <!-- /form clear -->
 
-      <!-- form submission -->
+      <!-- back to menu -->
       <input type="button"
-        value="Valider"
-        class="btn btn-secondary mx-2 w-25"
-        (click)="onSubmit()">
-      <!-- /form submission -->
+        value="Retour"
+        class="btn btn-outline-secondary mx-2 w-25"
+        (click)="onBack()">
+      <!-- /back to menu -->
 
     </div>
     <!-- /form buttons -->
