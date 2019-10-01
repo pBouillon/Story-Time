@@ -92,16 +92,19 @@ export class ContentComponent implements OnInit {
    * @returns `true` if all chapters are filled; `false` otherwise
    */
   public isContentValid(): boolean {
+    let isContentValid = true;
+
     this.chapters.forEach(chapter => {
       if (chapter.content === ''
         || chapter.expectedWord === ''
         || chapter.messageFailure === ''
         || chapter.question === '') {
-        return false;
+        isContentValid = false;
+        return;
       }
     });
 
-    return true;
+    return isContentValid;
   }
 
   /**
