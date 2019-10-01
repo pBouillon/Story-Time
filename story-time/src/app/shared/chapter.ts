@@ -4,6 +4,11 @@
 export interface IChapter {
 
   /**
+   * @summary Id containing the chapter's order in the story
+   */
+  id: number;
+
+  /**
    * @summary Chapter's content
    */
   content: string;
@@ -27,14 +32,33 @@ export class Chapter implements IChapter {
 
   /**
    * @summary Default constructor, all fields are blank by default
-   * @param content Chapter' content
+   * @param id Chapter order
+   * @param content Chapter's content
    * @param expectedWord Expected word or expression to move on the next chapter
    * @param messageFailure Message to display when the user fails on this chapter
    */
   constructor(
+    public id: number = 0,
     public content: string = '',
     public expectedWord: string = '',
     public messageFailure: string = ''
   ) { }
 
+}
+
+export enum ChapterAction {
+  /**
+   * @summary Constant code to ask for another chapter after this one
+   */
+  AFTER = 1,
+
+  /**
+   * @summary Constant code to ask for another chapter before this one
+   */
+  BEFORE = -1,
+
+  /**
+   * @summary Constant code to ask for the item to be removed
+   */
+  REMOVE = 0,
 }

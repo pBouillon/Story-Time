@@ -3,7 +3,7 @@ import { EditorService } from '../editor.service';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
-import { IChapter, Chapter } from 'src/app/shared/chapter';
+import { IChapter, Chapter, ChapterAction } from 'src/app/shared/chapter';
 
 @Component({
   selector: 'app-content',
@@ -33,16 +33,43 @@ export class ContentComponent implements OnInit {
 
   ngOnInit() {
     this.chapters = new Array<IChapter>();
+    this.addChapter();
+  }
 
-    // TODO: remove - only for tests purposes
-    this.chapters.push(new Chapter('I\'m', 'testing', 'stuff'));
+  /**
+   * @summary Add a new chapter in the chapters list
+   * @param position position in which the new chapter will be created
+   */
+  private addChapter(position: number = this.chapters.length): any {
+    this.chapters.splice(position, 0, new Chapter(this.chapters.length + 1));
   }
 
   /**
    * @todo doc
    */
-  public handleRequestedAction(event: number): void {
-    this.chapters.push(new Chapter('I\'m', 'testing', 'stuff'));
+  public handleRequestedAction(event: [number, number]): void {
+    const [request, position] = event;
+
+    // Handle action
+    switch (request) {
+      case ChapterAction.AFTER:
+      case ChapterAction.BEFORE:
+        this.addChapter(position);
+        break;
+
+      case ChapterAction.REMOVE:
+        this.removeItem(position);
+
+        break;
+
+      default:
+        // TODO: error message on notification (planned later)
+        break;
+    }
+
+    // Re-evaluate indexes
+    let counter = 0;
+    this.chapters.map(chapter => chapter.id = ++counter);
   }
 
   /**
@@ -50,6 +77,14 @@ export class ContentComponent implements OnInit {
    */
   public onBack(): void {
     this.router.navigate([`${AppRoutes.Writing}/${AppRoutes.Infos}`]);
+  }
+
+  /**
+   * @summary Remove an item at a given position
+   * @param position Position of the item to delete
+   */
+  private removeItem(position: number): void {
+    this.chapters.splice(position, 1);
   }
 
 }
