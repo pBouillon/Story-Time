@@ -41,7 +41,7 @@ export class ContentComponent implements OnInit {
    * @param position position in which the new chapter will be created
    */
   private addChapter(position: number = this.chapters.length): any {
-    this.chapters.splice(position, 0, new Chapter(this.chapters.length + 1));
+    this.chapters.splice(position, 0, new Chapter(this.chapters.length));
   }
 
   /**
@@ -53,13 +53,15 @@ export class ContentComponent implements OnInit {
     // Handle action
     switch (request) {
       case ChapterAction.AFTER:
-      case ChapterAction.BEFORE:
-        this.addChapter(position);
+        this.addChapter(position + 1);
         break;
+
+      case ChapterAction.BEFORE:
+      this.addChapter(position);
+      break;
 
       case ChapterAction.REMOVE:
         this.removeItem(position);
-
         break;
 
       default:
@@ -69,7 +71,7 @@ export class ContentComponent implements OnInit {
 
     // Re-evaluate indexes
     let counter = 0;
-    this.chapters.map(chapter => chapter.id = ++counter);
+    this.chapters.map(chapter => chapter.id = counter++);
   }
 
   /**
