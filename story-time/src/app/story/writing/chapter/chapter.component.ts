@@ -46,21 +46,21 @@ export class ChapterComponent implements OnInit {
   ngOnInit() { }
 
   /**
-   * @todo doc
+   * @summary Request the creation of a new component after this one
    */
   public askAfter(): void {
     return this.requestedAction.emit([ChapterAction.AFTER, this.chapterData.id]);
   }
 
   /**
-   * @todo doc
+   * @summary Request the creation of a new component before this one
    */
   public askBefore(): void {
     return this.requestedAction.emit([ChapterAction.BEFORE, this.chapterData.id]);
   }
 
   /**
-   * @todo doc
+   * @summary Request this component to be removed
    */
   public askRemove(): void {
     return this.requestedAction.emit([ChapterAction.REMOVE, this.chapterData.id]);

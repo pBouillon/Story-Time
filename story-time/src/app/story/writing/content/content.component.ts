@@ -45,7 +45,8 @@ export class ContentComponent implements OnInit {
   }
 
   /**
-   * @todo doc
+   * @summary Handle the requested action from the child component
+   * @param event A tuple containing the event request code and the component position
    */
   public handleRequestedAction(event: [number, number]): void {
     const [request, position] = event;
@@ -57,8 +58,8 @@ export class ContentComponent implements OnInit {
         break;
 
       case ChapterAction.BEFORE:
-      this.addChapter(position);
-      break;
+        this.addChapter(position);
+        break;
 
       case ChapterAction.REMOVE:
         this.removeItem(position);
