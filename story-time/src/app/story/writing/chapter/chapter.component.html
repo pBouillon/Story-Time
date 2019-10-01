@@ -12,26 +12,39 @@
     <!-- chapter fields -->
     <div class="d-flex flex-column w-100">
 
-      <input type="text"
+      <textarea
         #content
         placeholder="Contenu du chapitre"
+        class="chapter-content border border-secondary rounded m-1"
+        rows="3"
+        (input)="chapterData.content = content.value">{{ chapterData.content }}</textarea>
+
+      <input type="text"
+        #question
+        placeholder="Question à poser"
         class="border border-secondary rounded m-1 p-2"
-        [value]="chapterData.content"
-        (input)="chapterData.content = content.value">
+        [value]="chapterData.question"
+        (input)="chapterData.question = question.value">
 
-      <input type="text"
-        #expectedWord
-        placeholder="Mot attendu"
-        class="border border-success rounded m-1 p-2"
-        [value]="chapterData.expectedWord"
-        (input)="chapterData.expectedWord = expectedWord.value">
+      <!-- outputs -->
+      <div class="d-flex flex-row flex-grow-1">
 
-      <input type="text"
-        #messageFailure
-        placeholder="Message en cas d'échec"
-        class="border border-danger rounded m-1 p-2"
-        [value]="chapterData.messageFailure"
-        (input)="chapterData.messageFailure = messageFailure.value">
+        <input type="text"
+          #expectedWord
+          placeholder="Mot attendu"
+          class="border border-success rounded m-1 p-2"
+          [value]="chapterData.expectedWord"
+          (input)="chapterData.expectedWord = expectedWord.value">
+
+        <input type="text"
+          #messageFailure
+          placeholder="Message en cas d'échec"
+          class="border border-danger rounded m-1 p-2"
+          [value]="chapterData.messageFailure"
+          (input)="chapterData.messageFailure = messageFailure.value">
+
+      </div>
+      <!-- /outputs -->
 
     </div>
     <!-- /chapter fields -->

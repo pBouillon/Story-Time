@@ -4,11 +4,6 @@
 export interface IChapter {
 
   /**
-   * @summary Id containing the chapter's order in the story
-   */
-  id: number;
-
-  /**
    * @summary Chapter's content
    */
   content: string;
@@ -19,9 +14,19 @@ export interface IChapter {
   expectedWord: string;
 
   /**
+   * @summary Id containing the chapter's order in the story
+   */
+  id: number;
+
+  /**
    * @summary Message to display when the user fails on this chapter
    */
   messageFailure: string;
+
+  /**
+   * @summary Question to ask after the chapter's content
+   */
+  question: string;
 
 }
 
@@ -36,12 +41,14 @@ export class Chapter implements IChapter {
    * @param content Chapter's content
    * @param expectedWord Expected word or expression to move on the next chapter
    * @param messageFailure Message to display when the user fails on this chapter
+   * @param question Question to ask after the chapter's content
    */
   constructor(
     public id: number = 0,
     public content: string = '',
     public expectedWord: string = '',
-    public messageFailure: string = ''
+    public messageFailure: string = '',
+    public question: string = ''
   ) { }
 
 }
