@@ -5,7 +5,6 @@ import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
 import { IChapter, Chapter, ChapterAction } from 'src/app/shared/chapter';
 import { LengthSpec } from 'src/app/shared/length-spec';
-import { all } from 'q';
 
 @Component({
   selector: 'app-content',

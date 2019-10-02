@@ -12,6 +12,11 @@ import { Chapter } from 'src/app/shared/chapter';
 export class EditorService {
 
   /**
+   * @summary Extension of the exported story file
+   */
+  public EXTENSION_NAME = '.story';
+
+  /**
    * @summary Key to access the "chapters" part of the story
    */
   private STORY_CHAPTERS_KEY = 'story-chapters';

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { EditorService } from '../editor.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Router } from '@angular/router';
+import { AppRoutes } from 'src/app/app-routing.module';
 
 @Component({
   selector: 'app-export',
@@ -15,6 +17,7 @@ export class ExportComponent implements OnInit {
   public jsonUrl: SafeUrl;
 
   constructor(
+    private router: Router,
     private sanitizer: DomSanitizer,
     private editorService: EditorService,
   ) { }
@@ -38,25 +41,39 @@ export class ExportComponent implements OnInit {
     const format = 'data:text/json;charset=UTF-8,';
     return this.sanitizer.bypassSecurityTrustUrl(format + encodeURIComponent(toSerialize));
   }
-  
+
   /**
-   * @todo: doc
+   * @summary Generate the name of the file to export
+   *          The name is built as `<story title>.<story extension>`
+   * @returns The generated name
    */
-  public onBack(): void { 
-    // TODO
-  }
-  
-  /**
-   * @todo: doc
-   */
-  public onExport(): void { 
-    // TODO
+  public getExportedFileName(): string {
+    const storyName = this.editorService
+      .getCurrentStoryMeta()
+      .title
+      .trim()
+      .toLowerCase()
+      .replace(/ /g, '_', );
+
+    return `${storyName}${this.editorService.EXTENSION_NAME}`;
   }
 
   /**
-   * @todo: doc
+   * @summary Redirect the user to the previous page
+   */
+  public onBack(): void {
+    this.router.navigate([`${AppRoutes.Writing}/${AppRoutes.Content}`]);
+  }
+
+  /**
+   * @summary Redirect the user to the main menu and clear its cache
    */
   public onMenu(): void {
-    // TODO
+    // Clear the stored story
+    this.editorService.clearAllStoryData();
+
+    // Redirect the user
+    this.router.navigate([`${AppRoutes.Index}`]);
   }
+
 }
