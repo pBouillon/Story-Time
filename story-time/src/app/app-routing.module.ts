@@ -5,11 +5,14 @@ import { PageNotFoundComponent } from './error-pages/page-not-found/page-not-fou
 import { InfosComponent } from './story/writing/infos/infos.component';
 import { ContentComponent } from './story/writing/content/content.component';
 import { ContentWritingGuard } from './guards/content-writing.guard';
+import { ExportComponent } from './story/writing/export/export.component';
 
 /**
  * @summary Reference route constants
  */
 export const enum AppRoutes {
+  // Export
+  Export = 'export',
   // Main page
   Index = 'index',
   // Story writing
@@ -47,6 +50,10 @@ const routes: Routes = [
       canActivate: [
         ContentWritingGuard,
       ],
+    }, {
+      path: AppRoutes.Export,
+      component: ExportComponent,
+      // TODO: guar
     }]
   },
   // Error pages

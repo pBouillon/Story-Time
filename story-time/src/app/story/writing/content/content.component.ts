@@ -146,8 +146,7 @@ export class ContentComponent implements OnInit {
     this.editorService.storeStoryChapters(this.chapters);
 
     // Redirect the user to the export page
-    // TODO
-    this.router.navigate([`#`]);
+    this.router.navigate([`${AppRoutes.Writing}/${AppRoutes.Export}`]);
   }
 
   /**
