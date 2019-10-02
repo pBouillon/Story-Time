@@ -37,8 +37,11 @@ export class ContentComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.chapters = new Array<IChapter>();
-    this.addChapter();
+    // Clear any remaining data
+    this.editorService.clearCurrentStoryChapters();
+
+    // Initialize chapters
+    this.initializeChapters();
   }
 
   /**
@@ -88,6 +91,14 @@ export class ContentComponent implements OnInit {
   }
 
   /**
+   * @summary Initialize the chapter's array
+   */
+  private initializeChapters(): void {
+    this.chapters = new Array<IChapter>();
+    this.addChapter();
+  }
+
+  /**
    * @summary Assert that all chapters are valid
    * @returns `true` if all chapters are filled; `false` otherwise
    */
@@ -118,11 +129,7 @@ export class ContentComponent implements OnInit {
    * @summary Reset the chapters writing view
    */
   public onReset(): void {
-    // Clear all values
-    this.chapters = new Array<IChapter>();
-
-    // Add a new empty chapter
-    this.addChapter();
+    this.initializeChapters();
   }
 
   /**
@@ -136,7 +143,7 @@ export class ContentComponent implements OnInit {
     }
 
     // Save chapters
-    // TODO
+    this.editorService.storeStoryChapters(this.chapters);
 
     // Redirect the user to the export page
     // TODO
