@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, Router } from '@angular/router';
 import { EditorService } from '../story/writing/editor.service';
-import { IStoryMeta, StoryMeta } from '../shared/story-meta';
 import { AppRoutes } from '../app-routing.module';
 
 @Injectable({

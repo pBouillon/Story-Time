@@ -6,6 +6,7 @@ import { InfosComponent } from './story/writing/infos/infos.component';
 import { ContentComponent } from './story/writing/content/content.component';
 import { ContentWritingGuard } from './guards/content-writing.guard';
 import { ExportComponent } from './story/writing/export/export.component';
+import { ContentExportGuard } from './guards/content-export.guard';
 
 /**
  * @summary Reference route constants
@@ -53,7 +54,9 @@ const routes: Routes = [
     }, {
       path: AppRoutes.Export,
       component: ExportComponent,
-      // TODO: guar
+      canActivate: [
+        ContentExportGuard,
+      ]
     }]
   },
   // Error pages
