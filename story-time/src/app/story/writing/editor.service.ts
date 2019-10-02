@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StorageService } from './storage.service';
 import { IStoryMeta } from '../../shared/story-meta';
+import { Chapter } from 'src/app/shared/chapter';
 
 /**
  * @summary The editor service provides a bunch of tool to write your own story
@@ -9,6 +10,11 @@ import { IStoryMeta } from '../../shared/story-meta';
   providedIn: 'root',
 })
 export class EditorService {
+
+  /**
+   * @summary Key to access the "chapters" part of the story
+   */
+  private STORY_CHAPTERS_KEY = 'story-chapters';
 
   /**
    * @summary Key to access the "meta" part of the story
@@ -24,6 +30,25 @@ export class EditorService {
   ) { }
 
   /**
+   * @summary Clear all story writing related content stored
+   */
+  public clearAllStoryData(): void {
+    this.clearCurrentStoryMeta();
+    this.clearCurrentStoryChapters();
+  }
+
+  /**
+   * @summary Clear the stored chapters
+   */
+  public clearCurrentStoryChapters(): void {
+    const currentStoryChapters = this.storageService.get(this.STORY_CHAPTERS_KEY) || null;
+
+    if (currentStoryChapters !== null) {
+      localStorage.removeItem(this.STORY_CHAPTERS_KEY);
+    }
+  }
+
+  /**
    * @summary Clear the stored StoryMeta object
    */
   public clearCurrentStoryMeta(): void {
@@ -32,6 +57,18 @@ export class EditorService {
     if (currentStoryMeta !== null) {
       localStorage.removeItem(this.STORY_META_KEY);
     }
+  }
+
+  /**
+   * @summary Fetch the stored chapters of a story
+   * @returns An array of all those chapters if existing; null otherwise
+   */
+  public getCurrentStoryChapters(): Array<Chapter> {
+    const currentStoryChapters = this.storageService.get(this.STORY_CHAPTERS_KEY) || null;
+
+    return currentStoryChapters === null
+      ? null
+      : JSON.parse(currentStoryChapters) as Array<Chapter>;
   }
 
   /**
@@ -44,6 +81,14 @@ export class EditorService {
     return currentStoryMeta === null
       ? null
       : JSON.parse(currentStoryMeta) as IStoryMeta;
+  }
+
+  /**
+   * @summary Store all chapters of a story
+   * @param chapters An array containing all chapters of the current story
+   */
+  public storeStoryChapters(chapters: Array<Chapter>): void {
+    this.storageService.store(this.STORY_CHAPTERS_KEY, chapters);
   }
 
   /**
