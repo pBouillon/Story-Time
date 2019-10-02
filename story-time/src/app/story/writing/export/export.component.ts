@@ -38,5 +38,25 @@ export class ExportComponent implements OnInit {
     const format = 'data:text/json;charset=UTF-8,';
     return this.sanitizer.bypassSecurityTrustUrl(format + encodeURIComponent(toSerialize));
   }
+  
+  /**
+   * @todo: doc
+   */
+  public onBack(): void { 
+    // TODO
+  }
+  
+  /**
+   * @todo: doc
+   */
+  public onExport(): void { 
+    // TODO
+  }
 
+  /**
+   * @todo: doc
+   */
+  public onMenu(): void {
+    // TODO
+  }
 }
