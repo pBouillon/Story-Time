@@ -1,3 +1,37 @@
-<p>
-  export works!
-</p>
+<div class="container justify-content-center d-flex">
+  <h2>Histoire prête !</h2>
+</div>
+
+<div class="container justify-content-center d-flex flex-row-reverse mt-4">
+
+  <!-- export button -->
+  <input type="button"
+    value="Télécharger"
+    class="btn btn-primary mx-2 w-25"
+    (click)="onExport()">
+    <!-- TODO -->
+  <!-- /export button -->
+
+  <!-- export button -->
+  <input type="button"
+    value="Retour à l'édition"
+    class="btn btn-outline-primary mx-2 w-25"
+    (click)="onBack()">
+    <!-- TODO: back -->
+  <!-- /export button -->
+
+  <!-- back to menu -->
+  <input type="button"
+    value="Retour au menu"
+    class="btn btn-outline-secondary mx-2 w-25"
+    (click)="onMenu()">
+    <!-- TODO -->
+  <!-- /back to menu -->
+
+  <!-- <a class="btn btn-primary"
+    title="Download JSON"
+    [href]="jsonUrl"
+    download="download.json">Télécharger l'histoire</a> -->
+
+</div>
+
