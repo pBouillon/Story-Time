@@ -1,0 +1,47 @@
+<div class="container justify-content-center d-flex">
+  <h2>Rédaction des chapitres</h2>
+</div>
+
+<div class="container justify-content-center d-flex mt-4">
+
+  <!-- story content form -->
+  <form class="w-50">
+
+    <!-- chapters display -->
+    <div *ngFor="let chapter of chapters">
+      <app-chapter [(chapterData)]="chapter"
+        (requestedAction)="handleRequestedAction($event);"></app-chapter>
+    </div>
+    <!-- /chapters display -->
+
+    <!-- form buttons -->
+    <div class="container d-flex flex-row-reverse p-0 justify-content-center">
+
+      <!-- form submission -->
+      <input type="button"
+        value="Valider"
+        class="btn btn-primary mx-2 w-25"
+        (click)="onSubmit()">
+      <!-- /form submission -->
+
+      <!-- form clear -->
+      <input type="button"
+        value="Effacer"
+        class="btn btn-outline-primary mx-2 w-25"
+        (click)="onReset()">
+      <!-- /form clear -->
+
+      <!-- back to menu -->
+      <input type="button"
+        value="Retour"
+        class="btn btn-outline-secondary mx-2 w-25"
+        (click)="onBack()">
+      <!-- /back to menu -->
+
+    </div>
+    <!-- /form buttons -->
+
+  </form>
+  <!-- /story content form -->
+
+</div>

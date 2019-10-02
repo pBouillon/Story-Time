@@ -3,16 +3,23 @@ import { Routes, RouterModule } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { PageNotFoundComponent } from './error-pages/page-not-found/page-not-found.component';
 import { InfosComponent } from './story/writing/infos/infos.component';
+import { ContentComponent } from './story/writing/content/content.component';
+import { ContentWritingGuard } from './guards/content-writing.guard';
+import { ExportComponent } from './story/writing/export/export.component';
+import { ContentExportGuard } from './guards/content-export.guard';
 
 /**
  * @summary Reference route constants
  */
 export const enum AppRoutes {
+  // Export
+  Export = 'export',
   // Main page
   Index = 'index',
   // Story writing
-  Writing = 'writing',
+  Content = 'content',
   Infos = 'infos',
+  Writing = 'writing',
 }
 
 /**
@@ -38,6 +45,18 @@ const routes: Routes = [
     }, {
       path: AppRoutes.Infos,
       component: InfosComponent
+    }, {
+      path: AppRoutes.Content,
+      component: ContentComponent,
+      canActivate: [
+        ContentWritingGuard,
+      ],
+    }, {
+      path: AppRoutes.Export,
+      component: ExportComponent,
+      canActivate: [
+        ContentExportGuard,
+      ]
     }]
   },
   // Error pages

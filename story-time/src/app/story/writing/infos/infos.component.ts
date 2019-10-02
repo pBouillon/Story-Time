@@ -4,23 +4,7 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/fo
 import { EditorService } from '../editor.service';
 import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
-
-/**
- * @summary Lenght specifications for a field
- */
-class LenghtSpec {
-
-  /**
-   * @summary Default constructor
-   * @param min Minimal size of the field
-   * @param max Maximum size of the field
-   */
-  constructor(
-    public min: number,
-    public max: number,
-  ) { }
-}
-
+import { LengthSpec } from '../../../shared/length-spec';
 
 @Component({
   selector: 'app-infos',
@@ -32,27 +16,27 @@ export class InfosComponent implements OnInit {
   /**
    * @summary Author authorized lengths
    */
-  public readonly AUTHOR_LENGTH = new LenghtSpec(3, 25);
+  public readonly AUTHOR_LENGTH = new LengthSpec(3, 25);
 
   /**
    * @summary Overview authorized lengths
    */
-  public readonly OVERVIEW_LENGTH = new LenghtSpec(5, 140);
+  public readonly OVERVIEW_LENGTH = new LengthSpec(5, 140);
 
   /**
    * @summary Tags authorized lengths
    */
-  public readonly TAGS_LENGTH = new LenghtSpec(0, 40);
+  public readonly TAGS_LENGTH = new LengthSpec(0, 40);
 
   /**
-   * @todo doc
+   * @summary used separator for tags listing
    */
   public readonly TAG_SEPARATOR = ',';
 
   /**
    * @summary Title authorized lengths
    */
-  public readonly TITLE_LENGTH = new LenghtSpec(2, 60);
+  public readonly TITLE_LENGTH = new LengthSpec(2, 60);
 
   /**
    * @summary Form containing story's data
@@ -131,7 +115,7 @@ export class InfosComponent implements OnInit {
    * @summary Check if a field has to be considered as invalid for the form
    *
    * A field is invalid if it is marked as invalid by the form and the user
-   * had already interract with it
+   * had already interact with it
    *
    * @param field field's name to check
    * @returns true if the field is invalid; false otherwise
@@ -147,6 +131,22 @@ export class InfosComponent implements OnInit {
    */
   public onBack(): void {
     this.router.navigate([AppRoutes.Index]);
+  }
+
+  /**
+   * @summary Clear form's content
+   */
+  public onClear(): void {
+    // Reset cached values
+    this.editorService.clearCurrentStoryMeta();
+
+    // Reset form values
+    this.storyMetaForm.setValue({
+      author: '',
+      overview: '',
+      title: '',
+      tags: ''
+    });
   }
 
   /**
@@ -169,33 +169,41 @@ export class InfosComponent implements OnInit {
     });
 
     // Redirect the user to the next page
-    this.router.navigate(['#']);
+    this.router.navigate([`${AppRoutes.Writing}/${AppRoutes.Content}`]);
   }
 
   /**
    * @summary Build the story's meta form
    */
   private setupForm(): void {
+
+    /**
+     * @summary Inner-function to generate validators for lengths
+     * @param specification Defined specification precising the lengths
+     * @returns The `minLength` and `maxLength` validators associated with the
+     *          given `specification`
+     */
+    const getValidatorsFromSpec = (specification: LengthSpec) => {
+      return Validators.minLength(specification.min),
+        Validators.maxLength(specification.max);
+    };
+
     // Creates the form
     this.storyMetaForm = this.formBuilder.group({
       author: ['', [
         Validators.required,
-        Validators.minLength(this.AUTHOR_LENGTH.min),
-        Validators.maxLength(this.AUTHOR_LENGTH.max)
+        getValidatorsFromSpec(this.AUTHOR_LENGTH),
       ]],
       overview: ['', [
         Validators.required,
-        Validators.minLength(this.OVERVIEW_LENGTH.min),
-        Validators.maxLength(this.OVERVIEW_LENGTH.max)
+        getValidatorsFromSpec(this.OVERVIEW_LENGTH),
       ]],
       tags: ['', [
-        Validators.minLength(this.TAGS_LENGTH.min),
-        Validators.maxLength(this.TAGS_LENGTH.max)
+        getValidatorsFromSpec(this.TAGS_LENGTH),
       ]],
       title: ['', [
         Validators.required,
-        Validators.minLength(this.TITLE_LENGTH.min),
-        Validators.maxLength(this.TITLE_LENGTH.max)
+        getValidatorsFromSpec(this.TITLE_LENGTH),
       ]],
     });
 

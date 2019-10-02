@@ -1,0 +1,57 @@
+<div class="container justify-content-center d-flex">
+  <h2>Histoire prête !</h2>
+</div>
+
+<div class="container shadow d-flex flex-column border w-50 justify-content-center my-3">
+
+  <p class="text-center pt-3 m-0">
+    ✅ Votre histoire a été générée avec succès !
+  </p>
+
+  <hr class="border-top border-secondary w-75">
+
+  <p class="pl-2 m-1">
+    Vous pouvez dès à présent:
+  </p>
+
+  <ul>
+    <li class="mb-1">
+      📩 Télécharger votre histoire au format
+      <span class="text-secondary">.story</span>
+    </li>
+    <li class="mb-1">
+      📚 Retourner au menu principal pour tester votre nouvelle
+      histoire <br>
+      (les modifications en cours seront perdues)
+    </li>
+    <li class="mb-1">
+      📝 Modifier le contenu de l'histoire
+    </li>
+  </ul>
+
+</div>
+
+<div class="container justify-content-center d-flex flex-row-reverse">
+
+  <!-- export button -->
+  <a [download]="getExportedFileName()"
+    class="btn btn-primary mx-2 w-25"
+    [href]="generateDownloadJsonUri()">Télécharger</a>
+  <!-- /export button -->
+
+  <!-- back to menu -->
+  <input type="button"
+    value="Retour au menu"
+    class="btn btn-outline-primary mx-2 w-25"
+    (click)="onMenu()">
+  <!-- /back to menu -->
+
+  <!-- back button -->
+  <input type="button"
+    value="Retour à l'édition"
+    class="btn btn-outline-secondary mx-2 w-25"
+    (click)="onBack()">
+  <!-- /back button -->
+
+</div>
+
