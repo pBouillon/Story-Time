@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
 import { IChapter, Chapter, ChapterAction } from 'src/app/shared/chapter';
 import { LengthSpec } from 'src/app/shared/length-spec';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-content',
@@ -26,13 +27,13 @@ export class ContentComponent implements OnInit {
   /**
    * Default constructor
    * @param editorService Editor toolbox
-   * @param formBuilder FormBuilder object to gather story's details
    * @param router Router to redirect the user to the requested pages
+   * @param toastrService Toastr utilities to show messages
    */
   constructor(
     private editorService: EditorService,
-    private formBuilder: FormBuilder,
     private router: Router,
+    private toastrService: ToastrService,
   ) { }
 
   ngOnInit() {
@@ -50,7 +51,10 @@ export class ContentComponent implements OnInit {
   private addChapter(position: number = this.chapters.length): IChapter {
     // If the maximum number of chapters allowed is reached, does nothing
     if (this.chapters.length === this.chaptersBounds.max) {
-      // TODO: error notification
+      this.toastrService.warning(
+        'Impossible d\'ajouter un chapitre',
+        'Le nombre maximum de chapitre est déjà atteint.'
+      );
       return;
     }
 
@@ -80,7 +84,10 @@ export class ContentComponent implements OnInit {
         break;
 
       default:
-        // TODO: error message on notification (planned later)
+        this.toastrService.error(
+          'Impossible d\'effectuer l\'action demandée',
+          'Cette commande est inconnue.'
+        );
         break;
     }
 
@@ -137,7 +144,10 @@ export class ContentComponent implements OnInit {
   public onSubmit(): void {
     // Validate all chapters
     if (!this.isContentValid()) {
-      // TODO: error message
+      this.toastrService.warning(
+        'Impossible d\'exporter cette histoire',
+        'Certains champs sont incorrects.'
+      );
       return;
     }
 
@@ -155,7 +165,10 @@ export class ContentComponent implements OnInit {
   private removeItem(position: number): void {
     // If the minimum number of chapters allowed is reached, does nothing
     if (this.chapters.length === this.chaptersBounds.min) {
-      // TODO: error notification
+      this.toastrService.warning(
+        'Impossible de supprimer un chapitre',
+        'Le nombre minimal de chapitre est déjà atteint.'
+      );
       return;
     }
 
