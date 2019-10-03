@@ -25,10 +25,10 @@ export class ContentExportGuard implements CanActivate {
     const storedStoryChapters = this.editorService
       .getCurrentStoryChapters();
 
-    canActivate = !(storedStoryMeta !== null
-      && storedStoryMeta.author !== ''
-      && storedStoryMeta.overview !== ''
-      && storedStoryMeta.title !== '');
+    canActivate = !(storedStoryMeta === null
+      || storedStoryMeta.author === ''
+      || storedStoryMeta.overview === ''
+      || storedStoryMeta.title === '');
 
     if (storedStoryChapters === null) {
       canActivate = false;
