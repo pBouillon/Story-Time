@@ -9,6 +9,7 @@ import { ErrorPagesModule } from './error-pages/error-pages.module';
 import { FooterComponent } from './footer/footer.component';
 import { MenuModule } from './menu/menu.module';
 import { StoryModule } from './story/story.module';
+import { TagInputModule } from 'ngx-chips';
 import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -18,6 +19,7 @@ import { ToastrModule } from 'ngx-toastr';
   ],
   imports: [
     // ANGULAR
+    TagInputModule,
     BrowserModule,
     AppRoutingModule,
     BrowserModule,
