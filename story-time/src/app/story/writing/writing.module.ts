@@ -5,6 +5,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ContentComponent } from './content/content.component';
 import { ChapterComponent } from './chapter/chapter.component';
 import { ExportComponent } from './export/export.component';
+import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { ExportComponent } from './export/export.component';
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
+    TagInputModule,
   ]
 })
 export class WritingModule { }

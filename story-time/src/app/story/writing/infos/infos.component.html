@@ -55,8 +55,9 @@
         placeholder="Il était une fois ... *"
         formControlName="overview"
         row="3"
-        autocomplete="off"></textarea>
-      <small id="tagsHelp"
+        autocomplete="off"
+        aria-describedby="overviewHelp"></textarea>
+      <small id="overviewHelp"
         class="form-text text-muted">
         Taille actuelle: {{ getOverviewCurrentSize() }} / {{ OVERVIEW_LENGTH.max }}
       </small>
@@ -94,34 +95,18 @@
           class="col-sm-2 col-form-label">Tags <small>(Optionnels)</small>
       </label>
       <div class="col-sm-10">
-        <input type="text"
-          id="tags"
-          class="form-control form-control-sm"
-          [ngClass]="{'border-danger': isFieldInvalid(tags)}"
+        <tag-input [(ngModel)]="tagsList"
           name="tags"
-          placeholder="vocabulary, school, ..."
-          formControlName="tags"
           aria-describedby="tagsHelp"
-          autocomplete="off">
+          [editable]="true"
+          [separatorKeyCodes]="[32, 188]"
+          [ngModelOptions]="{standalone: true}"
+          [modelAsStrings]="true"
+          [maxItems]="5">
+        </tag-input>
         <small id="tagsHelp"
-          class="form-text text-muted">Séparer les tags par des <kbd>{{ TAG_SEPARATOR }}</kbd></small>
-
-        <!-- error messages -->
-        <div *ngIf="isFieldInvalid(tags)"
-          class="text-danger small">
-          <!-- min size -->
-          <div *ngIf="tags.errors.minlength">
-            Le champ <code>tags</code> doit comporter au minimum {{ TAGS_LENGTH.min }} caractère(s).
-          </div>
-          <!-- /min size -->
-          <!-- max size -->
-          <div *ngIf="tags.errors.maxlength">
-            Le champ <code>tags</code> doit comporter au maximum {{ TAGS_LENGTH.max }} caractères (actuels: {{ tags.value.length }}).
-          </div>
-          <!-- /max size -->
-        </div>
-        <!-- /error messages -->
-
+          class="form-text text-muted">Appuyer sur <kbd>Entrer</kbd> ou
+          <kbd>Espace</kbd> pour ajouter les tags (5 maximums)</small>
       </div>
       <!-- /tags -->
 
@@ -184,9 +169,9 @@
       <!-- /form submission -->
 
       <!-- clear form -->
-      <input type="button" 
-        value="Effacer" 
-        class="btn btn-outline-primary mx-2 w-25" 
+      <input type="button"
+        value="Effacer"
+        class="btn btn-outline-primary mx-2 w-25"
         (click)="onClear()">
       <!-- /clear form -->
 

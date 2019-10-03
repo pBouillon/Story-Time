@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl, FormControl } from '@angular/forms';
 
 import { EditorService } from '../editor.service';
 import { Router } from '@angular/router';
@@ -24,16 +24,6 @@ export class InfosComponent implements OnInit {
   public readonly OVERVIEW_LENGTH = new LengthSpec(5, 140);
 
   /**
-   * @summary Tags authorized lengths
-   */
-  public readonly TAGS_LENGTH = new LengthSpec(0, 40);
-
-  /**
-   * @summary used separator for tags listing
-   */
-  public readonly TAG_SEPARATOR = ',';
-
-  /**
    * @summary Title authorized lengths
    */
   public readonly TITLE_LENGTH = new LengthSpec(2, 60);
@@ -42,6 +32,11 @@ export class InfosComponent implements OnInit {
    * @summary Form containing story's data
    */
   public storyMetaForm: FormGroup;
+
+  /**
+   * @summary Dynamic tags list
+   */
+  public tagsList = Array<string>();
 
   /**
    * Default constructor
@@ -76,14 +71,6 @@ export class InfosComponent implements OnInit {
    */
   get overview(): AbstractControl {
     return this.fetchFormProperty('overview');
-  }
-
-  /**
-   * @summary Getter for the `tags` field of the form
-   * @returns An array of tags that may be empty
-   */
-  get tags(): AbstractControl {
-    return this.fetchFormProperty('tags');
   }
 
   /**
@@ -141,11 +128,12 @@ export class InfosComponent implements OnInit {
     this.editorService.clearCurrentStoryMeta();
 
     // Reset form values
+    this.tagsList = new Array<string>();
+
     this.storyMetaForm.setValue({
       author: '',
       overview: '',
       title: '',
-      tags: ''
     });
   }
 
@@ -162,9 +150,7 @@ export class InfosComponent implements OnInit {
     this.editorService.storeStoryMeta({
       author: this.author.value,
       overview: this.overview.value,
-      tags: this.tags.value
-        .split(this.TAG_SEPARATOR)
-        .map(tag => tag.trim()),
+      tags: this.tagsList,
       title: this.title.value,
     });
 
@@ -198,9 +184,6 @@ export class InfosComponent implements OnInit {
         Validators.required,
         getValidatorsFromSpec(this.OVERVIEW_LENGTH),
       ]],
-      tags: ['', [
-        getValidatorsFromSpec(this.TAGS_LENGTH),
-      ]],
       title: ['', [
         Validators.required,
         getValidatorsFromSpec(this.TITLE_LENGTH),
@@ -218,9 +201,10 @@ export class InfosComponent implements OnInit {
     this.storyMetaForm.patchValue({
       author: currentStoryMeta.author || '',
       overview: currentStoryMeta.overview || '',
-      tags: currentStoryMeta.tags.join(`${this.TAG_SEPARATOR} `) || '',
       title: currentStoryMeta.title || '',
     });
+
+    this.tagsList = currentStoryMeta.tags || [];
   }
 
 }
