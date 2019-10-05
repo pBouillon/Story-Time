@@ -31,6 +31,7 @@ import { ContentComponent } from './story/writing/content/content.component';
 import { ContentWritingGuard } from './guards/content-writing.guard';
 import { ExportComponent } from './story/writing/export/export.component';
 import { ContentExportGuard } from './guards/content-export.guard';
+import { SelectionComponent } from './story/selection/selection.component';
 
 /**
  * @summary Reference route constants
@@ -40,6 +41,8 @@ export const enum AppRoutes {
   Export = 'export',
   // Main page
   Index = 'index',
+  // Story selection
+  Selection = 'selection',
   // Story writing
   Content = 'content',
   Infos = 'infos',
@@ -50,17 +53,33 @@ export const enum AppRoutes {
  * @summary Define all redirections and routes
  */
 const routes: Routes = [
-  // Redirections
+  /**
+   * Redirections
+   * ------------
+   */
+   // 404 Error
   {
     path: '',
     redirectTo: AppRoutes.Index,
     pathMatch: 'full',
   },
-  // Routes
+
+  /**
+   * Routes
+   * ------
+   */
+  // Main menu
   {
     path: AppRoutes.Index,
     component: MenuComponent,
-  }, {
+  },
+  // Story selection
+  {
+    path: AppRoutes.Selection,
+    component: SelectionComponent,
+  },
+  // Story writing
+  {
     path: AppRoutes.Writing,
     children: [{
       path: '',
