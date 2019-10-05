@@ -43,6 +43,14 @@ export class SelectionComponent implements OnInit {
 
   ngOnInit() { }
 
+  public onChange(event: EventTarget): void {
+    const eventObj: MSInputMethodContext = event as MSInputMethodContext;
+    const target: HTMLInputElement = eventObj.target as HTMLInputElement;
+    const files: FileList = target.files;
+
+    console.log(files);
+  }
+
   /**
    * @todo story import
    * @summary import new stories

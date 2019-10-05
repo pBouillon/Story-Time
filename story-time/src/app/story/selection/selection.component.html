@@ -42,7 +42,9 @@ SOFTWARE.
       <input type="file"
         class="custom-file-input"
         id="story-import"
-        accept=".json,.story">
+        accept=".json,.story"
+        (change)="onChange($event)"
+        multiple>
       <label class="border border-success custom-file-label text-success"
         for="story-import">
         📥 Importer une histoire
