@@ -40,10 +40,16 @@ export class ExportComponent implements OnInit {
    */
   public jsonUrl: SafeUrl;
 
+  /**
+   * Default constructor
+   * @param editorService Editor toolbox
+   * @param router Router to redirect the user to the requested pages
+   * @param sanitizer DomSanitizer used to generate the downloaded .story file
+   */
   constructor(
+    private editorService: EditorService,
     private router: Router,
     private sanitizer: DomSanitizer,
-    private editorService: EditorService,
   ) { }
 
   ngOnInit() {

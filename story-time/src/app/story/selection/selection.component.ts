@@ -23,6 +23,8 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppRoutes } from 'src/app/app-routing.module';
 
 @Component({
   selector: 'app-selection',
@@ -31,13 +33,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SelectionComponent implements OnInit {
 
-
   /**
-   * TODO: Selection d'une histoire
+   * Default constructor
+   * @param router Router to redirect the user to the requested pages
    */
-
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit() { }
+
+  /**
+   * @todo story import
+   * @summary import new stories
+   */
+  public onImport(): void {
+    // TODO
+  }
+
+  /**
+   * @summary Redirect the user to the main menu
+   */
+  public onMenu(): void {
+    this.router.navigate([`${AppRoutes.Index}`]);
+  }
 
 }

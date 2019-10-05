@@ -22,6 +22,32 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 
-<p>
-  selection works!
-</p>
+<div class="d-flex flex-column h-100">
+
+  <div class="container justify-content-center d-flex">
+    <h2>Choix d'une histoire</h2>
+  </div>
+
+  <div class="container justify-content-left d-flex flex-row w-50 mt-3">
+    <!-- back to menu -->
+    <input type="button"
+    value="Retour au menu"
+    class="btn btn-outline-primary w-25 mr-2"
+    (click)="onMenu()">
+    <!-- /back to menu -->
+
+    <!-- story import -->
+    <input type="button"
+    value="Importer 📥"
+    class="btn btn-outline-success w-25"
+    (click)="onImport()">
+    <!-- /story import -->
+  </div>
+
+  <hr class="border-top border-secondary w-50">
+
+  <h4 class="text-muted align-self-center py-5 my-5">
+    Aucune histoire disponible ...
+  </h4>
+
+</div>

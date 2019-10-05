@@ -55,11 +55,8 @@ export class MenuComponent {
   /**
    * @summary Redirect the user to the story selection
    */
-  public onGame(): void {
-    // TODO: create associated component
-    // TODO: add it to routing
-    // TODO: redirect on this component
-    this.router.navigate(['#']);
+  public onSelection(): void {
+    this.router.navigate([`${AppRoutes.Selection}`]);
   }
 
   /**
