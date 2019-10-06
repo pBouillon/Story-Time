@@ -27,6 +27,7 @@ import { EditorService } from '../editor.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
+import { IStory } from 'src/app/shared/story';
 
 @Component({
   selector: 'app-export',
@@ -61,11 +62,14 @@ export class ExportComponent implements OnInit {
    * @return The assoriated URL
    */
   public generateDownloadJsonUri() {
-    // Fetch story data
-    const toSerialize = JSON.stringify({
+    // Create the story
+    const story: IStory = {
       meta: this.editorService.getCurrentStoryMeta(),
-      story: this.editorService.getCurrentStoryChapters(),
-    });
+      story: this.editorService.getCurrentStoryChapters()
+    };
+
+    // Fetch story data
+    const toSerialize = JSON.stringify(story);
 
     // Generate the associated URI
     const format = 'data:text/json;charset=UTF-8,';
