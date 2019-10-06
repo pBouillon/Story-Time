@@ -37,7 +37,7 @@ export class SelectionComponent implements OnInit {
   /**
    * @summary Array of all imported stories
    */
-  private stories: Array<IStory>;
+  public stories: Array<IStory>;
 
   /**
    * Default constructor
