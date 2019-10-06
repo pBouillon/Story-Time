@@ -25,6 +25,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
+import { IStory } from 'src/app/shared/story';
 
 @Component({
   selector: 'app-selection',
@@ -34,6 +35,11 @@ import { AppRoutes } from 'src/app/app-routing.module';
 export class SelectionComponent implements OnInit {
 
   /**
+   * @summary Array of all imported stories
+   */
+  private stories: Array<IStory>;
+
+  /**
    * Default constructor
    * @param router Router to redirect the user to the requested pages
    */
@@ -41,22 +47,56 @@ export class SelectionComponent implements OnInit {
     private router: Router,
   ) { }
 
-  ngOnInit() { }
-
-  public onChange(event: EventTarget): void {
-    const eventObj: MSInputMethodContext = event as MSInputMethodContext;
-    const target: HTMLInputElement = eventObj.target as HTMLInputElement;
-    const files: FileList = target.files;
-
-    console.log(files);
+  /**
+   * @summary Initialize the component
+   */
+  ngOnInit() {
+    // Create an empty array on init
+    this.stories = new Array<IStory>();
   }
 
   /**
-   * @todo story import
-   * @summary import new stories
+   * @todo Move to service
+   *
+   * @summary Store a new file
+   * @param files FileList of all files to store
    */
-  public onImport(): void {
-    // TODO
+  private importFiles(files: FileList): void {
+    // Initialize the file handler
+    const reader = new FileReader();
+
+    // Initialise story buffer
+    let parsedStory: IStory;
+
+    // Set callback on reader
+    reader.onload = (event: ProgressEvent) => {
+      // Extract file content
+      const jsonContent = JSON.parse(reader.result as string);
+
+      // Extract story parts (meta and content)
+      parsedStory = jsonContent as IStory;
+
+      // Add it to the known stories
+      this.stories.push(parsedStory);
+    };
+
+    // Load provided files
+    Array.from(files).forEach(file => {
+      reader.readAsText(file);
+    });
+  }
+
+  /**
+   * @summary import new stories
+   * @param event Event thrown on file drop
+   */
+  public onChange(event: EventTarget): void {
+    // Extract relevant data from the event
+    const eventObj = event as MSInputMethodContext;
+    const target = eventObj.target as HTMLInputElement;
+
+    // Extract uploaded files
+    this.importFiles(target.files);
   }
 
   /**

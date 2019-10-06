@@ -56,8 +56,14 @@ SOFTWARE.
 
   <hr class="border-top border-secondary w-50">
 
-  <h4 class="text-muted align-self-center py-5 my-5">
-    Aucune histoire disponible ...
-  </h4>
+  <div *ngIf="stories.length else noStories">
+    <!-- TODO -->
+  </div>
+
+  <ng-template #noStories>
+    <h4 class="text-muted align-self-center py-5 my-5">
+      Aucune histoire disponible ...
+    </h4>
+  </ng-template>
 
 </div>
