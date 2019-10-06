@@ -27,9 +27,10 @@ import { CommonModule } from '@angular/common';
 import { SelectionComponent } from './selection/selection.component';
 import { WritingModule } from './writing/writing.module';
 import { EditorService } from './writing/editor.service';
+import { StorySelectionComponent } from './selection/story-selection/story-selection.component';
 
 @NgModule({
-  declarations: [SelectionComponent],
+  declarations: [SelectionComponent, StorySelectionComponent],
   imports: [
     CommonModule,
     WritingModule,
