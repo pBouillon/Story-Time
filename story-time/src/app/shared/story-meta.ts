@@ -28,7 +28,7 @@
 export interface IStoryMeta {
 
   /**
-   * @summary The story's author
+   * @param author The story's author
    */
   author: string;
 
