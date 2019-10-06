@@ -30,7 +30,10 @@ import { EditorService } from './writing/editor.service';
 import { StorySelectionComponent } from './selection/story-selection/story-selection.component';
 
 @NgModule({
-  declarations: [SelectionComponent, StorySelectionComponent],
+  declarations: [
+    SelectionComponent,
+    StorySelectionComponent,
+  ],
   imports: [
     CommonModule,
     WritingModule,

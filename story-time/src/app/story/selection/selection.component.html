@@ -57,7 +57,10 @@ SOFTWARE.
   <hr class="border-top border-secondary w-50">
 
   <div *ngIf="stories.length else noStories">
-    <!-- TODO -->
+    <app-story-selection
+      *ngFor="let story of stories"
+      [storyMeta]="story.meta">
+    </app-story-selection>
   </div>
 
   <ng-template #noStories>

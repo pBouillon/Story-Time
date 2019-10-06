@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { IStoryMeta } from 'src/app/shared/story-meta';
 
 @Component({
   selector: 'app-story-selection',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StorySelectionComponent implements OnInit {
 
+  @Input()
+  public storyMeta: IStoryMeta;
+
   constructor() { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
 }
