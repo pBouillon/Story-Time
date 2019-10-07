@@ -57,7 +57,7 @@ const routes: Routes = [
    * Redirections
    * ------------
    */
-   // 404 Error
+   // Redirect to index
   {
     path: '',
     redirectTo: AppRoutes.Index,
@@ -102,7 +102,12 @@ const routes: Routes = [
       ]
     }]
   },
-  // Error pages
+
+  /**
+   * Error pages
+   * -----------
+   */
+   // 404
   {
     path: '**',
     component: PageNotFoundComponent,
