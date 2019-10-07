@@ -22,9 +22,6 @@ export class MenuComponent {
    * @summary Redirect the user to the site's details
    */
   public onAbout(): void {
-    // TODO: create associated component
-    // TODO: add it to routing
-    // TODO: redirect on this component
     this.router.navigate([AppRoutes.About]);
   }
 
