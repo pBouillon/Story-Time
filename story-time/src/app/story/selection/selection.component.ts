@@ -41,7 +41,7 @@ export class SelectionComponent implements OnInit {
    */
   constructor(
     private router: Router,
-    private selectionService: SelectionService
+    public selectionService: SelectionService
   ) { }
 
   /**
