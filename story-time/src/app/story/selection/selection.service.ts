@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Story, IStory } from 'src/app/shared/story';
+import { StorageService } from '../storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,18 @@ export class SelectionService {
   // tslint:disable-next-line: variable-name
   private _stories = new Array<Story>();
 
-  constructor() { }
+  /**
+   * @summary Key for all stored stories in the LocalStorage
+   */
+  private CACHED_STORIES_KEY = 'cached-stories';
+
+  /**
+   * Default constructor
+   * @param storageService Storage service to cache data
+   */
+  constructor(
+    private storageService: StorageService,
+  ) { }
 
   /**
    * @summary Getter for the list of all stories
@@ -41,12 +53,39 @@ export class SelectionService {
 
       // Add it to the known stories
       this._stories.push(parsedStory);
+
+      // Store it in the cache
+      this.saveStory(parsedStory);
     };
 
     // Load provided files
     Array.from(files).forEach(file => {
       reader.readAsText(file);
     });
+  }
+
+  /**
+   * Save a story in the LocalStorage
+   * @param story story to save
+   */
+  private saveStory(story: IStory): void {
+    // Fetch the stories currently stored
+    const rawStoredStories = this.storageService.get(this.CACHED_STORIES_KEY);
+
+    // Format the LocalStorage data in an `IStory` array
+    let storedStories: Array<IStory>;
+
+    if (rawStoredStories !== null) {
+      storedStories = JSON.parse(rawStoredStories) as Array<IStory>;
+    } else {
+      storedStories = new Array<IStory>();
+    }
+
+    // Append the story to cache
+    storedStories.push(story);
+
+    // Save the new cache
+    this.storageService.store(this.CACHED_STORIES_KEY, storedStories);
   }
 
 }

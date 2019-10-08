@@ -23,9 +23,9 @@
  */
 
 import { Injectable } from '@angular/core';
-import { StorageService } from './storage.service';
 import { IStoryMeta } from '../../shared/story-meta';
 import { Chapter } from 'src/app/shared/chapter';
+import { StorageService } from '../storage.service';
 
 /**
  * @summary The editor service provides a bunch of tool to write your own story
