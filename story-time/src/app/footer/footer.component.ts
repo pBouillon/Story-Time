@@ -7,14 +7,6 @@ import { Component } from '@angular/core';
 })
 export class FooterComponent {
 
-  /**
-   * @summary list of all authors
-   */
-  readonly authors: Array<string> = [
-    'Pierre Bouillon',
-    'Timothée Adam',
-    'Victor Varnier'
-  ];
-
   constructor() { }
+
 }
