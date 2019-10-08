@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
+ * Copyright © 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -57,7 +57,7 @@ const routes: Routes = [
    * Redirections
    * ------------
    */
-   // 404 Error
+   // Redirect to index
   {
     path: '',
     redirectTo: AppRoutes.Index,
@@ -102,7 +102,12 @@ const routes: Routes = [
       ]
     }]
   },
-  // Error pages
+
+  /**
+   * Error pages
+   * -----------
+   */
+   // 404
   {
     path: '**',
     component: PageNotFoundComponent,

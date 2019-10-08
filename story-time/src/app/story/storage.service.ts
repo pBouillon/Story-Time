@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
+ * Copyright © 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,15 +22,40 @@
  * SOFTWARE.
  */
 
-import { TestBed } from '@angular/core/testing';
+import { Injectable } from '@angular/core';
 
-import { StorageService } from './storage.service';
+/**
+ * @summary The storage service provides a bunch of tool to handle the local storage
+ */
+@Injectable({
+  providedIn: 'root'
+})
+export class StorageService {
 
-describe('StorageService', () => {
-  beforeEach(() => TestBed.configureTestingModule({}));
+  constructor() { }
 
-  it('should be created', () => {
-    const service: StorageService = TestBed.get(StorageService);
-    expect(service).toBeTruthy();
-  });
-});
+  /**
+   * @summary Clear a stored value with its key
+   * @param key Key of the value to clear
+   */
+  public clear(key: string): void {
+    localStorage.removeItem(key);
+  }
+
+  /**
+   * @summary Fetch a stored value with its key
+   * @param key Key of the value to fetch
+   */
+  public get(key: string): string {
+    return localStorage.getItem(key);
+  }
+
+  /**
+   * @summary Store data in the local storage
+   * @param key Key of the data to store
+   * @param toStore Data to store as JSON
+   */
+  public store(key: string, toStore: object): void {
+    localStorage.setItem(key, JSON.stringify(toStore));
+  }
+}

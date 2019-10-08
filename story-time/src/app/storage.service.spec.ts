@@ -22,18 +22,15 @@
  * SOFTWARE.
  */
 
-import { TestBed, inject } from '@angular/core/testing';
+import { TestBed } from '@angular/core/testing';
 
-import { ContentWritingGuard } from './content-writing.guard';
+import { StorageService } from './storage.service';
 
-describe('ContentWritingGuard', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [ContentWritingGuard]
-    });
+describe('StorageService', () => {
+  beforeEach(() => TestBed.configureTestingModule({}));
+
+  it('should be created', () => {
+    const service: StorageService = TestBed.get(StorageService);
+    expect(service).toBeTruthy();
   });
-
-  it('should ...', inject([ContentWritingGuard], (guard: ContentWritingGuard) => {
-    expect(guard).toBeTruthy();
-  }));
 });

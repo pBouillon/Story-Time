@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
+ * Copyright © 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,6 +25,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
+import { IStory } from 'src/app/shared/story';
+import { SelectionService } from './selection.service';
 
 @Component({
   selector: 'app-selection',
@@ -39,16 +41,28 @@ export class SelectionComponent implements OnInit {
    */
   constructor(
     private router: Router,
+    public selectionService: SelectionService
   ) { }
 
-  ngOnInit() { }
+  /**
+   * @summary Initialize the component
+   */
+  ngOnInit() {
+    // Fetch the cached stories
+    this.selectionService.retrieveCachedStories();
+  }
 
   /**
-   * @todo story import
    * @summary import new stories
+   * @param event Event thrown on file drop
    */
-  public onImport(): void {
-    // TODO
+  public onChange(event: EventTarget): void {
+    // Extract relevant data from the event
+    const eventObj = event as MSInputMethodContext;
+    const target = eventObj.target as HTMLInputElement;
+
+    // Extract uploaded files
+    this.selectionService.importFiles(target.files);
   }
 
   /**

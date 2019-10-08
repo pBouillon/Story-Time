@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
+ * Copyright © 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -63,9 +63,6 @@ export class MenuComponent {
    * @summary Redirect the user to the story writing
    */
   public onWrite(): void {
-    // TODO: create associated component
-    // TODO: add it to routing
-    // TODO: redirect on this component
     this.router.navigate([AppRoutes.Writing]);
   }
 }

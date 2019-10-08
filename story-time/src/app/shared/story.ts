@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
+ * Copyright © 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,40 +22,44 @@
  * SOFTWARE.
  */
 
-import { Injectable } from '@angular/core';
+import { IStoryMeta } from './story-meta';
+import { IChapter } from './chapter';
 
 /**
- * @summary The storage service provides a bunch of tool to handle the local storage
+ * @summary Wrapper for the story data
  */
-@Injectable({
-  providedIn: 'root'
-})
-export class StorageService {
-
-  constructor() { }
+export interface IStory {
 
   /**
-   * @summary Clear a stored value with its key
-   * @param key Key of the value to clear
+   * @param meta the story "meta" data
+   * @see IStoryMeta
    */
-  public clear(key: string): void {
-    localStorage.removeItem(key);
-  }
+  meta: IStoryMeta;
 
   /**
-   * @summary Fetch a stored value with its key
-   * @param key Key of the value to fetch
+   * @param story the story chapters as an array of chapters
+   * @see IChapter
    */
-  public get(key: string): string {
-    return localStorage.getItem(key);
-  }
+  story: Array<IChapter>;
+
+}
+
+/**
+ * @summary Concrete implementation of the IStory interface
+ * @see IStory
+ */
+export class Story implements IStory {
 
   /**
-   * @summary Store data in the local storage
-   * @param key Key of the data to store
-   * @param toStore Data to store as JSON
+   * @param meta the story "meta" data
+   * @see IStoryMeta
    */
-  public store(key: string, toStore: object): void {
-    localStorage.setItem(key, JSON.stringify(toStore));
-  }
+  meta: IStoryMeta;
+
+  /**
+   * @param story the story chapters as an array of chapters
+   * @see IChapter
+   */
+  story: Array<IChapter>;
+
 }

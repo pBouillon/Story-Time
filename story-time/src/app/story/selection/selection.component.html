@@ -29,25 +29,46 @@ SOFTWARE.
   </div>
 
   <div class="container justify-content-left d-flex flex-row w-50 mt-3">
+
     <!-- back to menu -->
     <input type="button"
-    value="Retour au menu"
-    class="btn btn-outline-primary w-25 mr-2"
-    (click)="onMenu()">
+      value="Retour au menu"
+      class="btn btn-outline-primary w-25 mr-2"
+      (click)="onMenu()">
     <!-- /back to menu -->
 
     <!-- story import -->
-    <input type="button"
-    value="Importer 📥"
-    class="btn btn-outline-success w-25"
-    (click)="onImport()">
+    <div class="custom-file w-50">
+      <input type="file"
+        class="custom-file-input"
+        id="story-import"
+        accept=".json,.story"
+        (change)="onChange($event)"
+        multiple>
+      <label class="border border-success custom-file-label text-success"
+        for="story-import">
+        📥 Importer une histoire
+      </label>
+    </div>
     <!-- /story import -->
+
   </div>
 
   <hr class="border-top border-secondary w-50">
 
-  <h4 class="text-muted align-self-center py-5 my-5">
-    Aucune histoire disponible ...
-  </h4>
+  <div *ngIf="selectionService.stories.length else noStories">
+    <div class="container justify-content-center d-flex flex-column w-50 mt-3">
+      <app-story-selection
+        *ngFor="let story of selectionService.stories"
+        [storyMeta]="story.meta">
+      </app-story-selection>
+    </div>
+  </div>
+
+  <ng-template #noStories>
+    <h4 class="text-muted align-self-center py-5 my-5">
+      Aucune histoire disponible ...
+    </h4>
+  </ng-template>
 
 </div>

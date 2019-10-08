@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
+ * Copyright © 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -23,9 +23,9 @@
  */
 
 import { Injectable } from '@angular/core';
-import { StorageService } from './storage.service';
 import { IStoryMeta } from '../../shared/story-meta';
 import { Chapter } from 'src/app/shared/chapter';
+import { StorageService } from '../storage.service';
 
 /**
  * @summary The editor service provides a bunch of tool to write your own story

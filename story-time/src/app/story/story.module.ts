@@ -1,7 +1,7 @@
 /**
  * MIT License
  *
- * Copyright (c) 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
+ * Copyright © 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -27,9 +27,13 @@ import { CommonModule } from '@angular/common';
 import { SelectionComponent } from './selection/selection.component';
 import { WritingModule } from './writing/writing.module';
 import { EditorService } from './writing/editor.service';
+import { StorySelectionComponent } from './selection/story-selection/story-selection.component';
 
 @NgModule({
-  declarations: [SelectionComponent],
+  declarations: [
+    SelectionComponent,
+    StorySelectionComponent,
+  ],
   imports: [
     CommonModule,
     WritingModule,
