@@ -47,7 +47,10 @@ export class SelectionComponent implements OnInit {
   /**
    * @summary Initialize the component
    */
-  ngOnInit() { }
+  ngOnInit() {
+    // Fetch the cached stories
+    this.selectionService.retrieveCachedStories();
+  }
 
   /**
    * @summary import new stories

@@ -65,15 +65,15 @@ export class SelectionService {
   }
 
   /**
-   * Fetch the cached stories
-   * @return An array of the cached `IStories`
+   * Fetch the cached stories and fill the story list
    */
-  public retrieveCachedStories(): Array<IStory> {
+  public retrieveCachedStories(): void {
     // Fetch the stories currently stored
     const rawStoredStories = this.storageService.get(this.CACHED_STORIES_KEY);
 
-    // Return them casted or a new empty array if no story where stored
-    return rawStoredStories === null
+    // Load the cached stories
+    // or a new empty array if no story where stored
+    this._stories = rawStoredStories === null
       ? new Array<IStory>()
       : JSON.parse(rawStoredStories) as Array<IStory>;
   }
