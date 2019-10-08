@@ -9,13 +9,14 @@ import { AboutComponent } from './about/about.component';
  * @summary Reference route constants
  */
 export const enum AppRoutes {
+  // Par ordre alphabétique
+  // About page
+  About = 'about'
   // Main page
   Index = 'index',
   // Story writing
   Writing = 'writing',
   Infos = 'infos',
-  // About page
-  About = 'about'
 }
 
 /**
