@@ -1,7 +1,9 @@
 # Story Time !
 
-[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
-[![forthebadge](https://forthebadge.com/images/badges/makes-people-smile.svg)](https://forthebadge.com)  
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](http://pierre.bouillon.gl-pages.telecomnancy.univ-lorraine.fr/anglais-a2/)
+[![forthebadge](https://forthebadge.com/images/badges/makes-people-smile.svg)](http://pierre.bouillon.gl-pages.telecomnancy.univ-lorraine.fr/anglais-a2/)  
+
+_Story Time !_ est accessible [ici !](http://pierre.bouillon.gl-pages.telecomnancy.univ-lorraine.fr/anglais-a2/)
 
 Projet d'anglais de seconde année de cycle ingénieur à [Telecom Nancy](https://telecomnancy.univ-lorraine.fr/).
 
