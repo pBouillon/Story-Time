@@ -11,7 +11,7 @@ import { AboutComponent } from './about/about.component';
 export const enum AppRoutes {
   // Par ordre alphabétique
   // About page
-  About = 'about'
+  About = 'about',
   // Main page
   Index = 'index',
   // Story writing
