@@ -65,6 +65,20 @@ export class SelectionService {
   }
 
   /**
+   * Fetch the cached stories
+   * @return An array of the cached `IStories`
+   */
+  public retrieveCachedStories(): Array<IStory> {
+    // Fetch the stories currently stored
+    const rawStoredStories = this.storageService.get(this.CACHED_STORIES_KEY);
+
+    // Return them casted or a new empty array if no story where stored
+    return rawStoredStories === null
+      ? new Array<IStory>()
+      : JSON.parse(rawStoredStories) as Array<IStory>;
+  }
+
+  /**
    * Save a story in the LocalStorage
    * @param story story to save
    */
