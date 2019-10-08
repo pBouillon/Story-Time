@@ -20,15 +20,9 @@ build:
   artifacts:
     paths:
       - story-time/dist/
-  cache:
-    paths:
-      - story-time/node_modules/
 
 pages:
   stage: deploy
-  cache:
-    paths:
-      - story-time/node_modules/
   script:
     - cd story-time/
     - cd .. 
