@@ -1,4 +1,22 @@
-<div class="border shadow d-flex flex-column-reverse my-2">
+<!-- global wrapper -->
+<div class="border shadow d-flex flex-column my-2 p-3">
+  
+  <!-- title -->
   <h4>{{ storyMeta.title }}</h4>
-  <h5>{{ storyMeta.overview }}</h5>
+  <!-- /title -->
+
+  <!-- tags -->
+  <div class="d-flex flex-row mb-2">
+    <div *ngFor="let tag of storyMeta.tags"
+      class="badge badge-secondary py-1 mr-1">
+      <p class="font-weight-light m-0">{{ tag }}</p>
+    </div>
+  </div>
+  <!-- /tags -->
+  
+  <!-- overview -->
+  <p>{{ storyMeta.overview }}</p>
+  <!-- /overview -->
+  
 </div>
+<!-- /global wrapper -->
