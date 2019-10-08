@@ -56,13 +56,13 @@ SOFTWARE.
 
   <hr class="border-top border-secondary w-50">
 
-  <div *ngIf="stories.length else noStories">
+  <div *ngIf="selectionService.stories.length else noStories">
     <div class="container justify-content-center d-flex flex-column w-50 mt-3">
       <app-story-selection
-        *ngFor="let story of stories"
+        *ngFor="let story of selectionService.stories"
         [storyMeta]="story.meta">
       </app-story-selection>
-  </div>
+    </div>
   </div>
 
   <ng-template #noStories>

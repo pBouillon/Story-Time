@@ -26,6 +26,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
 import { IStory } from 'src/app/shared/story';
+import { SelectionService } from './selection.service';
 
 @Component({
   selector: 'app-selection',
@@ -35,56 +36,18 @@ import { IStory } from 'src/app/shared/story';
 export class SelectionComponent implements OnInit {
 
   /**
-   * @summary Array of all imported stories
-   */
-  public stories: Array<IStory>;
-
-  /**
    * Default constructor
    * @param router Router to redirect the user to the requested pages
    */
   constructor(
     private router: Router,
+    private selectionService: SelectionService
   ) { }
 
   /**
    * @summary Initialize the component
    */
-  ngOnInit() {
-    // Create an empty array on init
-    this.stories = new Array<IStory>();
-  }
-
-  /**
-   * @todo Move to service
-   *
-   * @summary Store a new file
-   * @param files FileList of all files to store
-   */
-  private importFiles(files: FileList): void {
-    // Initialize the file handler
-    const reader = new FileReader();
-
-    // Initialise story buffer
-    let parsedStory: IStory;
-
-    // Set callback on reader
-    reader.onload = (event: ProgressEvent) => {
-      // Extract file content
-      const jsonContent = JSON.parse(reader.result as string);
-
-      // Extract story parts (meta and content)
-      parsedStory = jsonContent as IStory;
-
-      // Add it to the known stories
-      this.stories.push(parsedStory);
-    };
-
-    // Load provided files
-    Array.from(files).forEach(file => {
-      reader.readAsText(file);
-    });
-  }
+  ngOnInit() { }
 
   /**
    * @summary import new stories
@@ -96,7 +59,7 @@ export class SelectionComponent implements OnInit {
     const target = eventObj.target as HTMLInputElement;
 
     // Extract uploaded files
-    this.importFiles(target.files);
+    this.selectionService.importFiles(target.files);
   }
 
   /**
