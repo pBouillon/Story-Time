@@ -1,0 +1,101 @@
+<!--
+MIT License
+
+Copyright © 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+
+<div class="d-flex flex-row w-100">
+
+  <!-- chapter content -->
+  <div class="d-flex flex-row container shadow p-3 mb-5 bg-white rounded">
+
+    <!-- chapter id -->
+    <div class="d-flex flex-column justify-content-start text-secondary pr-3">
+      <h3 class="">&#35;{{ chapterData.id + 1 }}</h3>
+    </div>
+    <!-- /chapter id -->
+
+    <!-- chapter fields -->
+    <div class="d-flex flex-column w-100">
+
+      <textarea
+        #content
+        placeholder="Contenu du chapitre"
+        class="chapter-content border border-secondary rounded m-1"
+        rows="3"
+        (input)="chapterData.content = content.value">{{ chapterData.content }}</textarea>
+
+      <input type="text"
+        #question
+        placeholder="Question à poser"
+        class="border border-secondary rounded m-1 p-2"
+        [value]="chapterData.question"
+        (input)="chapterData.question = question.value">
+
+      <!-- outputs -->
+      <div class="d-flex flex-row flex-grow-1">
+
+        <input type="text"
+          #expectedWord
+          placeholder="Mot attendu"
+          class="border border-success rounded m-1 p-2"
+          [value]="chapterData.expectedWord"
+          (input)="chapterData.expectedWord = expectedWord.value">
+
+        <input type="text"
+          #messageFailure
+          placeholder="Message en cas d'échec"
+          class="border border-danger rounded m-1 p-2"
+          [value]="chapterData.messageFailure"
+          (input)="chapterData.messageFailure = messageFailure.value">
+
+      </div>
+      <!-- /outputs -->
+
+    </div>
+    <!-- /chapter fields -->
+
+  </div>
+  <!-- /chapter content -->
+
+  <!-- chapter controls -->
+  <div class="d-flex flex-column mx-2">
+
+    <input type="button"
+      class="btn btn-outline-primary mb-2"
+      value="⬆"
+      (click)="askBefore()">
+
+    <input type="button"
+      class="btn btn-outline-danger mb-2"
+      value="❌"
+      (click)="askRemove()">
+
+    <input type="button"
+      class="btn btn-outline-primary mb-2"
+      value="⬇"
+      (click)="askAfter()">
+
+  </div>
+  <!-- /chapter controls -->
+
+</div>
+

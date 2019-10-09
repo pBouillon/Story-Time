@@ -1,0 +1,71 @@
+<!--
+MIT License
+
+Copyright © 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+
+<div class="container justify-content-center d-flex">
+  <h2>Rédaction des chapitres</h2>
+</div>
+
+<div class="container justify-content-center d-flex mt-4">
+
+  <!-- story content form -->
+  <form class="w-50">
+
+    <!-- chapters display -->
+    <div *ngFor="let chapter of chapters">
+      <app-chapter [(chapterData)]="chapter"
+        (requestedAction)="handleRequestedAction($event);"></app-chapter>
+    </div>
+    <!-- /chapters display -->
+
+    <!-- form buttons -->
+    <div class="container d-flex flex-row-reverse p-0 justify-content-center">
+
+      <!-- form submission -->
+      <input type="button"
+        value="Valider"
+        class="btn btn-primary mx-2 w-25"
+        (click)="onSubmit()">
+      <!-- /form submission -->
+
+      <!-- form clear -->
+      <input type="button"
+        value="Effacer"
+        class="btn btn-outline-primary mx-2 w-25"
+        (click)="onReset()">
+      <!-- /form clear -->
+
+      <!-- back to menu -->
+      <input type="button"
+        value="Retour"
+        class="btn btn-outline-secondary mx-2 w-25"
+        (click)="onBack()">
+      <!-- /back to menu -->
+
+    </div>
+    <!-- /form buttons -->
+
+  </form>
+  <!-- /story content form -->
+
+</div>

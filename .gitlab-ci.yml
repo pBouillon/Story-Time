@@ -2,10 +2,11 @@ image: node:10
 
 stages:
   - build
+  - deploy
 
 build:
-  stage: 'build'
-  script:
+  stage: build
+  before_script:
     - apt update
     - apt-get install -y nodejs
     - cd story-time/
@@ -14,12 +15,21 @@ build:
     - npm -v
     - ls -la -F
     - npm ci
-    - npx ng build --prod
-  cache:
-    paths:
-      - story-time/node_modules/
+  script:
+    - npx ng build --prod --progress false --outputPath=./dist/story-time
   artifacts:
-    when: on_success
-    name: '$CI_JOB_NAME-$CI_COMMIT_REF_NAME'
     paths:
-      - dist/story-time/
+      - story-time/dist/
+
+pages:
+  stage: deploy
+  script:
+    - cd story-time/
+    - cd .. 
+    - cp -R story-time/dist/story-time/ public/
+  artifacts:
+    paths:
+      - public
+  only:
+    - master
+

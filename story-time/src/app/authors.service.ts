@@ -18,5 +18,5 @@ export class AuthorsService {
   get authors(): Array<string> { return this._authors; }
 
   constructor() { }
-  
+
 }

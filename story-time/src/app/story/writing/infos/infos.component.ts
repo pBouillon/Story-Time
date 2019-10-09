@@ -1,26 +1,34 @@
+/**
+ * MIT License
+ *
+ * Copyright © 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 
 import { EditorService } from '../editor.service';
 import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
-
-/**
- * @summary Lenght specifications for a field
- */
-class LenghtSpec {
-
-  /**
-   * @summary Default constructor
-   * @param min Minimal size of the field
-   * @param max Maximum size of the field
-   */
-  constructor(
-    public min: number,
-    public max: number,
-  ) { }
-}
-
+import { LengthSpec } from '../../../shared/length-spec';
 
 @Component({
   selector: 'app-infos',
@@ -32,32 +40,27 @@ export class InfosComponent implements OnInit {
   /**
    * @summary Author authorized lengths
    */
-  public readonly AUTHOR_LENGTH = new LenghtSpec(3, 25);
+  public readonly AUTHOR_LENGTH = new LengthSpec(3, 25);
 
   /**
    * @summary Overview authorized lengths
    */
-  public readonly OVERVIEW_LENGTH = new LenghtSpec(5, 140);
-
-  /**
-   * @summary Tags authorized lengths
-   */
-  public readonly TAGS_LENGTH = new LenghtSpec(0, 40);
-
-  /**
-   * @todo doc
-   */
-  public readonly TAG_SEPARATOR = ',';
+  public readonly OVERVIEW_LENGTH = new LengthSpec(5, 140);
 
   /**
    * @summary Title authorized lengths
    */
-  public readonly TITLE_LENGTH = new LenghtSpec(2, 60);
+  public readonly TITLE_LENGTH = new LengthSpec(2, 60);
 
   /**
    * @summary Form containing story's data
    */
   public storyMetaForm: FormGroup;
+
+  /**
+   * @summary Dynamic tags list
+   */
+  public tagsList = Array<string>();
 
   /**
    * Default constructor
@@ -95,14 +98,6 @@ export class InfosComponent implements OnInit {
   }
 
   /**
-   * @summary Getter for the `tags` field of the form
-   * @returns An array of tags that may be empty
-   */
-  get tags(): AbstractControl {
-    return this.fetchFormProperty('tags');
-  }
-
-  /**
    * @summary Getter for the `title` field of the form
    * @returns The title as string
    */
@@ -131,7 +126,7 @@ export class InfosComponent implements OnInit {
    * @summary Check if a field has to be considered as invalid for the form
    *
    * A field is invalid if it is marked as invalid by the form and the user
-   * had already interract with it
+   * had already interact with it
    *
    * @param field field's name to check
    * @returns true if the field is invalid; false otherwise
@@ -150,6 +145,23 @@ export class InfosComponent implements OnInit {
   }
 
   /**
+   * @summary Clear form's content
+   */
+  public onClear(): void {
+    // Reset cached values
+    this.editorService.clearCurrentStoryMeta();
+
+    // Reset form values
+    this.tagsList = new Array<string>();
+
+    this.storyMetaForm.setValue({
+      author: '',
+      overview: '',
+      title: '',
+    });
+  }
+
+  /**
    * @summary Actions to perform on form submission
    */
   public onSubmit(): void {
@@ -162,40 +174,43 @@ export class InfosComponent implements OnInit {
     this.editorService.storeStoryMeta({
       author: this.author.value,
       overview: this.overview.value,
-      tags: this.tags.value
-        .split(this.TAG_SEPARATOR)
-        .map(tag => tag.trim()),
+      tags: this.tagsList,
       title: this.title.value,
     });
 
     // Redirect the user to the next page
-    this.router.navigate(['#']);
+    this.router.navigate([`${AppRoutes.Writing}/${AppRoutes.Content}`]);
   }
 
   /**
    * @summary Build the story's meta form
    */
   private setupForm(): void {
+
+    /**
+     * @summary Inner-function to generate validators for lengths
+     * @param specification Defined specification precising the lengths
+     * @returns The `minLength` and `maxLength` validators associated with the
+     *          given `specification`
+     */
+    const getValidatorsFromSpec = (specification: LengthSpec) => {
+      return Validators.minLength(specification.min),
+        Validators.maxLength(specification.max);
+    };
+
     // Creates the form
     this.storyMetaForm = this.formBuilder.group({
       author: ['', [
         Validators.required,
-        Validators.minLength(this.AUTHOR_LENGTH.min),
-        Validators.maxLength(this.AUTHOR_LENGTH.max)
+        getValidatorsFromSpec(this.AUTHOR_LENGTH),
       ]],
       overview: ['', [
         Validators.required,
-        Validators.minLength(this.OVERVIEW_LENGTH.min),
-        Validators.maxLength(this.OVERVIEW_LENGTH.max)
-      ]],
-      tags: ['', [
-        Validators.minLength(this.TAGS_LENGTH.min),
-        Validators.maxLength(this.TAGS_LENGTH.max)
+        getValidatorsFromSpec(this.OVERVIEW_LENGTH),
       ]],
       title: ['', [
         Validators.required,
-        Validators.minLength(this.TITLE_LENGTH.min),
-        Validators.maxLength(this.TITLE_LENGTH.max)
+        getValidatorsFromSpec(this.TITLE_LENGTH),
       ]],
     });
 
@@ -210,9 +225,10 @@ export class InfosComponent implements OnInit {
     this.storyMetaForm.patchValue({
       author: currentStoryMeta.author || '',
       overview: currentStoryMeta.overview || '',
-      tags: currentStoryMeta.tags.join(`${this.TAG_SEPARATOR} `) || '',
       title: currentStoryMeta.title || '',
     });
+
+    this.tagsList = currentStoryMeta.tags || [];
   }
 
 }

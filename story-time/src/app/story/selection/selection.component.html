@@ -1,3 +1,74 @@
-<p>
-  selection works!
-</p>
+<!--
+MIT License
+
+Copyright © 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+-->
+
+<div class="d-flex flex-column h-100">
+
+  <div class="container justify-content-center d-flex">
+    <h2>Choix d'une histoire</h2>
+  </div>
+
+  <div class="container justify-content-left d-flex flex-row w-50 mt-3">
+
+    <!-- back to menu -->
+    <input type="button"
+      value="Retour au menu"
+      class="btn btn-outline-primary w-25 mr-2"
+      (click)="onMenu()">
+    <!-- /back to menu -->
+
+    <!-- story import -->
+    <div class="custom-file w-50">
+      <input type="file"
+        class="custom-file-input"
+        id="story-import"
+        accept=".json,.story"
+        (change)="onChange($event)"
+        multiple>
+      <label class="border border-success custom-file-label text-success"
+        for="story-import">
+        📥 Importer une histoire
+      </label>
+    </div>
+    <!-- /story import -->
+
+  </div>
+
+  <hr class="border-top border-secondary w-50">
+
+  <div *ngIf="selectionService.stories.length else noStories">
+    <div class="container justify-content-center d-flex flex-column w-50 mt-3">
+      <app-story-selection
+        *ngFor="let story of selectionService.stories"
+        [storyMeta]="story.meta">
+      </app-story-selection>
+    </div>
+  </div>
+
+  <ng-template #noStories>
+    <h4 class="text-muted align-self-center py-5 my-5">
+      Aucune histoire disponible ...
+    </h4>
+  </ng-template>
+
+</div>
