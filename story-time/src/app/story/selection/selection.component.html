@@ -67,7 +67,8 @@ SOFTWARE.
     <div class="container justify-content-center d-flex flex-column w-50 mt-3">
       <app-story-selection
         *ngFor="let story of selectionService.stories"
-        [storyMeta]="story.meta">
+        [storyMeta]="story.meta"
+        (removeRequested)="handleRequestedAction($event)">
       </app-story-selection>
     </div>
   </div>

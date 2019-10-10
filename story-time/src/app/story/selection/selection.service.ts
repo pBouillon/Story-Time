@@ -75,6 +75,38 @@ export class SelectionService {
   }
 
   /**
+   * @summary Remove a story from its title
+   * @param title Title of the story to remove
+   * @return `false` if no matching story were found
+   */
+  public removeStoryByTitle(title: string): boolean {
+    // Get the index of the element to remove
+    let index = -1;
+
+    this._stories.forEach(story => {
+      ++index;
+      if (story.meta.title === title) {
+        return;
+      }
+    });
+
+    // Detect error
+    if (index === -1) {
+      return false;
+    }
+
+    // Remove item
+    this._stories.splice(index, 1);
+
+    // Refresh the cache
+    this.storageService.clear(this.CACHED_STORIES_KEY);
+    this.storageService.store(this.CACHED_STORIES_KEY, this.stories);
+
+    // Return success
+    return true;
+  }
+
+  /**
    * @summary Fetch the cached stories and fill the story list
    */
   public retrieveCachedStories(): void {
@@ -109,7 +141,7 @@ export class SelectionService {
     storedStories.push(story);
 
     // Save the new cache
-    this.storageService.store(this.CACHED_STORIES_KEY, storedStories);
+    this.storageService.store(this.CACHED_STORIES_KEY, this.stories);
   }
 
 }
