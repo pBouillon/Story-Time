@@ -36,12 +36,14 @@ import { StoryModule } from './story/story.module';
 import { AboutComponent } from './about/about.component';
 import { TagInputModule } from 'ngx-chips';
 import { ToastrModule } from 'ngx-toastr';
+import { AboutDataComponent } from './about/about-data/about-data.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FooterComponent,
     AboutComponent,
+    AboutDataComponent,
   ],
   imports: [
     // ANGULAR

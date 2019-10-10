@@ -4,18 +4,12 @@
 
 <div class="container d-flex flex-column justify-content-center">
 
-    <div class="d-flex flex-row my-3 py-2">
-        <img src="../../assets/tncy_logo.png" 
-            class="img-fluid p-4" 
-            alt="Responsive image">
-        <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae ipsum vehicula, porta elit ac, ultricies risus. Quisque consectetur eros tortor, venenatis congue augue ullamcorper eu. Mauris eu est mattis, aliquam mauris a, fringilla augue. Fusce mattis vitae odio a tempor. Integer id lacinia nunc, a feugiat sem. Sed luctus, eros sed pretium lacinia, mi lorem condimentum lorem, sit amet vestibulum sapien ipsum eu mauris. Praesent placerat, est ut consectetur mattis, ante turpis commodo lorem, quis vestibulum turpis erat eget justo. Nullam non leo sed diam varius scelerisque. Nunc faucibus turpis eget nibh interdum, nec porttitor massa molestie. Ut molestie massa orci, vel efficitur lorem placerat vel. Ut luctus commodo urna sed vestibulum. Aliquam mattis hendrerit lorem, at facilisis ligula viverra quis. In hac habitasse platea dictumst. </p>
-    </div>
-
-    <div class="d-flex flex-row-reverse my-3 py-2">
-        <img src="../../assets/tncy_logo.png" 
-            class="img-fluid p-4"
-            alt="Responsive image">
-        <p class="text-justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae ipsum vehicula, porta elit ac, ultricies risus. Quisque consectetur eros tortor, venenatis congue augue ullamcorper eu. Mauris eu est mattis, aliquam mauris a, fringilla augue. Fusce mattis vitae odio a tempor. Integer id lacinia nunc, a feugiat sem. Sed luctus, eros sed pretium lacinia, mi lorem condimentum lorem, sit amet vestibulum sapien ipsum eu mauris. Praesent placerat, est ut consectetur mattis, ante turpis commodo lorem, quis vestibulum turpis erat eget justo. Nullam non leo sed diam varius scelerisque. Nunc faucibus turpis eget nibh interdum, nec porttitor massa molestie. Ut molestie massa orci, vel efficitur lorem placerat vel. Ut luctus commodo urna sed vestibulum. Aliquam mattis hendrerit lorem, at facilisis ligula viverra quis. In hac habitasse platea dictumst. </p>
-    </div>
+    <!-- TODO: add reverse option -->
+    <app-about-data *ngFor="let section of sections"
+        [imageSource]="section.imgSource"
+        [aboutText]="section.aboutText">
+    </app-about-data>
 
 </div>
+
+<!-- TODO: return button -->
