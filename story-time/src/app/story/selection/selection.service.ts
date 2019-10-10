@@ -19,7 +19,7 @@ export class SelectionService {
   private CACHED_STORIES_KEY = 'cached-stories';
 
   /**
-   * Default constructor
+   * @summary Default constructor
    * @param storageService Storage service to cache data
    */
   constructor(
@@ -32,8 +32,14 @@ export class SelectionService {
   get stories(): Array<Story> { return this._stories; }
 
   /**
+   * @summary Delete all uploaded stories
+   */
+  public clearStories(): void {
+    this._stories = [];
+  }
+
+  /**
    * @summary Import several files
-   *
    * @files FileList of files to import
    */
   public importFiles(files: FileList): void {
@@ -65,7 +71,7 @@ export class SelectionService {
   }
 
   /**
-   * Fetch the cached stories and fill the story list
+   * @summary Fetch the cached stories and fill the story list
    */
   public retrieveCachedStories(): void {
     // Fetch the stories currently stored
@@ -79,7 +85,7 @@ export class SelectionService {
   }
 
   /**
-   * Save a story in the LocalStorage
+   * @summary Save a story in the LocalStorage
    * @param story story to save
    */
   private saveStory(story: IStory): void {

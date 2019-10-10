@@ -66,6 +66,13 @@ export class SelectionComponent implements OnInit {
   }
 
   /**
+   * @summary Remove all stored stories
+   */
+  public onClear(): void {
+    this.selectionService.clearStories();
+  }
+
+  /**
    * @summary Redirect the user to the main menu
    */
   public onMenu(): void {
