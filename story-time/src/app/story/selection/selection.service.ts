@@ -35,7 +35,11 @@ export class SelectionService {
    * @summary Delete all uploaded stories
    */
   public clearStories(): void {
+    // Remove dynamically stored story
     this._stories = [];
+
+    // Clear the local storage
+    this.storageService.clear(this.CACHED_STORIES_KEY);
   }
 
   /**
