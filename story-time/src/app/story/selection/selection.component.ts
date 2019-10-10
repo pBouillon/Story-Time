@@ -25,8 +25,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
-import { IStory } from 'src/app/shared/story';
 import { SelectionService } from './selection.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-selection',
@@ -38,10 +38,13 @@ export class SelectionComponent implements OnInit {
   /**
    * Default constructor
    * @param router Router to redirect the user to the requested pages
+   * @param selectionService Toolbox for the selection menu's operations
+   * @param toastrService Toastr toolbox for alert messages
    */
   constructor(
     private router: Router,
-    public selectionService: SelectionService
+    public selectionService: SelectionService,
+    public toastrService: ToastrService,
   ) { }
 
   /**
@@ -50,6 +53,24 @@ export class SelectionComponent implements OnInit {
   ngOnInit() {
     // Fetch the cached stories
     this.selectionService.retrieveCachedStories();
+  }
+
+  /**
+   * @summary Remove the listed story requesting its deletion
+   * @param event The story's title
+   */
+  public handleRequestedAction(event: string): void {
+    const storyTitle = event;
+
+    // Handle action
+    const success = this.selectionService.removeStoryByTitle(storyTitle);
+
+    if (!success) {
+      this.toastrService.error(
+        'Impossible de supprimer cette histoire',
+        `Aucune histoire à supprimer intitulée "${storyTitle}"`
+      );
+    }
   }
 
   /**
@@ -63,6 +84,13 @@ export class SelectionComponent implements OnInit {
 
     // Extract uploaded files
     this.selectionService.importFiles(target.files);
+  }
+
+  /**
+   * @summary Remove all stored stories
+   */
+  public onClear(): void {
+    this.selectionService.clearStories();
   }
 
   /**

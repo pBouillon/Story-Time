@@ -14,7 +14,7 @@ de la culture et/ou de la langue anglaise par l'outil et les technologies de not
 
 ## Introduction
 
-**_Story Time!_** est un outil en ligne d'apprentissage ludique de notions tournant autour de l'anglais.  
+**_Story Time !_** est un outil en ligne d'apprentissage ludique de notions tournant autour de l'anglais.  
 
 Il s'agit d'une histoire se racontant partie par partie au cours de laquelle il sera demandé à l'utilisateur
 d'intervenir ponctuellement pour débloquer la suite en trouvant le mot attendu pour aider l'histoire à 
