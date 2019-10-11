@@ -28,13 +28,13 @@ import { BaseError } from './BaseError';
  * @summary Error to be thrown when attempted to delete a story not
  *          matching any others
  */
-export class NoSuchStoryUploadedError extends BaseError {
-    
+export class DuplicatedStoryUploadedError extends BaseError {
+
     /**
      * @summary Default constructor
      */
     constructor(message: string) {
         super(message);
     }
-
+    
 }
