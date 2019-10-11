@@ -25,6 +25,7 @@
 import { Injectable } from '@angular/core';
 import { Story, IStory } from 'src/app/shared/story';
 import { StorageService } from '../storage.service';
+import { DuplicatedStoryUploadedError } from 'src/app/errors/DuplicatedStoryUploadedError';
 import { NoSuchStoryUploadedError } from 'src/app/errors/NoSuchStoryUploadedError';
 
 @Injectable({
@@ -68,8 +69,29 @@ export class SelectionService {
   }
 
   /**
+   * @summary get the index of the story with a matching title among all stored stories
+   * @param title Story's title
+   * @returns The index of the story in the stored stories array; -1 if not found
+   */
+  private getIndexByTitle(title: string): number {
+    let index = -1;
+    let counter = -1;
+
+    this._stories.forEach((upladedStory: Story) => {
+      ++counter;
+      if (upladedStory.meta.title === title) {
+        index = counter;
+        return;
+      }
+    });
+
+    return index;
+  }
+
+  /**
    * @summary Import several files
    * @files FileList of files to import
+   * @throws `DuplicatedStoryUploadedError` on reupload of a tracked story
    */
   public importFiles(files: FileList): void {
     // Initialize the file handler
@@ -85,6 +107,11 @@ export class SelectionService {
 
       // Extract story parts (meta and content)
       parsedStory = jsonContent as IStory;
+
+      // Check if the story exists
+      if (this.getIndexByTitle(parsedStory.meta.title) !== -1) {
+        throw new DuplicatedStoryUploadedError('This story has already been uploaded');
+      }
 
       // Add it to the known stories
       this._stories.push(parsedStory);
@@ -106,14 +133,7 @@ export class SelectionService {
    */
   public removeStoryByTitle(title: string): void {
     // Get the index of the element to remove
-    let index = -1;
-
-    this._stories.forEach(story => {
-      ++index;
-      if (story.meta.title === title) {
-        return;
-      }
-    });
+    const index = this.getIndexByTitle(title);
 
     // Detect error
     if (index === -1) {

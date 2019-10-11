@@ -67,8 +67,8 @@ export class SelectionComponent implements OnInit {
       this.selectionService.removeStoryByTitle(storyTitle);
     } catch (error) {
       this.toastrService.error(
-        'Impossible de supprimer cette histoire',
-        `Aucune histoire à supprimer intitulée "${storyTitle}"`
+        `Aucune histoire à supprimer intitulée "${storyTitle}"`,
+        'Impossible de supprimer cette histoire'
       );
     }
   }
@@ -83,7 +83,14 @@ export class SelectionComponent implements OnInit {
     const target = eventObj.target as HTMLInputElement;
 
     // Extract uploaded files
-    this.selectionService.importFiles(target.files);
+    try {
+      this.selectionService.importFiles(target.files);
+    } catch (error) {
+      this.toastrService.error(
+        'L\'histoire importée existe déjà dans le système',
+        'Impossible d\'importer cette histoire'
+      );
+    }
   }
 
   /**

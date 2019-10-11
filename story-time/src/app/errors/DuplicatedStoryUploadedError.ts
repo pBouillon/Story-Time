@@ -36,5 +36,5 @@ export class DuplicatedStoryUploadedError extends BaseError {
     constructor(message: string) {
         super(message);
     }
-    
+
 }
