@@ -33,5 +33,5 @@ export class AppComponent {
   /**
    * @summary application's title
    */
-  readonly title: string = 'Story Time';
+  readonly title: string = 'Story Time !';
 }
