@@ -63,9 +63,9 @@ export class SelectionComponent implements OnInit {
     const storyTitle = event;
 
     // Handle action
-    const success = this.selectionService.removeStoryByTitle(storyTitle);
-
-    if (!success) {
+    try {
+      this.selectionService.removeStoryByTitle(storyTitle);
+    } catch (error) {
       this.toastrService.error(
         'Impossible de supprimer cette histoire',
         `Aucune histoire à supprimer intitulée "${storyTitle}"`
