@@ -19,7 +19,7 @@ export class SelectionService {
   private CACHED_STORIES_KEY = 'cached-stories';
 
   /**
-   * Default constructor
+   * @summary Default constructor
    * @param storageService Storage service to cache data
    */
   constructor(
@@ -32,8 +32,18 @@ export class SelectionService {
   get stories(): Array<Story> { return this._stories; }
 
   /**
+   * @summary Delete all uploaded stories
+   */
+  public clearStories(): void {
+    // Remove dynamically stored story
+    this._stories = [];
+
+    // Clear the local storage
+    this.storageService.clear(this.CACHED_STORIES_KEY);
+  }
+
+  /**
    * @summary Import several files
-   *
    * @files FileList of files to import
    */
   public importFiles(files: FileList): void {
@@ -65,7 +75,39 @@ export class SelectionService {
   }
 
   /**
-   * Fetch the cached stories and fill the story list
+   * @summary Remove a story from its title
+   * @param title Title of the story to remove
+   * @return `false` if no matching story were found
+   */
+  public removeStoryByTitle(title: string): boolean {
+    // Get the index of the element to remove
+    let index = -1;
+
+    this._stories.forEach(story => {
+      ++index;
+      if (story.meta.title === title) {
+        return;
+      }
+    });
+
+    // Detect error
+    if (index === -1) {
+      return false;
+    }
+
+    // Remove item
+    this._stories.splice(index, 1);
+
+    // Refresh the cache
+    this.storageService.clear(this.CACHED_STORIES_KEY);
+    this.storageService.store(this.CACHED_STORIES_KEY, this.stories);
+
+    // Return success
+    return true;
+  }
+
+  /**
+   * @summary Fetch the cached stories and fill the story list
    */
   public retrieveCachedStories(): void {
     // Fetch the stories currently stored
@@ -79,7 +121,7 @@ export class SelectionService {
   }
 
   /**
-   * Save a story in the LocalStorage
+   * @summary Save a story in the LocalStorage
    * @param story story to save
    */
   private saveStory(story: IStory): void {
@@ -99,7 +141,7 @@ export class SelectionService {
     storedStories.push(story);
 
     // Save the new cache
-    this.storageService.store(this.CACHED_STORIES_KEY, storedStories);
+    this.storageService.store(this.CACHED_STORIES_KEY, this.stories);
   }
 
 }

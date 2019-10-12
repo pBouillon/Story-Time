@@ -1,9 +1,18 @@
 <!-- global wrapper -->
 <div class="border shadow d-flex flex-column my-2 p-3">
   
-  <!-- title -->
-  <h4>{{ storyMeta.title }}</h4>
-  <!-- /title -->
+  <div class="d-flex justify-content-between">
+    <!-- title -->
+    <h4>{{ storyMeta.title }}</h4>
+    <!-- /title -->
+
+    <!-- delete button -->
+    <input type="button" 
+      class="btn btn-outline-danger m-1" 
+      value="❌"
+      (click)="askRemove()">
+    <!-- /delete button -->
+  </div>
 
   <!-- tags -->
   <div class="d-flex flex-row mb-2">

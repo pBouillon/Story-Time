@@ -28,7 +28,7 @@ SOFTWARE.
     <h2>Choix d'une histoire</h2>
   </div>
 
-  <div class="container justify-content-left d-flex flex-row w-50 mt-3">
+  <div class="container justify-content-center d-flex flex-row w-50 mt-3">
 
     <!-- back to menu -->
     <input type="button"
@@ -36,6 +36,13 @@ SOFTWARE.
       class="btn btn-outline-primary w-25 mr-2"
       (click)="onMenu()">
     <!-- /back to menu -->
+
+    <!-- clear stories -->
+    <input type="button" 
+      value="❌ Tout supprimer" 
+      class="btn btn-outline-danger w-25 mr-2" 
+      (click)="onClear()">
+    <!-- /clear stories -->
 
     <!-- story import -->
     <div class="custom-file w-50">
@@ -60,7 +67,8 @@ SOFTWARE.
     <div class="container justify-content-center d-flex flex-column w-50 mt-3">
       <app-story-selection
         *ngFor="let story of selectionService.stories"
-        [storyMeta]="story.meta">
+        [storyMeta]="story.meta"
+        (removeRequested)="handleRequestedAction($event)">
       </app-story-selection>
     </div>
   </div>
