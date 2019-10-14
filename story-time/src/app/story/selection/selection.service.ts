@@ -76,9 +76,9 @@ export class SelectionService {
     let index = -1;
     let counter = -1;
 
-    this._stories.forEach((upladedStory: Story) => {
+    this._stories.forEach((uploaded: Story) => {
       ++counter;
-      if (upladedStory.meta.title === title) {
+      if (uploaded.meta.title === title) {
         index = counter;
         return;
       }
@@ -100,7 +100,7 @@ export class SelectionService {
     let parsedStory: IStory;
 
     // Set callback on reader
-    reader.onload = (event: ProgressEvent) => {
+    reader.onload = (_: ProgressEvent) => {
       // Extract file content
       const jsonContent = JSON.parse(reader.result as string);
 
