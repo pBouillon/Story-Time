@@ -31,7 +31,7 @@ pages:
     - cp -R story-time/dist/story-time/ public/story-time/
   artifacts:
     paths:
-      - public
+      - public/story-time/
   only:
     - master
 
