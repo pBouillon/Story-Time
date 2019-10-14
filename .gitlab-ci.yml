@@ -26,7 +26,7 @@ pages:
   script:
     - cd story-time/
     - cd .. 
-    - cp -R story-time/dist/story-time/ public/
+    - cp -R story-time/dist/story-time/ public/story-time/
   artifacts:
     paths:
       - public
