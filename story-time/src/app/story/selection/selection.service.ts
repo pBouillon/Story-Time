@@ -1,6 +1,31 @@
+/**
+ * MIT License
+ *
+ * Copyright © 2019 ADAM Timothée, BOUILLON Pierre, VARNIER Victor
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all
+ * copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
 import { Injectable } from '@angular/core';
 import { Story, IStory } from 'src/app/shared/story';
 import { StorageService } from '../storage.service';
+import { NoSuchStoryUploadedError } from 'src/app/errors/NoSuchStoryUploadedError';
 
 @Injectable({
   providedIn: 'root'
@@ -43,8 +68,29 @@ export class SelectionService {
   }
 
   /**
+   * @summary get the index of the story with a matching title among all stored stories
+   * @param title Story's title
+   * @returns The index of the story in the stored stories array; -1 if not found
+   */
+  private getIndexByTitle(title: string): number {
+    let index = -1;
+    let counter = -1;
+
+    this._stories.forEach((uploaded: Story) => {
+      ++counter;
+      if (uploaded.meta.title === title) {
+        index = counter;
+        return;
+      }
+    });
+
+    return index;
+  }
+
+  /**
    * @summary Import several files
    * @files FileList of files to import
+   * @throws `DuplicatedStoryUploadedError` on reupload of a tracked story
    */
   public importFiles(files: FileList): void {
     // Initialize the file handler
@@ -54,18 +100,38 @@ export class SelectionService {
     let parsedStory: IStory;
 
     // Set callback on reader
-    reader.onload = (event: ProgressEvent) => {
+    reader.onload = (_: ProgressEvent) => {
       // Extract file content
       const jsonContent = JSON.parse(reader.result as string);
 
       // Extract story parts (meta and content)
       parsedStory = jsonContent as IStory;
 
+      // Count occurences of the same file
+      // Hack: make it more precise
+      const re = new RegExp(`^${parsedStory.meta.title}.*$`, 'g');
+
+      let occurences = 0;
+      this.stories.forEach(story => {
+        if (story.meta.title.match(re)) {
+          ++occurences;
+        }
+      });
+
+      // Append the number of occurences if any duplicate is found
+      if (occurences !== 0) {
+        parsedStory.meta.title += ` (${occurences})`;
+      }
+
       // Add it to the known stories
       this._stories.push(parsedStory);
 
       // Store it in the cache
       this.saveStory(parsedStory);
+    };
+
+    reader.onerror = (event: ProgressEvent) => {
+      reader.abort();
     };
 
     // Load provided files
@@ -77,22 +143,15 @@ export class SelectionService {
   /**
    * @summary Remove a story from its title
    * @param title Title of the story to remove
-   * @return `false` if no matching story were found
+   * @throws `Error` if no matching story were found
    */
-  public removeStoryByTitle(title: string): boolean {
+  public removeStoryByTitle(title: string): void {
     // Get the index of the element to remove
-    let index = -1;
-
-    this._stories.forEach(story => {
-      ++index;
-      if (story.meta.title === title) {
-        return;
-      }
-    });
+    const index = this.getIndexByTitle(title);
 
     // Detect error
     if (index === -1) {
-      return false;
+      throw new NoSuchStoryUploadedError('Unknown story');
     }
 
     // Remove item
@@ -101,9 +160,6 @@ export class SelectionService {
     // Refresh the cache
     this.storageService.clear(this.CACHED_STORIES_KEY);
     this.storageService.store(this.CACHED_STORIES_KEY, this.stories);
-
-    // Return success
-    return true;
   }
 
   /**

@@ -21,3 +21,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+import { BaseError } from './BaseError';
+
+/**
+ * @summary Error to be thrown when attempted to delete a story not
+ *          matching any others
+ */
+export class NoSuchStoryUploadedError extends BaseError {
+    
+    /**
+     * @summary Default constructor
+     */
+    constructor(message: string) {
+        super(message);
+    }
+
+}

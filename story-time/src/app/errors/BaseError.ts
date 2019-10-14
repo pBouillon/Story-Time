@@ -21,3 +21,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
+/**
+ * @summary Base error to be thrown
+ */
+export class BaseError extends Error {
+
+    /**
+     * @summary Default constructor
+     */
+    constructor(message: string) {
+        super(message);
+        Object.setPrototypeOf(this, BaseError.prototype);
+    }
+
+}
