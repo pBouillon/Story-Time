@@ -25,7 +25,6 @@
 import { Injectable } from '@angular/core';
 import { Story, IStory } from 'src/app/shared/story';
 import { StorageService } from '../storage.service';
-import { DuplicatedStoryUploadedError } from 'src/app/errors/DuplicatedStoryUploadedError';
 import { NoSuchStoryUploadedError } from 'src/app/errors/NoSuchStoryUploadedError';
 
 @Injectable({
@@ -108,9 +107,20 @@ export class SelectionService {
       // Extract story parts (meta and content)
       parsedStory = jsonContent as IStory;
 
-      // Check if the story exists
-      if (this.getIndexByTitle(parsedStory.meta.title) !== -1) {
-        throw new DuplicatedStoryUploadedError('This story has already been uploaded');
+      // Count occurences of the same file
+      // Hack: make it more precise
+      const re = new RegExp(`^${parsedStory.meta.title}.*$`, 'g');
+
+      let occurences = 0;
+      this.stories.forEach(story => {
+        if (story.meta.title.match(re)) {
+          ++occurences;
+        }
+      });
+
+      // Append the number of occurences if any duplicate is found
+      if (occurences !== 0) {
+        parsedStory.meta.title += ` (${occurences})`;
       }
 
       // Add it to the known stories
@@ -118,6 +128,10 @@ export class SelectionService {
 
       // Store it in the cache
       this.saveStory(parsedStory);
+    };
+
+    reader.onerror = (event: ProgressEvent) => {
+      reader.abort();
     };
 
     // Load provided files

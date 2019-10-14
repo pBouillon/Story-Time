@@ -83,14 +83,7 @@ export class SelectionComponent implements OnInit {
     const target = eventObj.target as HTMLInputElement;
 
     // Extract uploaded files
-    try {
-      this.selectionService.importFiles(target.files);
-    } catch (error) {
-      this.toastrService.error(
-        'L\'histoire importée existe déjà dans le système',
-        'Impossible d\'importer cette histoire'
-      );
-    }
+    this.selectionService.importFiles(target.files);
   }
 
   /**
