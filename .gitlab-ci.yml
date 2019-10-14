@@ -26,12 +26,10 @@ pages:
   script:
     - cd story-time/
     - cd .. 
-    - mkdir public/
-    - mkdir public/story-time/
-    - cp -R story-time/dist/story-time/ public/story-time/
+    - cp -R story-time/dist/story-time/ public/
   artifacts:
     paths:
-      - public/story-time/
+      - public/
   only:
     - master
 
