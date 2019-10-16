@@ -28,6 +28,7 @@ SOFTWARE.
     <h2>Choix d'une histoire</h2>
   </div>
 
+  <!-- buttons layer -->
   <div class="container justify-content-center d-flex flex-row w-50 mt-3">
 
     <!-- back to menu -->
@@ -60,11 +61,12 @@ SOFTWARE.
     <!-- /story import -->
 
   </div>
+  <!-- /buttons layer -->
 
   <hr class="border-top border-secondary w-50">
 
   <!-- story listing -->
-  <div *ngIf="selectionService.stories.length else noStories">
+  <div *ngIf="displayedStories.length else noStories">
     <div class="container justify-content-center d-flex flex-column w-50 mt-3">
 
       <!-- search bar -->
@@ -82,7 +84,8 @@ SOFTWARE.
           class="form-control" 
           placeholder="Titre ou tag de l'histoire" 
           aria-label="search-bar" 
-          aria-describedby="search-bar">
+          aria-describedby="search-bar"
+          (input)="onStorySearching($event.target.value)">
         <!-- /search bar field -->
 
       </div>
@@ -90,7 +93,7 @@ SOFTWARE.
 
       <!-- stories -->
       <app-story-selection
-        *ngFor="let story of selectionService.stories"
+        *ngFor="let story of displayedStories"
         [storyMeta]="story.meta"
         (removeRequested)="handleRequestedAction($event)">
       </app-story-selection>
