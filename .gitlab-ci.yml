@@ -16,7 +16,7 @@ build:
     - ls -la -F
     - npm ci
   script:
-    - npx ng build --prod --progress false --outputPath=./dist/story-time
+    - npx ng build --prod --progress false --outputPath=./dist/story-time --base-href /anglais-a2/
   artifacts:
     paths:
       - story-time/dist/
