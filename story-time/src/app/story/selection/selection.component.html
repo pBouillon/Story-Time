@@ -65,11 +65,25 @@ SOFTWARE.
 
   <div *ngIf="selectionService.stories.length else noStories">
     <div class="container justify-content-center d-flex flex-column w-50 mt-3">
+
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <span class="input-group-text" 
+            id="search-bar">Je cherche ...</span>
+        </div>
+        <input type="text" 
+          class="form-control" 
+          placeholder="Titre ou tag de l'histoire" 
+          aria-label="search-bar" 
+          aria-describedby="search-bar">
+      </div>
+
       <app-story-selection
         *ngFor="let story of selectionService.stories"
         [storyMeta]="story.meta"
         (removeRequested)="handleRequestedAction($event)">
       </app-story-selection>
+
     </div>
   </div>
 
