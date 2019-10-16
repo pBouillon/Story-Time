@@ -158,6 +158,7 @@ export class SelectionService {
 
       // Add it to the known stories
       this._stories.push(parsedStory);
+      this.sortStories();
 
       // Store it in the cache
       this.saveStory(parsedStory);
@@ -207,6 +208,8 @@ export class SelectionService {
     this._stories = rawStoredStories === null
       ? new Array<IStory>()
       : JSON.parse(rawStoredStories) as Array<IStory>;
+
+    this.sortStories();
   }
 
   /**
@@ -231,6 +234,29 @@ export class SelectionService {
 
     // Save the new cache
     this.storageService.store(this.CACHED_STORIES_KEY, this.stories);
+  }
+
+  /**
+   * @summary Sort all stories by title
+   */
+  private sortStories(): void {
+    // Sort the stories
+    this._stories = this.stories.sort((s1: Story, s2: Story) => {
+      let rc: number;
+
+      const title1 = s1.meta.title.toLowerCase();
+      const title2 = s2.meta.title.toLowerCase();
+
+      if (title1 > title2) {
+        rc = 1;
+      } else if (title2 > title1) {
+        rc = -1;
+      } else {
+        rc = 0;
+      }
+
+      return rc;
+    });
   }
 
 }
