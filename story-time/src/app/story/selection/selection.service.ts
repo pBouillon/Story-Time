@@ -107,20 +107,20 @@ export class SelectionService {
       // Extract story parts (meta and content)
       parsedStory = jsonContent as IStory;
 
-      // Count occurences of the same file
+      // Count occurrences of the same file
       // Hack: make it more precise
       const re = new RegExp(`^${parsedStory.meta.title}.*$`, 'g');
 
-      let occurences = 0;
+      let occurrences = 0;
       this.stories.forEach(story => {
         if (story.meta.title.match(re)) {
-          ++occurences;
+          ++occurrences;
         }
       });
 
-      // Append the number of occurences if any duplicate is found
-      if (occurences !== 0) {
-        parsedStory.meta.title += ` (${occurences})`;
+      // Append the number of occurrences if any duplicate is found
+      if (occurrences !== 0) {
+        parsedStory.meta.title += ` (${occurrences})`;
       }
 
       // Add it to the known stories
