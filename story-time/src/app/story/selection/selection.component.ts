@@ -27,6 +27,7 @@ import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
 import { SelectionService } from './selection.service';
 import { ToastrService } from 'ngx-toastr';
+import { IStory } from 'src/app/shared/story';
 
 @Component({
   selector: 'app-selection',
@@ -34,6 +35,8 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./selection.component.scss']
 })
 export class SelectionComponent implements OnInit {
+
+  public displayedStories: Array<IStory>;
 
   /**
    * Default constructor
@@ -43,7 +46,7 @@ export class SelectionComponent implements OnInit {
    */
   constructor(
     private router: Router,
-    public selectionService: SelectionService,
+    private selectionService: SelectionService,
     public toastrService: ToastrService,
   ) { }
 
@@ -53,6 +56,9 @@ export class SelectionComponent implements OnInit {
   ngOnInit() {
     // Fetch the cached stories
     this.selectionService.retrieveCachedStories();
+
+    // Fill displayed stories
+    this.displayedStories = this.selectionService.stories;
   }
 
   /**
@@ -90,7 +96,11 @@ export class SelectionComponent implements OnInit {
    * @summary Remove all stored stories
    */
   public onClear(): void {
+    // Request all stories clearing
     this.selectionService.clearStories();
+
+    // Refresh displayed stories
+    this.displayedStories = this.selectionService.stories;
   }
 
   /**
@@ -98,6 +108,18 @@ export class SelectionComponent implements OnInit {
    */
   public onMenu(): void {
     this.router.navigate([`${AppRoutes.Index}`]);
+  }
+
+  /**
+   * @summary Search for a specific story
+   * @param filter Text searched (case insensitive)
+   */
+  public onStorySearching(filter: string): void {
+    // On an empty filter, display all stories
+    // Otherwise, apply the given filter
+    filter === ''
+      ? this.displayedStories = this.selectionService.stories
+      : this.displayedStories = this.selectionService.filteredStories(filter);
   }
 
 }

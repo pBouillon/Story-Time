@@ -68,6 +68,39 @@ export class SelectionService {
   }
 
   /**
+   * @summary Search for all stories regarding the given filter
+   *          (case insensitive)
+   * @param filter Filter to apply
+   */
+  public filteredStories(filter: string): Array<IStory> {
+    // Set filter to lowercase to normalize it
+    const normalizedFilter = filter.toLowerCase();
+
+    // Create filtered story buffer
+    const filteredStories = new Array<IStory>();
+
+    // Parse stories
+    for (const story of this.stories) {
+      // Check for title matching
+      if (story.meta.title.toLowerCase().indexOf(normalizedFilter) !== -1) {
+        filteredStories.push(story);
+        continue;
+      }
+
+      // Check for tag matching
+      for (const tag of story.meta.tags) {
+        if (tag.toLowerCase().indexOf(normalizedFilter) !== -1) {
+          filteredStories.push(story);
+          break;
+        }
+      }
+    }
+
+    // Return filtered stories buffer
+    return filteredStories;
+  }
+
+  /**
    * @summary get the index of the story with a matching title among all stored stories
    * @param title Story's title
    * @returns The index of the story in the stored stories array; -1 if not found
@@ -107,24 +140,25 @@ export class SelectionService {
       // Extract story parts (meta and content)
       parsedStory = jsonContent as IStory;
 
-      // Count occurences of the same file
+      // Count occurrences of the same file
       // Hack: make it more precise
       const re = new RegExp(`^${parsedStory.meta.title}.*$`, 'g');
 
-      let occurences = 0;
+      let occurrences = 0;
       this.stories.forEach(story => {
         if (story.meta.title.match(re)) {
-          ++occurences;
+          ++occurrences;
         }
       });
 
-      // Append the number of occurences if any duplicate is found
-      if (occurences !== 0) {
-        parsedStory.meta.title += ` (${occurences})`;
+      // Append the number of occurrences if any duplicate is found
+      if (occurrences !== 0) {
+        parsedStory.meta.title += ` (${occurrences})`;
       }
 
       // Add it to the known stories
       this._stories.push(parsedStory);
+      this.sortStories();
 
       // Store it in the cache
       this.saveStory(parsedStory);
@@ -174,6 +208,8 @@ export class SelectionService {
     this._stories = rawStoredStories === null
       ? new Array<IStory>()
       : JSON.parse(rawStoredStories) as Array<IStory>;
+
+    this.sortStories();
   }
 
   /**
@@ -198,6 +234,29 @@ export class SelectionService {
 
     // Save the new cache
     this.storageService.store(this.CACHED_STORIES_KEY, this.stories);
+  }
+
+  /**
+   * @summary Sort all stories by title
+   */
+  private sortStories(): void {
+    // Sort the stories
+    this._stories = this.stories.sort((s1: Story, s2: Story) => {
+      let rc: number;
+
+      const title1 = s1.meta.title.toLowerCase();
+      const title2 = s2.meta.title.toLowerCase();
+
+      if (title1 > title2) {
+        rc = 1;
+      } else if (title2 > title1) {
+        rc = -1;
+      } else {
+        rc = 0;
+      }
+
+      return rc;
+    });
   }
 
 }
