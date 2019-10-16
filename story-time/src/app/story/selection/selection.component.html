@@ -63,33 +63,36 @@ SOFTWARE.
   </div>
   <!-- /buttons layer -->
 
+  <!-- search bar -->
+  <div *ngIf="displayedStories.length"
+    class="container justify-content-center d-flex flex-row w-50 mt-3">
+    <div class="input-group mb-1">
+    
+      <!-- search bar text -->
+      <div class="input-group-prepend">
+        <span class="input-group-text" 
+          id="search-bar">Je cherche ...</span>
+      </div>
+      <!-- /search bar text -->
+    
+      <!-- search bar field -->
+      <input type="text" 
+        class="form-control" 
+        placeholder="Titre ou tag de l'histoire" 
+        aria-label="search-bar"
+        aria-describedby="search-bar" 
+        (input)="onStorySearching($event.target.value)">
+      <!-- /search bar field -->
+    
+    </div>
+  </div>
+  <!-- /search bar -->
+
   <hr class="border-top border-secondary w-50">
 
   <!-- story listing -->
   <div *ngIf="displayedStories.length else noStories">
     <div class="container justify-content-center d-flex flex-column w-50 mt-3">
-
-      <!-- search bar -->
-      <div class="input-group mb-3">
-        
-        <!-- search bar text -->
-        <div class="input-group-prepend">
-          <span class="input-group-text" 
-            id="search-bar">Je cherche ...</span>
-        </div>
-        <!-- /search bar text -->
-
-        <!-- search bar field -->
-        <input type="text" 
-          class="form-control" 
-          placeholder="Titre ou tag de l'histoire" 
-          aria-label="search-bar" 
-          aria-describedby="search-bar"
-          (input)="onStorySearching($event.target.value)">
-        <!-- /search bar field -->
-
-      </div>
-      <!-- /search bar -->
 
       <!-- stories -->
       <app-story-selection
