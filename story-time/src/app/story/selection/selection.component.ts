@@ -112,10 +112,14 @@ export class SelectionComponent implements OnInit {
 
   /**
    * @summary Search for a specific story
-   * @param searched Text searched
+   * @param filter Text searched (case insensitive)
    */
-  public onStorySearching(searched: string): void {
-    // WiP
+  public onStorySearching(filter: string): void {
+    // On an empty filter, display all stories
+    // Otherwise, apply the given filter
+    filter === ''
+      ? this.displayedStories = this.selectionService.stories
+      : this.displayedStories = this.selectionService.filteredStories(filter);
   }
 
 }

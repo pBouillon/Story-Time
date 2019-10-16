@@ -68,6 +68,39 @@ export class SelectionService {
   }
 
   /**
+   * @summary Search for all stories regarding the given filter
+   *          (case insensitive)
+   * @param filter Filter to apply
+   */
+  public filteredStories(filter: string): Array<IStory> {
+    // Set filter to lowercase to normalize it
+    const normalizedFilter = filter.toLowerCase();
+
+    // Create filtered story buffer
+    const filteredStories = new Array<IStory>();
+
+    // Parse stories
+    for (const story of this.stories) {
+      // Check for title matching
+      if (story.meta.title.toLowerCase().indexOf(normalizedFilter) !== -1) {
+        filteredStories.push(story);
+        continue;
+      }
+
+      // Check for tag matching
+      for (const tag of story.meta.tags) {
+        if (tag.toLowerCase().indexOf(normalizedFilter) !== -1) {
+          filteredStories.push(story);
+          break;
+        }
+      }
+    }
+
+    // Return filtered stories buffer
+    return filteredStories;
+  }
+
+  /**
    * @summary get the index of the story with a matching title among all stored stories
    * @param title Story's title
    * @returns The index of the story in the stored stories array; -1 if not found
