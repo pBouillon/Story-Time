@@ -62,10 +62,28 @@ export class SelectionComponent implements OnInit {
   }
 
   /**
+   * @summary Play the story emitting the event
+   * @param event The story's title
+   */
+  public playRequestedStory(event: string): void {
+    const storyTitle = event;
+
+    // Handle action
+    try {
+      this.selectionService.playStoryByTitle(storyTitle);
+    } catch (error) {
+      this.toastrService.error(
+        `Aucune histoire intitulée "${storyTitle}"`,
+        'Impossible de lire cette histoire'
+      );
+    }
+  }
+
+  /**
    * @summary Remove the listed story requesting its deletion
    * @param event The story's title
    */
-  public handleRequestedAction(event: string): void {
+  public removeRequestedStory(event: string): void {
     const storyTitle = event;
 
     // Handle action
@@ -73,7 +91,7 @@ export class SelectionComponent implements OnInit {
       this.selectionService.removeStoryByTitle(storyTitle);
     } catch (error) {
       this.toastrService.error(
-        `Aucune histoire à supprimer intitulée "${storyTitle}"`,
+        `Aucune histoire intitulée "${storyTitle}"`,
         'Impossible de supprimer cette histoire'
       );
     }

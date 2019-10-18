@@ -42,7 +42,7 @@ export class StorySelectionComponent {
    * @summary Emitter for play request
    */
   @Output()
-  public playRequest = new EventEmitter<string>();
+  public playRequested = new EventEmitter<string>();
 
   /**
    * @summary Emitter for remove request
@@ -50,13 +50,16 @@ export class StorySelectionComponent {
   @Output()
   public removeRequested = new EventEmitter<string>();
 
+  /**
+   * @summary Default constructor
+   */
   public constructor() { }
 
   /**
    * @summary Emits the story's title on playing request
    */
   public askPlay(): void {
-    this.playRequest.emit(this.storyMeta.title);
+    this.playRequested.emit(this.storyMeta.title);
   }
 
   /**
