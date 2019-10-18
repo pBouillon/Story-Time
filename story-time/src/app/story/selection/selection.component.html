@@ -22,7 +22,7 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 
-<!-- /selection view -->
+<!-- selection view -->
 <div *ngIf="!selectionService.isUserPlaying; else gameView"
   class="d-flex flex-column h-100">
 
@@ -122,6 +122,21 @@ SOFTWARE.
 
 <!-- game view -->
 <ng-template #gameView>
-  <!-- TODO -->
+<div class="d-flex flex-column h-100">
+
+  <!-- buttons layer -->
+  <div class="container justify-content-center d-flex flex-row w-50 mt-3">
+
+  <!-- back to selection -->
+  <input type="button"
+    value="Retour menu de selection"
+    class="btn btn-outline-primary mr-2"
+    (click)="onSelectionMenu()">
+  <!-- /back to selection -->
+
+ </div>
+<!-- /buttons layer -->
+
+</div>
 </ng-template>
 <!-- /game view -->

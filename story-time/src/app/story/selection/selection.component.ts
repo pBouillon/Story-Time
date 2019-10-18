@@ -129,6 +129,13 @@ export class SelectionComponent implements OnInit {
   }
 
   /**
+   * @summary Leave the current game and redirect the user to the selection menu
+   */
+  public onSelectionMenu(): void {
+    this.selectionService.setUserSelecting();
+  }
+
+  /**
    * @summary Search for a specific story
    * @param filter Text searched (case insensitive)
    */
