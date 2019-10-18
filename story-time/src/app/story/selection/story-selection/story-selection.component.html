@@ -24,19 +24,35 @@ SOFTWARE.
 
 <!-- global wrapper -->
 <div class="border shadow d-flex flex-column my-2 p-3">
-  
-  <div class="d-flex justify-content-between">
+
+  <!-- main data -->
+  <div class="d-flex justify-content-between align-items-center">
+
     <!-- title -->
     <h4>{{ storyMeta.title }}</h4>
     <!-- /title -->
 
-    <!-- delete button -->
-    <input type="button" 
-      class="btn btn-outline-danger m-1" 
-      value="❌"
-      (click)="askRemove()">
-    <!-- /delete button -->
+    <!-- button wrapper -->
+    <div class="d-flex flex-row m-1">
+      <!-- play story -->
+      <div>
+        <input type="button"
+          class="btn btn-outline-primary mr-3"
+          value="📖 Lire l'histoire">
+      </div>
+      <!-- /play story -->
+
+      <!-- delete button -->
+      <input type="button"
+        class="btn btn-outline-danger"
+        value="❌"
+        (click)="askRemove()">
+      <!-- /delete button -->
+    </div>
+    <!-- button wrapper -->
+
   </div>
+  <!-- /main data -->
 
   <!-- tags -->
   <div class="d-flex flex-row mb-2">
@@ -46,10 +62,10 @@ SOFTWARE.
     </div>
   </div>
   <!-- /tags -->
-  
+
   <!-- overview -->
-  <p>{{ storyMeta.overview }}</p>
+  <p class="pr-4 text-justify">{{ storyMeta.overview }}</p>
   <!-- /overview -->
-  
+
 </div>
 <!-- /global wrapper -->
