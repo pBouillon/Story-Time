@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { IStoryMeta } from 'src/app/shared/story-meta';
 
 @Component({
@@ -30,7 +30,7 @@ import { IStoryMeta } from 'src/app/shared/story-meta';
   templateUrl: './story-selection.component.html',
   styleUrls: ['./story-selection.component.scss']
 })
-export class StorySelectionComponent implements OnInit {
+export class StorySelectionComponent {
 
   /**
    * @summary Uploaded story meta data
@@ -39,19 +39,30 @@ export class StorySelectionComponent implements OnInit {
   public storyMeta: IStoryMeta;
 
   /**
-   * @summary Emitter for action request
+   * @summary Emitter for play request
+   */
+  @Output()
+  public playRequest = new EventEmitter<string>();
+
+  /**
+   * @summary Emitter for remove request
    */
   @Output()
   public removeRequested = new EventEmitter<string>();
 
-  constructor() { }
+  public constructor() { }
 
-  ngOnInit() {}
+  /**
+   * @summary Emits the story's title on playing request
+   */
+  public askPlay(): void {
+    this.playRequest.emit(this.storyMeta.title);
+  }
 
   /**
    * @summary Emits the story's title on deletion request
    */
-  askRemove(): void {
+  public askRemove(): void {
     this.removeRequested.emit(this.storyMeta.title);
   }
 
