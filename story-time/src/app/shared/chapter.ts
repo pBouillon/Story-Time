@@ -52,6 +52,12 @@ export interface IChapter {
    */
   question: string;
 
+  /**
+   * @summary Check if the user input matches the expected words (case insensitive)
+   * @param input User input for this chapter
+   */
+  validate(input: string): boolean;
+
 }
 
 /**
@@ -74,6 +80,14 @@ export class Chapter implements IChapter {
     public messageFailure: string = '',
     public question: string = ''
   ) { }
+
+  /**
+   * @summary Check if the user input matches the expected words (case insensitive)
+   * @param input User input for this chapter
+   */
+  public validate(input: string): boolean {
+    return input.toLowerCase() === this.expectedWord.toLowerCase();
+  }
 
 }
 
