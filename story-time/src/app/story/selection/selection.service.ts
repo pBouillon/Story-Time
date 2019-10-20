@@ -44,6 +44,17 @@ export class SelectionService {
   public get isUserPlaying(): boolean { return this._isUserPlaying; }
 
   /**
+   * @summary User selected story to be played
+   */
+  // tslint:disable-next-line: variable-name
+  private _selectedStory: IStory;
+
+  /**
+   * @summary Getter for the user's selected story
+   */
+  public get selectedStory(): IStory { return this._selectedStory; }
+
+  /**
    * @summary List of all stored stories
    */
   // tslint:disable-next-line: variable-name
@@ -203,7 +214,8 @@ export class SelectionService {
     // Toggle player's status
     this.setUserPlaying();
 
-    // TODO: Play
+    // Assign this story
+    this._selectedStory = this.stories[index];
   }
 
   /**
@@ -271,15 +283,18 @@ export class SelectionService {
   /**
    * @summary Toggle the user status to playing
    */
-  public setUserPlaying(): void {
+  private setUserPlaying(): void {
     this._isUserPlaying = true;
   }
 
   /**
-   * @summary Toggle the user status to not playing
+   * @summary Toggle the user status to not playing and reset its selection
    */
   public setUserSelecting(): void {
     this._isUserPlaying = false;
+
+    // Reset user's selected story
+    this._selectedStory = null;
   }
 
   /**

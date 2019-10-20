@@ -132,6 +132,7 @@ export class SelectionComponent implements OnInit {
    * @summary Leave the current game and redirect the user to the selection menu
    */
   public onSelectionMenu(): void {
+    // Clear user's playing status
     this.selectionService.setUserSelecting();
   }
 
