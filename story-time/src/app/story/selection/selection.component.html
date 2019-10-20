@@ -133,15 +133,21 @@ SOFTWARE.
   <!-- buttons layer -->
   <div class="container justify-content-center d-flex flex-row w-50 mt-3">
 
-  <!-- back to selection -->
-  <input type="button"
-    value="Retour menu de selection"
-    class="btn btn-outline-primary mr-2"
-    (click)="onSelectionMenu()">
-  <!-- /back to selection -->
+    <!-- back to selection -->
+    <input type="button"
+      value="Retour menu de selection"
+      class="btn btn-outline-primary mr-2"
+      (click)="onSelectionMenu()">
+    <!-- /back to selection -->
 
- </div>
-<!-- /buttons layer -->
+  </div>
+  <!-- /buttons layer -->
+
+  <!-- play component -->
+  <app-playing
+    [playedStory]="selectionService.selectedStory">
+  </app-playing>
+  <!-- /play component -->
 
 </div>
 </ng-template>
