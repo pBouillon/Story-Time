@@ -30,6 +30,7 @@ import { ContentComponent } from './content/content.component';
 import { ChapterComponent } from './chapter/chapter.component';
 import { ExportComponent } from './export/export.component';
 import { TagInputModule } from 'ngx-chips';
+import { EditorService } from './editor.service';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,9 @@ import { TagInputModule } from 'ngx-chips';
     ReactiveFormsModule,
     FormsModule,
     TagInputModule,
+  ],
+  providers: [
+    EditorService,
   ]
 })
 export class WritingModule { }

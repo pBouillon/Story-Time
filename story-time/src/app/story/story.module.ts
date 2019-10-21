@@ -24,24 +24,17 @@
 
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SelectionComponent } from './selection/selection.component';
 import { WritingModule } from './writing/writing.module';
-import { EditorService } from './writing/editor.service';
-import { StorySelectionComponent } from './selection/story-selection/story-selection.component';
-import { PlayingComponent } from './playing/playing.component';
+import { PlayingModule } from './playing/playing.module';
+import { SelectionModule } from './selection/selection.module';
 
 @NgModule({
-  declarations: [
-    SelectionComponent,
-    StorySelectionComponent,
-    PlayingComponent,
-  ],
+  declarations: [ ],
   imports: [
     CommonModule,
+    SelectionModule,
     WritingModule,
   ],
-  providers: [
-    EditorService,
-  ],
+  providers: [ ],
 })
 export class StoryModule { }
