@@ -23,8 +23,8 @@
  */
 
 import { Injectable } from '@angular/core';
-import { IStory } from 'src/app/shared/story';
 import { IChapter } from 'src/app/shared/chapter';
+import { IStory } from 'src/app/shared/story';
 
 /**
  * @summary Logic to play a story

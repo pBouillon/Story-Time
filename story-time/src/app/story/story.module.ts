@@ -22,11 +22,10 @@
  * SOFTWARE.
  */
 
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { WritingModule } from './writing/writing.module';
-import { PlayingModule } from './playing/playing.module';
+import { NgModule } from '@angular/core';
 import { SelectionModule } from './selection/selection.module';
+import { WritingModule } from './writing/writing.module';
 
 @NgModule({
   declarations: [ ],

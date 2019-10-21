@@ -23,9 +23,9 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Story, IStory } from 'src/app/shared/story';
-import { StorageService } from '../storage.service';
 import { NoSuchStoryUploadedError } from 'src/app/errors/NoSuchStoryUploadedError';
+import { IStory, Story } from 'src/app/shared/story';
+import { StorageService } from '../storage.service';
 
 @Injectable({
   providedIn: 'root'

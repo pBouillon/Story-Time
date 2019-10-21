@@ -23,11 +23,11 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { EditorService } from '../editor.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
 import { IStory } from 'src/app/shared/story';
+import { EditorService } from '../editor.service';
 
 @Component({
   selector: 'app-export',

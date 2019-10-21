@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IStoryMeta } from 'src/app/shared/story-meta';
 
 @Component({

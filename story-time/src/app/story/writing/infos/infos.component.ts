@@ -23,12 +23,12 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-
-import { EditorService } from '../editor.service';
+import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
 import { LengthSpec } from '../../../shared/length-spec';
+import { EditorService } from '../editor.service';
+
 
 @Component({
   selector: 'app-infos',

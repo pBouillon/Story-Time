@@ -22,15 +22,15 @@
  * SOFTWARE.
  */
 
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InfosComponent } from './infos/infos.component';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { ContentComponent } from './content/content.component';
-import { ChapterComponent } from './chapter/chapter.component';
-import { ExportComponent } from './export/export.component';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TagInputModule } from 'ngx-chips';
+import { ChapterComponent } from './chapter/chapter.component';
+import { ContentComponent } from './content/content.component';
 import { EditorService } from './editor.service';
+import { ExportComponent } from './export/export.component';
+import { InfosComponent } from './infos/infos.component';
 
 @NgModule({
   declarations: [
