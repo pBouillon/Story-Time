@@ -22,18 +22,22 @@
  * SOFTWARE.
  */
 
-import { Component, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { IChapter } from 'src/app/shared/chapter';
 
 @Component({
   selector: 'app-played-chapter',
   templateUrl: './played-chapter.component.html',
   styleUrls: ['./played-chapter.component.scss']
 })
-export class PlayedChapterComponent implements OnInit {
+export class PlayedChapterComponent {
+
+  /**
+   * @summary Provided chapter to be displayed
+   */
+  @Input()
+  public chapter: IChapter;
 
   constructor() { }
-
-  ngOnInit() {
-  }
 
 }

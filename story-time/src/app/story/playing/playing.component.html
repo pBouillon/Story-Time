@@ -23,10 +23,13 @@ SOFTWARE.
 -->
 
 <!-- played story -->
-<div class="container justify-content-center d-flex flex-column w-50 mt-3 shadow">
+<div class="container justify-content-center d-flex flex-column w-50 mt-3 p-4 shadow">
 
   <!-- played chapter -->
-  <app-played-chapter></app-played-chapter>
+  <app-played-chapter
+    [chapter]="playingService.playedStory.story[0]">
+    <!-- TODO: parse all chapters -->
+  </app-played-chapter>
   <!-- /played chapter -->
 
 </div>
