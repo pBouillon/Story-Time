@@ -24,21 +24,21 @@
 
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlayingComponent } from './playing.component';
+import { PlayedChapterComponent } from './played-chapter.component';
 
-describe('PlayingComponent', () => {
-  let component: PlayingComponent;
-  let fixture: ComponentFixture<PlayingComponent>;
+describe('PlayedChapterComponent', () => {
+  let component: PlayedChapterComponent;
+  let fixture: ComponentFixture<PlayedChapterComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ PlayingComponent ]
+      declarations: [ PlayedChapterComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlayingComponent);
+    fixture = TestBed.createComponent(PlayedChapterComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

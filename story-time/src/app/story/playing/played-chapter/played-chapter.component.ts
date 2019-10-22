@@ -22,28 +22,18 @@
  * SOFTWARE.
  */
 
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { Component, OnInit } from '@angular/core';
 
-import { PlayingComponent } from './playing.component';
+@Component({
+  selector: 'app-played-chapter',
+  templateUrl: './played-chapter.component.html',
+  styleUrls: ['./played-chapter.component.scss']
+})
+export class PlayedChapterComponent implements OnInit {
 
-describe('PlayingComponent', () => {
-  let component: PlayingComponent;
-  let fixture: ComponentFixture<PlayingComponent>;
+  constructor() { }
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ PlayingComponent ]
-    })
-    .compileComponents();
-  }));
+  ngOnInit() {
+  }
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PlayingComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+}

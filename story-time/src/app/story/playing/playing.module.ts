@@ -26,10 +26,12 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { PlayingComponent } from './playing.component';
 import { PlayingService } from './playing.service';
+import { PlayedChapterComponent } from './played-chapter/played-chapter.component';
 
 @NgModule({
   declarations: [
     PlayingComponent,
+    PlayedChapterComponent,
   ],
   exports: [
     PlayingComponent,
