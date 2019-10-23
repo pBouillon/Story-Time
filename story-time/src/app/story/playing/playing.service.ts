@@ -62,20 +62,19 @@ export class PlayingService {
   }
 
   /**
-   * @summary Move on to the next chapter
-   * @param answer User provided answer
+   * @todo doc
    */
-  public playNextChapter(answer: string): void {
-    // Assert that this chapter is valid
-    const isAnswerValid = this.currentChapter.validate(answer);
+  public startNewGame(): void {
+    this.currentChapterIndex = 0;
+  }
 
-    if (!isAnswerValid) {
-      // TODO: story failure
-    }
-
+  /**
+   * @summary Move on to the next chapter
+   */
+  public playNextChapter(): void {
     // Move to the next chapter
     if (++this.currentChapterIndex === this.chapters.length) {
-      // TODO: success
+      // TODO: end of the
     }
   }
 

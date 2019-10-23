@@ -22,7 +22,7 @@
  * SOFTWARE.
  */
 
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { IChapter } from 'src/app/shared/chapter';
 import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 import { LengthSpec } from 'src/app/shared/length-spec';
@@ -35,6 +35,12 @@ import { LengthSpec } from 'src/app/shared/length-spec';
 export class PlayedChapterComponent implements OnInit {
 
   /**
+   * @todo doc
+   * @todo set limit for chapter's answer and fetch it
+   */
+  public readonly ANSWER_LENGTH = new LengthSpec(0, 140);
+
+  /**
    * @summary Provided chapter to be displayed
    */
   @Input()
@@ -42,9 +48,9 @@ export class PlayedChapterComponent implements OnInit {
 
   /**
    * @todo doc
-   * @todo set limit for chapter's answer and fetch it
    */
-  public readonly ANSWER_LENGTH = new LengthSpec(0, 140);
+  @Output()
+  public sumbittedAnswer = new EventEmitter<string>();
 
   /**
    * @todo doc
@@ -85,7 +91,7 @@ export class PlayedChapterComponent implements OnInit {
    * @todo
    */
   public onSubmit(): void {
-    // TODO: form submission
+    this.sumbittedAnswer.emit(this.answer.value);
   }
 
   /**

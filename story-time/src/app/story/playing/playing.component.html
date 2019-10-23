@@ -27,7 +27,8 @@ SOFTWARE.
 
   <!-- played chapter -->
   <app-played-chapter
-    [chapter]="playingService.playedStory.story[0]">
+    [chapter]="playingService.currentChapter"
+    (sumbittedAnswer)="handleAnswer($event)">
     <!-- TODO: parse all chapters -->
   </app-played-chapter>
   <!-- /played chapter -->

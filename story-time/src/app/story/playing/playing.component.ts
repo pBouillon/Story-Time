@@ -25,6 +25,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IStory } from 'src/app/shared/story';
 import { PlayingService } from './playing.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-playing',
@@ -42,9 +43,11 @@ export class PlayingComponent implements OnInit {
   /**
    * @summary Default constructor
    * @param playingService Playing service logic
+   * @param toastrService Toastr service to notify the user
    */
   constructor(
     public playingService: PlayingService,
+    public toastrService: ToastrService,
   ) { }
 
   /**
@@ -53,5 +56,24 @@ export class PlayingComponent implements OnInit {
   ngOnInit() {
     // Set the provided story as the one to be played
     this.playingService.playedStory = this.playedStory;
+
+    this.playingService.startNewGame();
   }
+
+  /**
+   * @todo doc
+   * @param answer
+   */
+  public handleAnswer(answer: string): void {
+    const isAnswerValid =
+      this.playingService.currentChapter.expectedWord.toLowerCase() === answer.toLowerCase();
+
+    if (isAnswerValid) {
+      this.toastrService.success('Bien joué !');
+      this.playingService.playNextChapter();
+    } else {
+      this.toastrService.warning('Mauvaise réponse !');
+    }
+  }
+
 }
