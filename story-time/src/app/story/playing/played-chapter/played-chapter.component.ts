@@ -22,15 +22,17 @@
  * SOFTWARE.
  */
 
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { IChapter } from 'src/app/shared/chapter';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
+import { LengthSpec } from 'src/app/shared/length-spec';
 
 @Component({
   selector: 'app-played-chapter',
   templateUrl: './played-chapter.component.html',
   styleUrls: ['./played-chapter.component.scss']
 })
-export class PlayedChapterComponent {
+export class PlayedChapterComponent implements OnInit {
 
   /**
    * @summary Provided chapter to be displayed
@@ -38,6 +40,75 @@ export class PlayedChapterComponent {
   @Input()
   public chapter: IChapter;
 
-  constructor() { }
+  /**
+   * @todo doc
+   * @todo set limit for chapter's answer and fetch it
+   */
+  public readonly ANSWER_LENGTH = new LengthSpec(0, 140);
+
+  /**
+   * @todo doc
+   */
+  public chapterAnswerForm: FormGroup;
+
+  /**
+   * @todo doc
+   */
+  constructor(
+    private formBuilder: FormBuilder,
+  ) { }
+
+  /**
+   * @todo doc
+   */
+  public ngOnInit() {
+    this.setupForm();
+  }
+
+  /**
+   * @todo doc
+   */
+  get answer(): AbstractControl {
+    return this.chapterAnswerForm.get('answer');
+  }
+
+  /**
+   * @todo doc
+   */
+  public isAnswerInvalid(): boolean {
+    return this.answer.invalid
+      && (this.answer.dirty
+        || this.answer.touched);
+  }
+
+  /**
+   * @todo
+   */
+  public onSubmit(): void {
+    // TODO: form submission
+  }
+
+  /**
+   * @todo doc
+   */
+  private setupForm(): void {
+
+    /**
+     * @todo doc
+     * @param specification
+     */
+    const getValidatorsFromSpec = (specification: LengthSpec) => {
+      return Validators.minLength(specification.min),
+        Validators.maxLength(specification.max);
+    };
+
+    // Form building
+    this.chapterAnswerForm = this.formBuilder.group({
+      answer: ['', [
+        Validators.required,
+        getValidatorsFromSpec(this.ANSWER_LENGTH),
+      ]]
+    });
+  }
 
 }

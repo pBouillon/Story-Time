@@ -27,6 +27,7 @@ import { NgModule } from '@angular/core';
 import { PlayingComponent } from './playing.component';
 import { PlayingService } from './playing.service';
 import { PlayedChapterComponent } from './played-chapter/played-chapter.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,9 @@ import { PlayedChapterComponent } from './played-chapter/played-chapter.componen
     PlayingComponent,
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
   ],
   providers: [
     PlayingService,

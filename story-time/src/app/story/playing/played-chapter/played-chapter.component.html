@@ -22,17 +22,72 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 
-<!-- chapter's content -->
-<p>{{ chapter.content }}</p>
-<!-- /chapter's content -->
+<!-- chapter's form -->
+<form [formGroup]="chapterAnswerForm">
 
-<!-- chapter's question -->
-<p>{{ chapter.question }}</p>
-<!-- /chapter's question -->
+  <!-- chapter's content -->
+  <div class="form-group">
+    <p>{{ chapter.content }}</p>
+  </div>
+  <!-- /chapter's content -->
 
-<!-- chapter's answer -->
-<input type="text"
-          class="form-control form-control-sm"
-          placeholder="Votre réponse"
-          autocomplete="off">
-<!-- chapter's answer -->
+  <!-- chapter's question -->
+  <div class="form-group">
+    <p>{{ chapter.question }} </p>
+  </div>
+  <!-- /chapter's question -->
+
+  <!-- chapter's answer -->
+  <div class="form-group">
+    <input type="text"
+      class="form-control"
+      [ngClass]="{'border-danger': isAnswerInvalid()}"
+      name="answer"
+      placeholder="Votre réponse"
+      formControlName="answer"
+      autocomplete="off">
+  </div>
+  <!-- /chapter's answer -->
+
+  <!-- answer's errors -->
+  <div *ngIf="isAnswerInvalid()"
+    class="text-danger small">
+
+    <!-- required -->
+    <div *ngIf="answer.errors.required">
+      Une réponse est requise
+    </div>
+    <!-- /required -->
+
+    <!-- min size -->
+    <div *ngIf="answer.errors.minlength">
+      La réponse doit comporter au moins {{ ANSWER_LENGTH.min }} caractère(s).
+    </div>
+    <!-- /min size -->
+
+    <!-- max size -->
+    <div *ngIf="answer.errors.maxlength">
+      La réponse doit comporter au maximum {{ ANSWER_LENGTH.max }} caractères (actuels: {{ answer.value.length }}).
+    </div>
+    <!-- /max size -->
+
+  </div>
+  <!-- /answer's errors -->
+
+  <!-- form's button -->
+  <div class="container d-flex flex-row-reverse p-0">
+
+    <!-- form submission -->
+    <button type="submit"
+      class="btn btn-primary w-25"
+      [disabled]="chapterAnswerForm.invalid"
+      (click)="onSubmit()">
+      Valider
+    </button>
+    <!-- /form submission -->
+
+  </div>
+  <!-- /form's button -->
+
+</form>
+<!-- /chapter's form -->
