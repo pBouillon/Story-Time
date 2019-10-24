@@ -68,14 +68,19 @@ export class PlayingComponent implements OnInit {
    * @param answer
    */
   public handleAnswer(answer: string): void {
-    const isAnswerValid =
-      this.playingService.currentChapter.expectedWord.toLowerCase() === answer.toLowerCase();
+    const isAnswerValid = this.playingService.tryValidateCurrentChapter(answer);
 
     if (isAnswerValid) {
       this.toastrService.success('Bien joué !');
       this.playingService.playNextChapter();
-    } else {
-      this.toastrService.warning('Mauvaise réponse !');
+      return;
+    }
+
+    if (!this.playingService.isChapterFailed) {
+      this.toastrService.warning(
+        `Encore ${this.playingService.remainingTries} essai.s restant.s`,
+        'Mauvaise réponse !'
+      );
     }
   }
 

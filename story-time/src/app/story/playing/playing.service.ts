@@ -35,6 +35,11 @@ import { IStory } from 'src/app/shared/story';
 export class PlayingService {
 
   /**
+   * @todo doc
+   */
+  private readonly ALLOWED_TRIES = 2;
+
+  /**
    * @summary Currently played story
    */
   public playedStory: IStory;
@@ -43,6 +48,11 @@ export class PlayingService {
    * @summary Index of the chapter currently played
    */
   private currentChapterIndex: number;
+
+  /**
+   * @todo doc
+   */
+  private currentRemainingTries: number;
 
   /**
    * @summary Getter for the chapter currently played
@@ -57,14 +67,23 @@ export class PlayingService {
   /**
    * @todo doc
    */
-  get isStoryFinished(): boolean {
-    return this.currentChapterIndex === this.chapters.length;
-  }
+  public get isChapterFailed(): boolean { return this.currentRemainingTries <= 0; }
+
+  /**
+   * @todo doc
+   */
+  public get isStoryFinished(): boolean { return this.currentChapterIndex === this.chapters.length; }
+
+  /**
+   * @todo doc
+   */
+  public get remainingTries(): number { return this.currentRemainingTries; }
 
   /**
    * @summary Initialize the inner-counted for chapters record
    */
   constructor() {
+    this.currentRemainingTries = this.ALLOWED_TRIES;
     this.currentChapterIndex = -1;
   }
 
@@ -83,6 +102,25 @@ export class PlayingService {
     if (!this.isStoryFinished) {
       ++this.currentChapterIndex;
     }
+  }
+
+  /**
+   * @todo doc
+   * @param answer
+   */
+  public tryValidateCurrentChapter(answer: string): boolean {
+    const isAnswerCorrect = this.currentChapter.expectedWord.toLowerCase() === answer.toLowerCase();
+
+    if (isAnswerCorrect
+        && this.currentRemainingTries > 0) {
+      // Restore remaining tries
+      this.currentRemainingTries = this.ALLOWED_TRIES;
+      return true;
+    }
+
+    // Decrement remaining tries
+    --this.currentRemainingTries;
+    return false;
   }
 
 }

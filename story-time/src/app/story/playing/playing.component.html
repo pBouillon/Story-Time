@@ -23,7 +23,8 @@ SOFTWARE.
 -->
 
 <!-- played story -->
-<div class="container justify-content-center d-flex flex-column w-50 mt-3 p-4 shadow">
+<div *ngIf="!playingService.isChapterFailed; else failedChapter"
+  class="container justify-content-center d-flex flex-column w-50 mt-3 p-4 shadow">
 
   <!-- played chapter -->
   <ng-container *ngIf="!playingService.isStoryFinished; else success">
@@ -36,6 +37,7 @@ SOFTWARE.
 
   <!-- story done -->
   <ng-template #success>
+
     <!-- success display -->
     <h5 class="text-center">
       🏆 <span class="font-italic font-weight-bolder">"{{ playingService.playedStory.meta.title }}"</span> finie ! 🏆
@@ -45,9 +47,31 @@ SOFTWARE.
       Bravo ! Cette histoire est finie, pourquoi pas en <a href="" (click)="onSelectionMenu()">selectionner une nouvelle</a> ?
     </p>
     <!-- /success display -->
+
   </ng-template>
   <!-- /story done -->
 
 </div>
 <!-- /played story -->
+
+<!-- failed story -->
+<ng-template #failedChapter>
+<div class="container justify-content-center d-flex flex-column w-50 mt-3 p-4 shadow">
+
+  <h5 class="text-center">
+    😔 Dommage ...
+  </h5>
+
+  <p class="text-center mt-1">
+    Plus aucun essai restant pour ce chapitre...
+  </p>
+
+  <p class="text-justify">
+    Pas d'inquiétude ! Il est toujours possible de
+    <a href="" (click)="onSelectionMenu()">selectionner une nouvelle histoire</a> avant de réessayer !
+  </p>
+
+</div>
+</ng-template>
+<!-- /failed story -->
 
