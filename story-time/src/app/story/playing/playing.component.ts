@@ -68,18 +68,21 @@ export class PlayingComponent implements OnInit {
    * @param answer
    */
   public handleAnswer(answer: string): void {
+    // Sumbit the answer to the system
     const isAnswerValid = this.playingService.tryValidateCurrentChapter(answer);
 
+    // On success, move on to the next chapter
     if (isAnswerValid) {
       this.toastrService.success('Bien joué !');
       this.playingService.playNextChapter();
       return;
     }
 
+    // On failure, if the user still have remaining tries, show how many tries he still has
     if (!this.playingService.isChapterFailed) {
       this.toastrService.warning(
-        `Encore ${this.playingService.remainingTries} essai.s restant.s`,
-        'Mauvaise réponse !'
+        `Encore ${this.playingService.remainingTries} essai.s pour trouver !`,
+        'Mauvaise réponse ...'
       );
     }
   }
@@ -88,7 +91,7 @@ export class PlayingComponent implements OnInit {
    * @todo doc
    */
   public onSelectionMenu(): void {
-    this.router.navigate([`${AppRoutes.Selection}`]);
+    this.router.navigate([AppRoutes.Selection]);
   }
 
 }
