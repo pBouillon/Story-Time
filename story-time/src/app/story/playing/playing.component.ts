@@ -81,7 +81,8 @@ export class PlayingComponent implements OnInit {
     // On failure, if the user still have remaining tries, show how many tries he still has
     if (!this.playingService.isChapterFailed) {
       this.toastrService.warning(
-        `Encore ${this.playingService.remainingTries} essai.s pour trouver !`,
+        `Encore ${this.playingService.remainingTries} `
+        + `essai${this.playingService.remainingTries < 2 ? '' : 's'} pour trouver !`,
         'Mauvaise réponse ...'
       );
     }
