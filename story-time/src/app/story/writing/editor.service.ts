@@ -23,8 +23,8 @@
  */
 
 import { Injectable } from '@angular/core';
-import { IStoryMeta } from '../../shared/story-meta';
 import { Chapter } from 'src/app/shared/chapter';
+import { IStoryMeta } from '../../shared/story-meta';
 import { StorageService } from '../storage.service';
 
 /**

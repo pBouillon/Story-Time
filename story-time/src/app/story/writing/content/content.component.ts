@@ -23,12 +23,12 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { EditorService } from '../editor.service';
 import { Router } from '@angular/router';
-import { AppRoutes } from 'src/app/app-routing.module';
-import { IChapter, Chapter, ChapterAction } from 'src/app/shared/chapter';
-import { LengthSpec } from 'src/app/shared/length-spec';
 import { ToastrService } from 'ngx-toastr';
+import { AppRoutes } from 'src/app/app-routing.module';
+import { Chapter, ChapterAction, IChapter } from 'src/app/shared/chapter';
+import { LengthSpec } from 'src/app/shared/length-spec';
+import { EditorService } from '../editor.service';
 
 @Component({
   selector: 'app-content',

@@ -22,51 +22,15 @@
  * SOFTWARE.
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IStoryMeta } from 'src/app/shared/story-meta';
+import { TestBed } from '@angular/core/testing';
 
-@Component({
-  selector: 'app-story-selection',
-  templateUrl: './story-selection.component.html',
-  styleUrls: ['./story-selection.component.scss']
-})
-export class StorySelectionComponent {
+import { PlayingService } from './playing.service';
 
-  /**
-   * @summary Uploaded story meta data
-   */
-  @Input()
-  public storyMeta: IStoryMeta;
+describe('PlayingService', () => {
+  beforeEach(() => TestBed.configureTestingModule({}));
 
-  /**
-   * @summary Emitter for play request
-   */
-  @Output()
-  public playRequested = new EventEmitter<string>();
-
-  /**
-   * @summary Emitter for remove request
-   */
-  @Output()
-  public removeRequested = new EventEmitter<string>();
-
-  /**
-   * @summary Default constructor
-   */
-  public constructor() { }
-
-  /**
-   * @summary Emits the story's title on playing request
-   */
-  public askPlay(): void {
-    this.playRequested.emit(this.storyMeta.title);
-  }
-
-  /**
-   * @summary Emits the story's title on deletion request
-   */
-  public askRemove(): void {
-    this.removeRequested.emit(this.storyMeta.title);
-  }
-
-}
+  it('should be created', () => {
+    const service: PlayingService = TestBed.get(PlayingService);
+    expect(service).toBeTruthy();
+  });
+});

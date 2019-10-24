@@ -23,9 +23,9 @@
  */
 
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, RouterStateSnapshot, CanActivate, Router } from '@angular/router';
-import { EditorService } from '../story/writing/editor.service';
+import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
 import { AppRoutes } from '../app-routing.module';
+import { EditorService } from '../story/writing/editor.service';
 
 @Injectable({
   providedIn: 'root'

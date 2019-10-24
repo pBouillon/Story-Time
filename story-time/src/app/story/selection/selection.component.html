@@ -22,7 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 -->
 
-<div class="d-flex flex-column h-100">
+<!-- selection view -->
+<div *ngIf="!selectionService.isUserPlaying; else gameView"
+  class="d-flex flex-column h-100">
 
   <div class="container justify-content-center d-flex">
     <h2>Choix d'une histoire</h2>
@@ -98,7 +100,8 @@ SOFTWARE.
       <app-story-selection
         *ngFor="let story of displayedStories"
         [storyMeta]="story.meta"
-        (removeRequested)="handleRequestedAction($event)">
+        (playRequested)="playRequestedStory($event)"
+        (removeRequested)="removeRequestedStory($event)">
       </app-story-selection>
       <!-- stories -->
 
@@ -115,3 +118,37 @@ SOFTWARE.
   <!-- /no story message -->
 
 </div>
+<!-- /selection view -->
+
+<!-- game view -->
+<ng-template #gameView>
+<div class="d-flex flex-column h-100">
+
+  <div class="container justify-content-center d-flex">
+    <h2>{{ selectionService.selectedStory.meta.title }}</h2>
+  </div>
+
+  <!-- buttons layer -->
+  <div class="container justify-content-center d-flex flex-row w-50 mt-3">
+
+    <!-- back to selection -->
+    <input type="button"
+      value="Retour menu de selection"
+      class="btn btn-outline-primary mr-2"
+      (click)="onSelectionMenu()">
+    <!-- /back to selection -->
+
+  </div>
+  <!-- /buttons layer -->
+
+  <hr class="border-top border-secondary w-50">
+
+  <!-- play component -->
+  <app-playing
+    [playedStory]="selectionService.selectedStory">
+  </app-playing>
+  <!-- /play component -->
+
+</div>
+</ng-template>
+<!-- /game view -->

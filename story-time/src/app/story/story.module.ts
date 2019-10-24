@@ -22,24 +22,18 @@
  * SOFTWARE.
  */
 
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SelectionComponent } from './selection/selection.component';
+import { NgModule } from '@angular/core';
+import { SelectionModule } from './selection/selection.module';
 import { WritingModule } from './writing/writing.module';
-import { EditorService } from './writing/editor.service';
-import { StorySelectionComponent } from './selection/story-selection/story-selection.component';
 
 @NgModule({
-  declarations: [
-    SelectionComponent,
-    StorySelectionComponent,
-  ],
+  declarations: [ ],
   imports: [
     CommonModule,
+    SelectionModule,
     WritingModule,
   ],
-  providers: [
-    EditorService,
-  ],
+  providers: [ ],
 })
 export class StoryModule { }

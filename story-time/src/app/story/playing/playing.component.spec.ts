@@ -22,51 +22,28 @@
  * SOFTWARE.
  */
 
-import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { IStoryMeta } from 'src/app/shared/story-meta';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-@Component({
-  selector: 'app-story-selection',
-  templateUrl: './story-selection.component.html',
-  styleUrls: ['./story-selection.component.scss']
-})
-export class StorySelectionComponent {
+import { PlayingComponent } from './playing.component';
 
-  /**
-   * @summary Uploaded story meta data
-   */
-  @Input()
-  public storyMeta: IStoryMeta;
+describe('PlayingComponent', () => {
+  let component: PlayingComponent;
+  let fixture: ComponentFixture<PlayingComponent>;
 
-  /**
-   * @summary Emitter for play request
-   */
-  @Output()
-  public playRequested = new EventEmitter<string>();
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      declarations: [ PlayingComponent ]
+    })
+    .compileComponents();
+  }));
 
-  /**
-   * @summary Emitter for remove request
-   */
-  @Output()
-  public removeRequested = new EventEmitter<string>();
+  beforeEach(() => {
+    fixture = TestBed.createComponent(PlayingComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+  });
 
-  /**
-   * @summary Default constructor
-   */
-  public constructor() { }
-
-  /**
-   * @summary Emits the story's title on playing request
-   */
-  public askPlay(): void {
-    this.playRequested.emit(this.storyMeta.title);
-  }
-
-  /**
-   * @summary Emits the story's title on deletion request
-   */
-  public askRemove(): void {
-    this.removeRequested.emit(this.storyMeta.title);
-  }
-
-}
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+});

@@ -23,9 +23,9 @@
  */
 
 import { Injectable } from '@angular/core';
-import { Story, IStory } from 'src/app/shared/story';
-import { StorageService } from '../storage.service';
 import { NoSuchStoryUploadedError } from 'src/app/errors/NoSuchStoryUploadedError';
+import { IStory, Story } from 'src/app/shared/story';
+import { StorageService } from '../storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -33,10 +33,37 @@ import { NoSuchStoryUploadedError } from 'src/app/errors/NoSuchStoryUploadedErro
 export class SelectionService {
 
   /**
+   * @summary Checker to assert that the user is playing or not
+   */
+  // tslint:disable-next-line: variable-name
+  private _isUserPlaying = false;
+
+  /**
+   * @summary Getter for the player's state
+   */
+  public get isUserPlaying(): boolean { return this._isUserPlaying; }
+
+  /**
+   * @summary User selected story to be played
+   */
+  // tslint:disable-next-line: variable-name
+  private _selectedStory: IStory;
+
+  /**
+   * @summary Getter for the user's selected story
+   */
+  public get selectedStory(): IStory { return this._selectedStory; }
+
+  /**
    * @summary List of all stored stories
    */
   // tslint:disable-next-line: variable-name
   private _stories = new Array<Story>();
+
+  /**
+   * @summary Getter for the list of all stories
+   */
+  public get stories(): Array<Story> { return this._stories; }
 
   /**
    * @summary Key for all stored stories in the LocalStorage
@@ -50,11 +77,6 @@ export class SelectionService {
   constructor(
     private storageService: StorageService,
   ) { }
-
-  /**
-   * @summary Getter for the list of all stories
-   */
-  get stories(): Array<Story> { return this._stories; }
 
   /**
    * @summary Delete all uploaded stories
@@ -175,6 +197,28 @@ export class SelectionService {
   }
 
   /**
+   * @todo
+   * @summary Play a story from its title
+   * @param title Title of the story to play
+   * @throws `Error` if no matching story were found
+   */
+  public playStoryByTitle(title: string): void {
+    // Get the index of the element to play
+    const index = this.getIndexByTitle(title);
+
+    // Detect error
+    if (index === -1) {
+      throw new NoSuchStoryUploadedError('Unknown story');
+    }
+
+    // Toggle player's status
+    this.setUserPlaying();
+
+    // Assign this story
+    this._selectedStory = this.stories[index];
+  }
+
+  /**
    * @summary Remove a story from its title
    * @param title Title of the story to remove
    * @throws `Error` if no matching story were found
@@ -234,6 +278,23 @@ export class SelectionService {
 
     // Save the new cache
     this.storageService.store(this.CACHED_STORIES_KEY, this.stories);
+  }
+
+  /**
+   * @summary Toggle the user status to playing
+   */
+  private setUserPlaying(): void {
+    this._isUserPlaying = true;
+  }
+
+  /**
+   * @summary Toggle the user status to not playing and reset its selection
+   */
+  public setUserSelecting(): void {
+    this._isUserPlaying = false;
+
+    // Reset user's selected story
+    this._selectedStory = null;
   }
 
   /**

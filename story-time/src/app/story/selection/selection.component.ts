@@ -24,10 +24,10 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppRoutes } from 'src/app/app-routing.module';
-import { SelectionService } from './selection.service';
 import { ToastrService } from 'ngx-toastr';
+import { AppRoutes } from 'src/app/app-routing.module';
 import { IStory } from 'src/app/shared/story';
+import { SelectionService } from './selection.service';
 
 @Component({
   selector: 'app-selection',
@@ -62,10 +62,28 @@ export class SelectionComponent implements OnInit {
   }
 
   /**
+   * @summary Play the story emitting the event
+   * @param event The story's title
+   */
+  public playRequestedStory(event: string): void {
+    const storyTitle = event;
+
+    // Handle action
+    try {
+      this.selectionService.playStoryByTitle(storyTitle);
+    } catch (error) {
+      this.toastrService.error(
+        `Aucune histoire intitulée "${storyTitle}"`,
+        'Impossible de lire cette histoire'
+      );
+    }
+  }
+
+  /**
    * @summary Remove the listed story requesting its deletion
    * @param event The story's title
    */
-  public handleRequestedAction(event: string): void {
+  public removeRequestedStory(event: string): void {
     const storyTitle = event;
 
     // Handle action
@@ -73,7 +91,7 @@ export class SelectionComponent implements OnInit {
       this.selectionService.removeStoryByTitle(storyTitle);
     } catch (error) {
       this.toastrService.error(
-        `Aucune histoire à supprimer intitulée "${storyTitle}"`,
+        `Aucune histoire intitulée "${storyTitle}"`,
         'Impossible de supprimer cette histoire'
       );
     }
@@ -108,6 +126,14 @@ export class SelectionComponent implements OnInit {
    */
   public onMenu(): void {
     this.router.navigate([`${AppRoutes.Index}`]);
+  }
+
+  /**
+   * @summary Leave the current game and redirect the user to the selection menu
+   */
+  public onSelectionMenu(): void {
+    // Clear user's playing status
+    this.selectionService.setUserSelecting();
   }
 
   /**
