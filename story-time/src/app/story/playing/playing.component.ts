@@ -26,6 +26,8 @@ import { Component, Input, OnInit } from '@angular/core';
 import { IStory } from 'src/app/shared/story';
 import { PlayingService } from './playing.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { AppRoutes } from 'src/app/app-routing.module';
 
 @Component({
   selector: 'app-playing',
@@ -47,6 +49,7 @@ export class PlayingComponent implements OnInit {
    */
   constructor(
     public playingService: PlayingService,
+    public router: Router,
     public toastrService: ToastrService,
   ) { }
 
@@ -74,6 +77,13 @@ export class PlayingComponent implements OnInit {
     } else {
       this.toastrService.warning('Mauvaise réponse !');
     }
+  }
+
+  /**
+   * @todo doc
+   */
+  public onSelectionMenu(): void {
+    this.router.navigate([`${AppRoutes.Selection}`]);
   }
 
 }

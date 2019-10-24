@@ -91,28 +91,23 @@ export class PlayedChapterComponent implements OnInit {
    * @todo
    */
   public onSubmit(): void {
+    // Emit the submitted answer
     this.sumbittedAnswer.emit(this.answer.value);
+
+    // Reset the text
+    this.chapterAnswerForm.patchValue({answer: ''});
+    this.answer.markAsUntouched();
   }
 
   /**
    * @todo doc
    */
   private setupForm(): void {
-
-    /**
-     * @todo doc
-     * @param specification
-     */
-    const getValidatorsFromSpec = (specification: LengthSpec) => {
-      return Validators.minLength(specification.min),
-        Validators.maxLength(specification.max);
-    };
-
-    // Form building
     this.chapterAnswerForm = this.formBuilder.group({
       answer: ['', [
         Validators.required,
-        getValidatorsFromSpec(this.ANSWER_LENGTH),
+        Validators.maxLength(this.ANSWER_LENGTH.max),
+        Validators.minLength(this.ANSWER_LENGTH.min),
       ]]
     });
   }

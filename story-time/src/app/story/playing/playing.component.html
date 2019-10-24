@@ -26,12 +26,27 @@ SOFTWARE.
 <div class="container justify-content-center d-flex flex-column w-50 mt-3 p-4 shadow">
 
   <!-- played chapter -->
-  <app-played-chapter
-    [chapter]="playingService.currentChapter"
-    (sumbittedAnswer)="handleAnswer($event)">
-    <!-- TODO: parse all chapters -->
-  </app-played-chapter>
+  <ng-container *ngIf="!playingService.isStoryFinished; else success">
+    <app-played-chapter
+      [chapter]="playingService.currentChapter"
+      (sumbittedAnswer)="handleAnswer($event)">
+    </app-played-chapter>
+  </ng-container>
   <!-- /played chapter -->
+
+  <!-- story done -->
+  <ng-template #success>
+    <!-- success display -->
+    <h5 class="text-center">
+      🏆 <span class="font-italic font-weight-bolder">"{{ playingService.playedStory.meta.title }}"</span> finie ! 🏆
+    </h5>
+
+    <p class="text-justify">
+      Bravo ! Cette histoire est finie, pourquoi pas en <a href="" (click)="onSelectionMenu()">selectionner une nouvelle</a> ?
+    </p>
+    <!-- /success display -->
+  </ng-template>
+  <!-- /story done -->
 
 </div>
 <!-- /played story -->

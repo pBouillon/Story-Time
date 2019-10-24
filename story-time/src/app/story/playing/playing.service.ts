@@ -55,6 +55,13 @@ export class PlayingService {
   public get chapters(): Array<IChapter> { return this.playedStory.story; }
 
   /**
+   * @todo doc
+   */
+  get isStoryFinished(): boolean {
+    return this.currentChapterIndex === this.chapters.length;
+  }
+
+  /**
    * @summary Initialize the inner-counted for chapters record
    */
   constructor() {
@@ -73,8 +80,8 @@ export class PlayingService {
    */
   public playNextChapter(): void {
     // Move to the next chapter
-    if (++this.currentChapterIndex === this.chapters.length) {
-      // TODO: end of the
+    if (!this.isStoryFinished) {
+      ++this.currentChapterIndex;
     }
   }
 
