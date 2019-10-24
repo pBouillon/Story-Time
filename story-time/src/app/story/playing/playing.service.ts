@@ -37,7 +37,7 @@ export class PlayingService {
   /**
    * @summary Allowed tries per chapters
    */
-  private readonly ALLOWED_TRIES = 2;
+  private readonly ALLOWED_TRIES = 3;
 
   /**
    * @summary Currently played story
