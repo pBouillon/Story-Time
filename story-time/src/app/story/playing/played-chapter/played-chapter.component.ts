@@ -35,8 +35,7 @@ import { LengthSpec } from 'src/app/shared/length-spec';
 export class PlayedChapterComponent implements OnInit {
 
   /**
-   * @todo doc
-   * @todo set limit for chapter's answer and fetch it
+   * @summary Answer length limits
    */
   public readonly ANSWER_LENGTH = new LengthSpec(0, 140);
 
@@ -47,39 +46,40 @@ export class PlayedChapterComponent implements OnInit {
   public chapter: IChapter;
 
   /**
-   * @todo doc
+   * @summary Emitter for the submitted answer
    */
   @Output()
   public sumbittedAnswer = new EventEmitter<string>();
 
   /**
-   * @todo doc
+   * @summary Form to submit chapter's answer
    */
   public chapterAnswerForm: FormGroup;
 
   /**
-   * @todo doc
+   * @summary Default constructor
+   * @param formBuilder FormBuilder to create the chapter's form
    */
   constructor(
     private formBuilder: FormBuilder,
   ) { }
 
   /**
-   * @todo doc
+   * @summary Initialize the component
    */
   public ngOnInit() {
     this.setupForm();
   }
 
   /**
-   * @todo doc
+   * @summary Fetch the `answer` field in the form
    */
-  get answer(): AbstractControl {
+  public get answer(): AbstractControl {
     return this.chapterAnswerForm.get('answer');
   }
 
   /**
-   * @todo doc
+   * @summary Check if the field is valid
    */
   public isAnswerInvalid(): boolean {
     return this.answer.invalid
@@ -88,7 +88,7 @@ export class PlayedChapterComponent implements OnInit {
   }
 
   /**
-   * @todo
+   * @summary Sumbit the provided answer to the parent component
    */
   public onSubmit(): void {
     // Emit the submitted answer
@@ -100,7 +100,7 @@ export class PlayedChapterComponent implements OnInit {
   }
 
   /**
-   * @todo doc
+   * @summary Initiate the chapter's form
    */
   private setupForm(): void {
     this.chapterAnswerForm = this.formBuilder.group({

@@ -64,8 +64,8 @@ export class PlayingComponent implements OnInit {
   }
 
   /**
-   * @todo doc
-   * @param answer
+   * @summary Handle the answer provided by the played chapter's component
+   * @param answer Provided answer for the current chapter of the `playingService`
    */
   public handleAnswer(answer: string): void {
     // Sumbit the answer to the system
@@ -88,7 +88,7 @@ export class PlayingComponent implements OnInit {
   }
 
   /**
-   * @todo doc
+   * @summary Redirect the user to the selection menu
    */
   public onSelectionMenu(): void {
     this.router.navigate([AppRoutes.Selection]);

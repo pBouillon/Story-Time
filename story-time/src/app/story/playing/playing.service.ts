@@ -35,7 +35,7 @@ import { IStory } from 'src/app/shared/story';
 export class PlayingService {
 
   /**
-   * @todo doc
+   * @summary Allowed tries per chapters
    */
   private readonly ALLOWED_TRIES = 2;
 
@@ -50,7 +50,7 @@ export class PlayingService {
   private currentChapterIndex: number;
 
   /**
-   * @todo doc
+   * @summary Current remaining tries for answer's submission for the current chapter
    */
   private currentRemainingTries: number;
 
@@ -65,17 +65,19 @@ export class PlayingService {
   public get chapters(): Array<IChapter> { return this.playedStory.story; }
 
   /**
-   * @todo doc
+   * @summary Getter for chapter success's status
+   * @returns True if the user does't have any remaining try; false otherwise
    */
   public get isChapterFailed(): boolean { return this.currentRemainingTries <= 0; }
 
-  /**
-   * @todo doc
-   */
+/**
+ * @summary Getter for story success's status
+ * @returns True if the user made it beyond the last chapter; false otherwise
+ */
   public get isStoryFinished(): boolean { return this.currentChapterIndex === this.chapters.length; }
 
   /**
-   * @todo doc
+   * @summary Getter for the user's remaing tries
    */
   public get remainingTries(): number { return this.currentRemainingTries; }
 
@@ -88,9 +90,10 @@ export class PlayingService {
   }
 
   /**
-   * @todo doc
+   * @summary Reset the parameters to prepare a new game
    */
   public startNewGame(): void {
+    this.currentRemainingTries = this.ALLOWED_TRIES;
     this.currentChapterIndex = 0;
   }
 
@@ -105,8 +108,10 @@ export class PlayingService {
   }
 
   /**
-   * @todo doc
-   * @param answer
+   * @summary Submit an answer for the current chapter
+   *          Updates the remaining tries of the user
+   * @param answer Provided answer
+   * @returns True if the provided story is valid; false otherwise
    */
   public tryValidateCurrentChapter(answer: string): boolean {
     const isAnswerCorrect = this.currentChapter.expectedWord.toLowerCase() === answer.toLowerCase();
