@@ -23,6 +23,8 @@
  */
 
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AppRoutes } from './app-routing.module';
 
 @Component({
   selector: 'app-root',
@@ -34,4 +36,18 @@ export class AppComponent {
    * @summary application's title
    */
   readonly title: string = 'Story Time !';
+
+  /**
+   * @summary Default constructor
+   */
+  constructor(
+    private router: Router,
+  ) { }
+
+  /**
+   * @summary Redirect the user to the main menu on title's click
+   */
+  public onMenu(): void {
+    this.router.navigate([AppRoutes.Index]);
+  }
 }

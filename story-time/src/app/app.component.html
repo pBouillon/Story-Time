@@ -23,7 +23,10 @@ SOFTWARE.
 -->
 
 <div class="container">
-  <h1 class="text-center m-5">{{ title }}</h1>
+  <h1 class="text-center m-5"
+    (click)="onMenu()">
+    {{ title }}
+  </h1>
 </div>
 
 <router-outlet></router-outlet>
