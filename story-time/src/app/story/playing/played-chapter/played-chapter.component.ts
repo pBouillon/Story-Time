@@ -49,7 +49,7 @@ export class PlayedChapterComponent implements OnInit {
    * @summary Emitter for the submitted answer
    */
   @Output()
-  public sumbittedAnswer = new EventEmitter<string>();
+  public submittedAnswer = new EventEmitter<string>();
 
   /**
    * @summary Form to submit chapter's answer
@@ -83,16 +83,16 @@ export class PlayedChapterComponent implements OnInit {
    */
   public isAnswerInvalid(): boolean {
     return this.answer.invalid
-      && (this.answer.dirty
-        || this.answer.touched);
+      && this.answer.dirty
+      && this.answer.touched;
   }
 
   /**
-   * @summary Sumbit the provided answer to the parent component
+   * @summary Submit the provided answer to the parent component
    */
   public onSubmit(): void {
     // Emit the submitted answer
-    this.sumbittedAnswer.emit(this.answer.value);
+    this.submittedAnswer.emit(this.answer.value);
 
     // Reset the text
     this.chapterAnswerForm.patchValue({answer: ''});
