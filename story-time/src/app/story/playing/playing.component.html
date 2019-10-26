@@ -30,7 +30,7 @@ SOFTWARE.
   <ng-container *ngIf="!playingService.isStoryFinished; else success">
     <app-played-chapter
       [chapter]="playingService.currentChapter"
-      (sumbittedAnswer)="handleAnswer($event)">
+      (submittedAnswer)="handleAnswer($event)">
     </app-played-chapter>
   </ng-container>
   <!-- /played chapter -->
