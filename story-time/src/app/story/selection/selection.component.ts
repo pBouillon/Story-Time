@@ -23,12 +23,12 @@
  */
 
 import { Component, OnInit } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AppRoutes } from 'src/app/app-routing.module';
 import { IStory } from 'src/app/shared/story';
 import { SelectionService } from './selection.service';
+import { SnackbarService } from '../snackbar.service';
 
 @Component({
   selector: 'app-selection',
@@ -42,13 +42,12 @@ export class SelectionComponent implements OnInit {
   /**
    * Default constructor
    * @param router Router to redirect the user to the requested pages
-   * @param snackBar Toolbox for snackbar displays
    * @param selectionService Toolbox for the selection menu's operations
    * @param toastrService Toastr toolbox for alert messages
    */
   constructor(
     private router: Router,
-    private snackBar: MatSnackBar,
+    private snackBarService: SnackbarService,
     public selectionService: SelectionService,
     public toastrService: ToastrService,
   ) { }
@@ -94,7 +93,7 @@ export class SelectionComponent implements OnInit {
       this.selectionService.removeStoryByTitle(storyTitle);
 
       // User notification
-      this.snackBar.open('🎊 Histoire supprimée !', 'Fermer');
+      this.snackBarService.open('🎊 Histoire supprimée !');
 
     } catch (error) {
       this.toastrService.error(
@@ -117,7 +116,7 @@ export class SelectionComponent implements OnInit {
     this.selectionService.importFiles(target.files);
 
     // User notification
-    this.snackBar.open('🎊 Histoire importée !', 'Fermer');
+    this.snackBarService.open('🎊 Histoire importée !');
   }
 
   /**
@@ -131,7 +130,7 @@ export class SelectionComponent implements OnInit {
     this.displayedStories = this.selectionService.stories;
 
     // User notification
-    this.snackBar.open('🎊 Histoire(s) supprimée(s) !', 'Fermer');
+    this.snackBarService.open('🎊 Histoire(s) supprimée(s) !');
   }
 
   /**
