@@ -28,6 +28,7 @@ import { PlayingModule } from '../playing/playing.module';
 import { SelectionComponent } from './selection.component';
 import { SelectionService } from './selection.service';
 import { StorySelectionComponent } from './story-selection/story-selection.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { StorySelectionComponent } from './story-selection/story-selection.compo
   imports: [
     CommonModule,
     PlayingModule,
+    MatSnackBarModule,
   ],
   providers: [
     SelectionService,

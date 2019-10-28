@@ -23,6 +23,7 @@
  */
 
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { AppRoutes } from 'src/app/app-routing.module';
@@ -41,11 +42,13 @@ export class SelectionComponent implements OnInit {
   /**
    * Default constructor
    * @param router Router to redirect the user to the requested pages
+   * @param snackBar Toolbox for snackbar displays
    * @param selectionService Toolbox for the selection menu's operations
    * @param toastrService Toastr toolbox for alert messages
    */
   constructor(
     private router: Router,
+    private snackBar: MatSnackBar,
     public selectionService: SelectionService,
     public toastrService: ToastrService,
   ) { }
@@ -89,6 +92,10 @@ export class SelectionComponent implements OnInit {
     // Handle action
     try {
       this.selectionService.removeStoryByTitle(storyTitle);
+
+      // User notification
+      this.snackBar.open('🎊 Histoire supprimée !', 'Fermer');
+
     } catch (error) {
       this.toastrService.error(
         `Aucune histoire intitulée "${storyTitle}"`,
@@ -108,6 +115,9 @@ export class SelectionComponent implements OnInit {
 
     // Extract uploaded files
     this.selectionService.importFiles(target.files);
+
+    // User notification
+    this.snackBar.open('🎊 Histoire importée !', 'Fermer');
   }
 
   /**
@@ -119,6 +129,9 @@ export class SelectionComponent implements OnInit {
 
     // Refresh displayed stories
     this.displayedStories = this.selectionService.stories;
+
+    // User notification
+    this.snackBar.open('🎊 Histoire(s) supprimée(s) !', 'Fermer');
   }
 
   /**
