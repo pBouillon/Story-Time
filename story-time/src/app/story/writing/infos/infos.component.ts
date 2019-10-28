@@ -28,6 +28,7 @@ import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
 import { LengthSpec } from '../../../shared/length-spec';
 import { EditorService } from '../editor.service';
+import { SnackbarService } from '../../snackbar.service';
 
 
 @Component({
@@ -67,11 +68,13 @@ export class InfosComponent implements OnInit {
    * @param editorService Editor toolbox
    * @param formBuilder FormBuilder object to gather story's details
    * @param router Router to redirect the user to the requested pages
+   * @param snackBarService SnackBar service to show snackBar messages
    */
   constructor(
     private editorService: EditorService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private snackBarService: SnackbarService,
   ) { }
 
   /**
@@ -159,6 +162,9 @@ export class InfosComponent implements OnInit {
       overview: '',
       title: '',
     });
+
+    // User notification
+    this.snackBarService.open('🚮 Contenu réinitialisé !');
   }
 
   /**
