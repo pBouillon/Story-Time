@@ -29,6 +29,7 @@ import { AppRoutes } from 'src/app/app-routing.module';
 import { Chapter, ChapterAction, IChapter } from 'src/app/shared/chapter';
 import { LengthSpec } from 'src/app/shared/length-spec';
 import { EditorService } from '../editor.service';
+import { SnackbarService } from '../../snackbar.service';
 
 @Component({
   selector: 'app-content',
@@ -52,11 +53,13 @@ export class ContentComponent implements OnInit {
    * @param editorService Editor toolbox
    * @param router Router to redirect the user to the requested pages
    * @param toastrService Toastr utilities to show messages
+   * @param snackBarService SnackBar service to show snackBar messages
    */
   constructor(
     private editorService: EditorService,
     private router: Router,
     private toastrService: ToastrService,
+    private snackBarService: SnackbarService,
   ) { }
 
   ngOnInit() {
@@ -159,6 +162,7 @@ export class ContentComponent implements OnInit {
    */
   public onReset(): void {
     this.initializeChapters();
+    this.snackBarService.open('🚮 Contenu réinitialisé !');
   }
 
   /**

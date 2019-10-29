@@ -36,10 +36,13 @@
 // Toastr core
 @import url('~ngx-toastr/toastr.css');
 
+// Angular Material theming
+@import '../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 // Define constants
 $global-font: 'Roboto';
 
 // Global default style
 body {
-  font-family: $global-font;
+  font-family: $global-font, "Helvetica Neue", sans-serif;
 }

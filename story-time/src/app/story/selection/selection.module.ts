@@ -23,20 +23,31 @@
  */
 
 import { CommonModule } from '@angular/common';
+import { MatDialogModule } from '@angular/material/dialog';
 import { NgModule } from '@angular/core';
 import { PlayingModule } from '../playing/playing.module';
 import { SelectionComponent } from './selection.component';
 import { SelectionService } from './selection.service';
 import { StorySelectionComponent } from './story-selection/story-selection.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AbortPlayedStoryDialogComponent } from './abort-played-story-dialog/abort-played-story-dialog.component';
 
 @NgModule({
   declarations: [
     SelectionComponent,
     StorySelectionComponent,
+    AbortPlayedStoryDialogComponent,
+  ],
+  entryComponents: [
+    AbortPlayedStoryDialogComponent
   ],
   imports: [
     CommonModule,
     PlayingModule,
+
+    // ANGULAR MATERIAL
+    MatSnackBarModule,
+    MatDialogModule,
   ],
   providers: [
     SelectionService,

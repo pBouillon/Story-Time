@@ -28,6 +28,9 @@ import { ToastrService } from 'ngx-toastr';
 import { AppRoutes } from 'src/app/app-routing.module';
 import { IStory } from 'src/app/shared/story';
 import { SelectionService } from './selection.service';
+import { SnackbarService } from '../snackbar.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AbortPlayedStoryDialogComponent } from './abort-played-story-dialog/abort-played-story-dialog.component';
 
 @Component({
   selector: 'app-selection',
@@ -40,12 +43,15 @@ export class SelectionComponent implements OnInit {
 
   /**
    * Default constructor
+   * @param dialog Toolbox to display the dialog window
    * @param router Router to redirect the user to the requested pages
    * @param selectionService Toolbox for the selection menu's operations
    * @param toastrService Toastr toolbox for alert messages
    */
   constructor(
+    private dialog: MatDialog,
     private router: Router,
+    private snackBarService: SnackbarService,
     public selectionService: SelectionService,
     public toastrService: ToastrService,
   ) { }
@@ -89,6 +95,10 @@ export class SelectionComponent implements OnInit {
     // Handle action
     try {
       this.selectionService.removeStoryByTitle(storyTitle);
+
+      // User notification
+      this.snackBarService.open('🎊 Histoire supprimée !');
+
     } catch (error) {
       this.toastrService.error(
         `Aucune histoire intitulée "${storyTitle}"`,
@@ -108,6 +118,9 @@ export class SelectionComponent implements OnInit {
 
     // Extract uploaded files
     this.selectionService.importFiles(target.files);
+
+    // User notification
+    this.snackBarService.open('🎊 Histoire importée !');
   }
 
   /**
@@ -119,6 +132,9 @@ export class SelectionComponent implements OnInit {
 
     // Refresh displayed stories
     this.displayedStories = this.selectionService.stories;
+
+    // User notification
+    this.snackBarService.open('🎊 Histoire(s) supprimée(s) !');
   }
 
   /**
@@ -132,8 +148,18 @@ export class SelectionComponent implements OnInit {
    * @summary Leave the current game and redirect the user to the selection menu
    */
   public onSelectionMenu(): void {
-    // Clear user's playing status
-    this.selectionService.setUserSelecting();
+    // Asks for confirmation
+    const dialogWindow = this.dialog.open(AbortPlayedStoryDialogComponent);
+
+    // Check user's validation
+    dialogWindow.afterClosed()
+      .subscribe(result => {
+        if (result === true) {
+          // Clear user's playing status
+          this.selectionService.setUserSelecting();
+        }
+      });
+
   }
 
   /**

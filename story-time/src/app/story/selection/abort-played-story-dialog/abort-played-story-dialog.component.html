@@ -1,0 +1,13 @@
+<h3>🚨 Vous quittez l'histoire en cours !</h3>
+
+<mat-dialog-content class="mat-typography">
+  <h3>Êtes-vous certain de vouloir quitter ?</h3>
+  <p>
+    Si vous quittez l'histoire en cours votre progression ne sera pas sauvegardée.
+  </p>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button class="btn btn-outline-secondary mr-2" mat-dialog-close>Annuler</button>
+  <button class="btn btn-outline-danger" [mat-dialog-close]="true" cdkFocusInitial>Quitter</button>
+</mat-dialog-actions>
