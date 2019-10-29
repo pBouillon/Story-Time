@@ -197,7 +197,6 @@ export class SelectionService {
   }
 
   /**
-   * @todo
    * @summary Play a story from its title
    * @param title Title of the story to play
    * @throws `Error` if no matching story were found
