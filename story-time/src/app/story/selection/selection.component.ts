@@ -154,7 +154,7 @@ export class SelectionComponent implements OnInit {
     // Check user's validation
     dialogWindow.afterClosed()
       .subscribe(result => {
-        if (result === 'true') {
+        if (result === true) {
           // Clear user's playing status
           this.selectionService.setUserSelecting();
         }
