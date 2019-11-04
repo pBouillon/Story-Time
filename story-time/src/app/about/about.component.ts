@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthorsService } from '../authors.service';
-import { AboutData } from './about-data';
+import { AboutData } from '../shared/about-data';
 import { Router } from '@angular/router';
 import { AppRoutes } from 'src/app/app-routing.module';
 
