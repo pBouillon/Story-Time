@@ -1,26 +1,30 @@
-<div class="container d-flex  flex-row justify-content-center">
-
-  <!-- back to menu -->
-  <input type="button"
-  value="Retour au menu"
-  class="btn btn-outline-primary"
-  (click)="onMenu()">  
-  <!-- /back to menu -->
+<div class="container d-flex flex-row justify-content-center">
 
   <h2>A propos de Story Time</h2>
 
 </div>
 
+<!-- list about sections -->
 <div class="container d-flex flex-column justify-content-center">
-
-    <!-- TODO: add reverse option -->
-    <app-about-data *ngFor="let section of sections"
-        [isToggle]="section.isToggle"
-        [imageSource]="section.imgSource"
-        [aboutText]="section.aboutText">
-    </app-about-data>
+  
+  <app-about-data *ngFor="let section of sections"
+    [isToggle]="section.isToggle"
+    [imageSource]="section.imgSource"
+    [aboutText]="section.aboutText">
+  </app-about-data>
 
 </div>
+<!-- /list about sections -->
 
+<!-- back to menu -->
+<div class="container d-flex flex-row-reverse justify-content-right w-50">
+  
+  <input type="button" 
+    value="Retour au menu" 
+    class="btn btn-outline-primary" 
+    (click)="onMenu()">
+
+</div>
+<!-- /back to menu -->
 
 
