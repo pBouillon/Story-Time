@@ -2,30 +2,31 @@
 <div class="d-flex flex-row my-3 py-2">
 
   <ng-container *ngIf="!isToggle; else toggledView">
-
     <!-- image -->
-    <img [src]="imageSource" class="img-fluid p-4" alt="Responsive image">
+    <img [src]="imageSource" 
+      class="img-responsive p-4 about-img"
+      alt="Responsive image">
     <!-- /image -->
-    
+
     <!-- content -->
-    <p class="text-justify">
-      {{ aboutText }}
+    <p class="text-justify border rounded flex-fill p-3 w-75 text-justify">
+      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad itaque tempora reiciendis ipsam ea quisquam sunt, nemo dolorum dolor? Iusto deleniti saepe vel veniam, autem voluptate. Voluptatum sed quidem tempore.
     </p>
     <!-- /content -->
-    
   </ng-container>
-  <ng-template #toggledView>
 
+  <ng-template #toggledView>
     <!-- content -->
-    <p class="text-justify">
+    <p class="text-justify border rounded rounded flex-fill p-3 w-75 text-justify">
       {{ aboutText }}
     </p>
     <!-- /content -->
 
     <!-- image -->
-    <img [src]="imageSource" class="img-fluid p-4" alt="Responsive image">
+    <img [src]="imageSource" 
+      class="img-responsive p-4 about-img" 
+      alt="Responsive image">
     <!-- /image -->
-    
   </ng-template>
 
 </div>
