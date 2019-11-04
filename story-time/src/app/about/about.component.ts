@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthorsService } from '../authors.service';
 import { AboutData } from './about-data';
+import { Router } from '@angular/router';
+import { AppRoutes } from 'src/app/app-routing.module';
+
 
 @Component({
   selector: 'app-about',
@@ -15,6 +18,7 @@ export class AboutComponent implements OnInit {
   public sections: Array<AboutData>;
 
   constructor(
+    private router: Router,
     public authorService: AuthorsService,
   ) { }
 
@@ -29,6 +33,13 @@ export class AboutComponent implements OnInit {
         '../../assets/tncy_logo.png'
       )
     ];
+  }
+
+/**
+   * @summary Redirect the user to the main menu
+   */
+  public onMenu(): void {
+    this.router.navigate([`${AppRoutes.Index}`]);
   }
 
 }
