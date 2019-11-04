@@ -4,27 +4,27 @@
   <ng-container *ngIf="!isToggle; else toggledView">
     <!-- image -->
     <img [src]="imageSource" 
-      class="img-responsive p-4 about-img"
+      class="img-responsive mr-3 about-img"
       alt="Responsive image">
     <!-- /image -->
 
     <!-- content -->
     <p class="text-justify border rounded flex-fill p-3 w-75 text-justify">
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ad itaque tempora reiciendis ipsam ea quisquam sunt, nemo dolorum dolor? Iusto deleniti saepe vel veniam, autem voluptate. Voluptatum sed quidem tempore.
+      {{ aboutText }}
     </p>
     <!-- /content -->
   </ng-container>
 
   <ng-template #toggledView>
     <!-- content -->
-    <p class="text-justify border rounded rounded flex-fill p-3 w-75 text-justify">
+    <p class="text-justify border rounded flex-fill p-3 w-75 text-justify">
       {{ aboutText }}
     </p>
     <!-- /content -->
 
     <!-- image -->
     <img [src]="imageSource" 
-      class="img-responsive p-4 about-img" 
+      class="img-responsive ml-3 about-img" 
       alt="Responsive image">
     <!-- /image -->
   </ng-template>
