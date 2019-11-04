@@ -1,17 +1,32 @@
 <!-- sub content -->
 <div class="d-flex flex-row my-3 py-2">
-  
-  <!-- image -->
-  <img [src]="imageSource" 
-    class="img-fluid p-4" 
-    alt="Responsive image">
-  <!-- /image -->
 
-  <!-- content -->
-  <p class="text-justify">
-    {{ aboutText }}
-  </p>
-  <!-- /content -->
+  <ng-container *ngIf="!isToggle; else toggledView">
+
+    <!-- image -->
+    <img [src]="imageSource" class="img-fluid p-4" alt="Responsive image">
+    <!-- /image -->
+    
+    <!-- content -->
+    <p class="text-justify">
+      {{ aboutText }}
+    </p>
+    <!-- /content -->
+    
+  </ng-container>
+  <ng-template #toggledView>
+
+    <!-- content -->
+    <p class="text-justify">
+      {{ aboutText }}
+    </p>
+    <!-- /content -->
+
+    <!-- image -->
+    <img [src]="imageSource" class="img-fluid p-4" alt="Responsive image">
+    <!-- /image -->
+    
+  </ng-template>
 
 </div>
 <!-- /sub content -->

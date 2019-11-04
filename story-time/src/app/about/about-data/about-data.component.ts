@@ -19,6 +19,12 @@ export class AboutDataComponent {
   @Input()
   public imageSource: string;
 
+  /**
+   * @summary
+   */
+  @Input()
+  public isToggle = false;
+
   constructor() { }
 
 }

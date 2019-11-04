@@ -30,12 +30,13 @@ export class AboutComponent implements OnInit {
       ),
       new AboutData(
         'sample text #2',
-        '../../assets/tncy_logo.png'
+        '../../assets/tncy_logo.png',
+        true,
       )
     ];
   }
 
-/**
+  /**
    * @summary Redirect the user to the main menu
    */
   public onMenu(): void {
