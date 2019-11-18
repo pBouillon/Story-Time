@@ -23,4 +23,4 @@ jobs:
     - name: Build
       run: |
         cd story-time
-        npm run ng build --prod --progress false
+        npm run ng build --prod
