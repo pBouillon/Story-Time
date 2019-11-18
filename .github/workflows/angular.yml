@@ -21,6 +21,4 @@ jobs:
         npm install
       
     - name: Build
-      run: |
-        cd story-time
-        npm run ng build --prod
+      run: npm run story-time/ ng build --prod
