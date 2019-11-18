@@ -1,0 +1,26 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - name: Use Node.js 12.13 (LTS)
+      uses: actions/setup-node@v1
+      with:
+        node-version: 12.13
+          
+    - name: Install dependencies
+      run: |
+        cd story-time
+        npm install
+      
+    - name: Build
+      run: |
+        cd story-time
+        npm run ng build --prod
