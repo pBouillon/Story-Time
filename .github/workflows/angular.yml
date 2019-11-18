@@ -16,7 +16,11 @@ jobs:
         node-version: 12.13
           
     - name: Install dependencies
-      run: npm install
+      run: |
+        cd story-time
+        npm install
       
     - name: Build
-      run: npm run ng build --prod --progress false --outputPath=./dist/story-time
+      run: |
+        cd story-time
+        npm run ng build --prod --progress false
