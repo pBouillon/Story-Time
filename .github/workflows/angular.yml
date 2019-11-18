@@ -19,4 +19,4 @@ jobs:
       run: npm install
       
     - name: Build
-      run: npm run ng build story-time/ --prod --progress false --outputPath=./dist/story-time
+      run: npm run ng build --prod --progress false --outputPath=./dist/story-time
