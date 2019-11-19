@@ -1,44 +1,29 @@
 # Story Time !
 
-[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](http://pierre.bouillon.gl-pages.telecomnancy.univ-lorraine.fr/anglais-a2/)
-[![forthebadge](https://forthebadge.com/images/badges/makes-people-smile.svg)](http://pierre.bouillon.gl-pages.telecomnancy.univ-lorraine.fr/anglais-a2/)  
+[![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://github.com/pBouillon/Story-Time/)
+[![forthebadge](https://forthebadge.com/images/badges/makes-people-smile.svg)](https://github.com/pBouillon/Story-Time/)
 
-_Story Time !_ est accessible [ici !](http://pierre.bouillon.gl-pages.telecomnancy.univ-lorraine.fr/anglais-a2/)
+_Story Time !_ is a project conceived during my second year in my engineering school [Telecom Nancy](https://telecomnancy.univ-lorraine.fr/). It aimed to help french people to progress in English.
 
-Projet d'anglais de seconde année de cycle ingénieur à [Telecom Nancy](https://telecomnancy.univ-lorraine.fr/).
+## Context
 
-## Contexte
+This project aims to provide a simple interface and mechanism to help people of all levels to train themselves in several aspects of
+the English language.
 
-Dans le cadre de ce module, il nous est demandé de réaliser un outil permettant de faciliter l'apprentissage
-de la culture et/ou de la langue anglaise par l'outil et les technologies de notre choix.
+### How does it works ?
 
-## Introduction
+📝 Note: _No session or account is required, however everything is localy stored._
 
-**_Story Time !_** est un outil en ligne d'apprentissage ludique de notions tournant autour de l'anglais.  
+_Story Time !_ is a small hub for small stories written by the users. Everyone can export, share and import stories of others.
 
-Il s'agit d'une histoire se racontant partie par partie au cours de laquelle il sera demandé à l'utilisateur
-d'intervenir ponctuellement pour débloquer la suite en trouvant le mot attendu pour aider l'histoire à 
-progresser.
+A story consists of a `.story` file (basicly JSON) and can be played inside the plateform. When played, the user will be asked
+to find the answer of each questions until the end.
 
-_Par exemple_ (sur le sujet du restaurant):
+On failure, he will have the opportunity to see the correct answer he missed.
 
-Story:
+One can use this project to create small tests to train themselves for small lessons waiting for an evaluation or just to challenge
+themselves (or any other usage that suits you !)
 
->>>
-In order to keep her outfit clean for her interview in the afternoon, Lisa must find
-something to protect her, could you help her ?
->>>
+## Contribution
 
-Answer:
-
-> A napkin !
-
-## Ressources
-
-Pour de plus amples détails, de nombreuses ressources sont disponibles [sur le wiki](https://gitlab.telecomnancy.univ-lorraine.fr/Pierre.Bouillon/anglais-a2/wikis/home).
-
-## Auteurs
-
-- [Pierre Bouillon](https://pbouillon.github.io/)
-- [Timothée Adam](https://www.linkedin.com/in/timoth%C3%A9e-adam-883b4414b/)
-- [Victor Varnier](https://www.linkedin.com/in/victor-varnier-a87b03133/)
+Any contribution is welcome. Please open an issue and let's talk about it !
